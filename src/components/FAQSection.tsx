@@ -4,11 +4,11 @@ import { ScrollReveal } from "./ScrollReveal";
 const faqs = [
   { q: "How much does a panel upgrade cost?", a: "Panel upgrades typically range from $1,500 to $3,500 depending on the size of your home and the amperage needed. We provide a free, upfront quote before any work begins — no surprises." },
   { q: "Do you pull permits?", a: "Yes, always. We pull permits on every job that requires one. This protects you as the homeowner and ensures the work is done to code." },
-  { q: "How fast can you come out?", a: "We do our best to schedule jobs quickly. For electrical emergencies, call (858) 997-9251 and we will assist you as soon as we can." },
+  { q: "How fast can you come out?", a: "We do our best to schedule jobs quickly. For electrical emergencies, call (714) 826-4444 and we will assist you as soon as we can." },
   { q: "Are you licensed and insured?", a: "Yes. LTE Electric is a fully licensed C-10 Electrical Contractor in California (#1072569) and carries $2,000,000 in liability insurance and $25,000 in bonding." },
   { q: "Do you work on both homes and businesses?", a: "Yes. We handle residential and commercial electrical work across all of San Diego County." },
   { q: "What areas do you serve?", a: "We serve all of San Diego County including San Diego, Chula Vista, El Cajon, Santee, Escondido, La Mesa, Lemon Grove, National City, Spring Valley, Lakeside, Poway, and surrounding cities." },
-  { q: "Do you offer free estimates?", a: "Yes, we provide free estimates on all jobs. Call us at (858) 997-9251 or fill out our contact form and we'll get back to you to schedule." },
+  { q: "Do you offer free estimates?", a: "Yes, we provide free estimates on all jobs. Call us at (714) 826-4444 or fill out our contact form and we'll get back to you to schedule." },
   { q: "Can you install a Tesla Wall Connector or EV charger?", a: "Absolutely. We install all major EV charger brands including Tesla Wall Connector, ChargePoint, and JuiceBox. We handle permits, wiring, and setup from start to finish." },
 ];
 
@@ -27,8 +27,8 @@ export function FAQSection() {
                 </h2>
                 <p className="mt-4 text-gray-600 dark:text-gray-400">
                   Can't find the answer you're looking for? Call us at{" "}
-                  <a href="tel:8589979251" className="font-semibold text-red-400 hover:text-red-300">
-                    (858) 997-9251
+                  <a href="tel:7148264444" className="font-semibold text-red-400 hover:text-red-300">
+                    (714) 826-4444
                   </a>
                 </p>
               </div>

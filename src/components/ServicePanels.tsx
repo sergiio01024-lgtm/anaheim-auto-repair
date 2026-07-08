@@ -3,37 +3,37 @@ import { ScrollReveal } from "./ScrollReveal";
 
 const cardsData = [
   {
-    eyebrow: "COMMERCIAL",
-    title: "Commercial Electrical",
-    subtitle: "Tenant improvements, new builds, and switchgear — done to code and inspection-ready so your business stays powered and compliant.",
-    photo: "/photos/commercial-switchgear-panel.webp",
+    eyebrow: "MUFFLER & EXHAUST",
+    title: "Muffler & Exhaust Repair",
+    subtitle: "Muffler replacement, catalytic converters, and full exhaust work — our specialty for over 45 years. We fix the rattle, the roar, and the check-engine light.",
+    photo: "/photos/placeholder.jpg",
   },
   {
-    eyebrow: "PANEL UPGRADES",
-    title: "Panel & Service Upgrades",
-    subtitle: "Modern, code-compliant panels that keep your home safe, add capacity, and pass inspection the first time.",
-    photo: "/photos/residential-panel-upgrade-exterior.webp",
+    eyebrow: "BRAKES & SUSPENSION",
+    title: "Brakes & Suspension",
+    subtitle: "Brake pads, rotors, shocks, struts, alignment, and steering. Stop safely and ride smooth — inspected and done right the first time.",
+    photo: "/photos/placeholder.jpg",
   },
   {
-    eyebrow: "GENERATORS",
-    title: "Generator Installations",
-    subtitle: "Standby and portable generators sized and wired to code — so the power stays on when the grid goes down.",
-    photo: "/photos/commercial-generac-generator-install.webp",
+    eyebrow: "ENGINE & TRANSMISSION",
+    title: "Engine & Transmission",
+    subtitle: "Check-engine diagnostics, timing belts, transmission service and rebuilds, and major engine repair. The hard jobs other shops send away.",
+    photo: "/photos/placeholder.jpg",
   },
   {
-    eyebrow: "RESIDENTIAL",
-    title: "Residential Wiring & Lighting",
-    subtitle: "New construction, rewires, and recessed lighting — clean, reliable work that makes your home safer and brighter.",
-    photo: "/photos/residential-kitchen-recessed-lighting.webp",
+    eyebrow: "MAINTENANCE",
+    title: "Oil Changes & Maintenance",
+    subtitle: "Oil and filter changes, 30k/60k/90k service, AC recharge, batteries, and tune-ups. Keep your car running and avoid the big repairs.",
+    photo: "/photos/placeholder.jpg",
   },
 ];
 
 const alsoOffered = [
-  "EV Charger Installation",
-  "Lighting Installation",
-  "Outlet & Switch Repair",
-  "Emergency Repairs",
-  "Temporary Power Connections",
+  "AC & Heating Repair",
+  "Alignment",
+  "Tires & Rotation",
+  "Check Engine Diagnostics",
+  "Smog Check Prep",
 ];
 
 export function ServicePanels() {
@@ -51,7 +51,7 @@ export function ServicePanels() {
             Our Services
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Comprehensive Electrical Solutions
+            Complete Auto & Muffler Service
           </h2>
         </div>
 
@@ -92,10 +92,10 @@ export function ServicePanels() {
                   Get a Free Quote
                 </a>
                 <a
-                  href="tel:+18589979251"
+                  href="tel:+17148264444"
                   className="rounded-full bg-transparent hover:bg-white hover:text-gray-900 border border-white px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center"
                 >
-                  Call (858) 997-9251
+                  Call (714) 826-4444
                 </a>
               </div>
             </div>

@@ -31,7 +31,7 @@ export function Footer() {
             </div>
             <p className="text-sm text-gray-700 dark:text-gray-400 mb-4">Licensed C-10 electrical contractor serving all of San Diego County since 2018.</p>
             <div className="space-y-2 text-sm text-gray-700 dark:text-gray-400">
-              <p><a href="tel:8589979251" className="hover:text-gray-900 dark:hover:text-white transition-colors">(858) 997-9251</a></p>
+              <p><a href="tel:7148264444" className="hover:text-gray-900 dark:hover:text-white transition-colors">(714) 826-4444</a></p>
               <p>San Diego, CA</p>
               <p>CA C-10 License #1072569</p>
               <p className="mt-3 text-sm font-semibold text-gray-900 dark:text-white">Hours</p>

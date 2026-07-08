@@ -67,7 +67,7 @@ export function ContactSection() {
       <ScrollReveal>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">Get a Free Quote</h2>
-          <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">Fill out the form and we'll get back to you to schedule. For emergencies, call (858) 997-9251.</p>
+          <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">Fill out the form and we'll get back to you to schedule. For emergencies, call (714) 826-4444.</p>
           <p className="mt-2 text-sm text-gray-500">Mon–Sat: Open 24 Hours · Sun: Closed</p>
         </div>
 
@@ -136,7 +136,7 @@ export function ContactSection() {
                 </div>
               </div>
             </div>
-            {status === "error" && <p className="mt-4 text-red-400 text-sm">Something went wrong. Please call us at (858) 997-9251.</p>}
+            {status === "error" && <p className="mt-4 text-red-400 text-sm">Something went wrong. Please call us at (714) 826-4444.</p>}
             <div className="mt-10">
               <button type="submit" disabled={status === "loading"}
                 className="block w-full rounded-md bg-red-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 disabled:opacity-50">
