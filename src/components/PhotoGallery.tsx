@@ -256,14 +256,12 @@ export function PhotoGallery() {
                 onClick={() => setSelectedPhoto(filteredPhotos[index0].src)}
                 className="hidden sm:block relative w-full aspect-[4/3] bg-gray-950 cursor-pointer group overflow-hidden"
               >
-                <img
-                  src={filteredPhotos[index0].src}
-                  alt={filteredPhotos[index0].alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover filter grayscale contrast-110 brightness-75 blur-[2px] transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:blur-0"
-                />
-                <div className="absolute inset-0 bg-orange-500/35 mix-blend-multiply pointer-events-none transition-all duration-500 group-hover:bg-orange-500/5" />
+                <div
+                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-950/90 text-gray-500 transition-all duration-500 group-hover:bg-zinc-900 group-hover:text-gray-400"
+                >
+                  <span className="text-[10px] font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
+                  <span className="text-[8px] max-w-[150px] line-clamp-2">{filteredPhotos[index0].alt}</span>
+                </div>
               </div>
 
               {/* Image 2 (Mobile & Desktop - Center active photo) - Full Color, Sharp, No Tint */}
@@ -275,13 +273,12 @@ export function PhotoGallery() {
                   onClick={() => setSelectedPhoto(filteredPhotos[index1].src)}
                   className="w-full h-full cursor-pointer"
                 >
-                  <img
-                    src={filteredPhotos[index1].src}
-                    alt={filteredPhotos[index1].alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-105"
-                  />
+                  <div
+                    className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-red-950/45 border border-red-900/25 text-gray-300 transition-transform duration-500 group-hover/image:scale-105"
+                  >
+                    <span className="text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+                    <span className="text-xs text-gray-400 max-w-[200px] line-clamp-3">{filteredPhotos[index1].alt}</span>
+                  </div>
                 </div>
 
                 {/* Hero Prev Arrow */}
@@ -318,14 +315,12 @@ export function PhotoGallery() {
                 onClick={() => setSelectedPhoto(filteredPhotos[index2].src)}
                 className="hidden sm:block relative w-full aspect-[4/3] bg-gray-950 cursor-pointer group overflow-hidden"
               >
-                <img
-                  src={filteredPhotos[index2].src}
-                  alt={filteredPhotos[index2].alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover filter grayscale contrast-110 brightness-75 blur-[2px] transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:blur-0"
-                />
-                <div className="absolute inset-0 bg-orange-500/35 mix-blend-multiply pointer-events-none transition-all duration-500 group-hover:bg-orange-500/5" />
+                <div
+                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-950/90 text-gray-500 transition-all duration-500 group-hover:bg-zinc-900 group-hover:text-gray-400"
+                >
+                  <span className="text-[10px] font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
+                  <span className="text-[8px] max-w-[150px] line-clamp-2">{filteredPhotos[index2].alt}</span>
+                </div>
               </div>
             </div>
           )}
@@ -366,13 +361,14 @@ export function PhotoGallery() {
                         : "ring-1 ring-gray-200 dark:ring-white/10 opacity-70 hover:opacity-100"
                     }`}
                   >
-                    <img
-                      src={photo.src}
-                      alt={photo.alt}
-                      loading="lazy"
-                      decoding="async"
-                      className="size-full object-cover"
-                    />
+                    <div
+                      className={`size-full flex flex-col items-center justify-center p-1 text-center ${
+                        i % 2 === 0 ? "bg-zinc-900" : "bg-red-950/60"
+                      }`}
+                    >
+                      <span className="text-[8px] text-gray-400 font-semibold uppercase leading-none mb-1">Photo</span>
+                      <span className="text-[6px] text-gray-500 line-clamp-3 leading-none">{photo.alt}</span>
+                    </div>
                   </div>
                 );
               })}
@@ -391,26 +387,29 @@ export function PhotoGallery() {
           </div>
 
           {/* Fullscreen Lightbox Overlay */}
-          {selectedPhoto && (
-            <div
-              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
-              onClick={() => setSelectedPhoto(null)}
-            >
-              <img
-                src={selectedPhoto}
-                loading="lazy"
-                decoding="async"
-                className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl animate-fade-in"
-                onClick={(e) => e.stopPropagation()}
-              />
-              <button
-                className="absolute top-6 right-6 text-white text-4xl font-bold hover:text-orange-400 leading-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
+          {selectedPhoto && (() => {
+            const currentPhoto = photos.find(p => p.src === selectedPhoto);
+            return (
+              <div
+                className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
                 onClick={() => setSelectedPhoto(null)}
               >
-                ✕
-              </button>
-            </div>
-          )}
+                <div
+                  className="w-full max-w-2xl aspect-[4/3] bg-zinc-900 border border-white/10 rounded-lg flex flex-col items-center justify-center p-8 text-center shadow-2xl animate-fade-in"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <span className="text-gray-400 text-lg font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+                  <span className="text-gray-500 text-sm">{currentPhoto ? currentPhoto.alt : ""}</span>
+                </div>
+                <button
+                  className="absolute top-6 right-6 text-white text-4xl font-bold hover:text-red-500 leading-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
+                  onClick={() => setSelectedPhoto(null)}
+                >
+                  ✕
+                </button>
+              </div>
+            );
+          })()}
 
           {/* Call to Action */}
           <p className="mt-12 text-center text-sm text-gray-500">

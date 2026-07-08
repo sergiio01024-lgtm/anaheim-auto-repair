@@ -44,25 +44,15 @@ export function AboutSection() {
             </div>
             <div className="mt-12 lg:mt-0 flex flex-col gap-4">
               <div className="img-frame ratio-3-2 ring-1 ring-gray-200 dark:ring-white/10 rounded-2xl">
-                <div onClick={() => setSelectedPhoto("/photos/luke-van-thumbsup.webp")} className="cursor-pointer size-full">
-                  <img
-                    src="/photos/luke-van-thumbsup.webp"
-                    alt="LTE Electric owner Luke in front of the company van"
-                    loading="lazy"
-                    decoding="async"
-                    className="img-cover"
-                  />
+                <div onClick={() => setSelectedPhoto("luke-van")} className="cursor-pointer size-full flex flex-col items-center justify-center bg-zinc-950 p-6 text-center">
+                  <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+                  <span className="text-gray-500 text-xs max-w-[200px]">Founder in front of company van</span>
                 </div>
               </div>
               <div className="img-frame ratio-1-1 ring-1 ring-gray-200 dark:ring-white/10 rounded-2xl">
-                <div onClick={() => setSelectedPhoto("/photos/luke-panel-framing-jobsite.jpg")} className="cursor-pointer size-full">
-                  <img
-                    src="/photos/luke-panel-framing-jobsite.jpg"
-                    alt="LTE Electric owner Luke working at a commercial framing job site"
-                    loading="lazy"
-                    decoding="async"
-                    className="img-cover"
-                  />
+                <div onClick={() => setSelectedPhoto("luke-panel")} className="cursor-pointer size-full flex flex-col items-center justify-center bg-red-950/40 border border-red-900/30 p-6 text-center">
+                  <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+                  <span className="text-gray-500 text-xs max-w-[200px]">Founder working at a job site</span>
                 </div>
               </div>
             </div>
@@ -75,15 +65,17 @@ export function AboutSection() {
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
           onClick={() => setSelectedPhoto(null)}
         >
-          <img
-            src={selectedPhoto}
-            loading="lazy"
-            decoding="async"
-            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+          <div
+            className="w-full max-w-2xl aspect-video bg-zinc-900 border border-white/10 rounded-lg flex flex-col items-center justify-center p-8 text-center shadow-2xl"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <span className="text-gray-400 text-lg font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+            <span className="text-gray-500 text-sm">
+              {selectedPhoto === "luke-van" ? "Founder in front of company van" : "Founder working at a job site"}
+            </span>
+          </div>
           <button
-            className="absolute top-6 right-6 text-white text-4xl font-bold hover:text-orange-400 leading-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+            className="absolute top-6 right-6 text-white text-4xl font-bold hover:text-red-500 leading-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
             onClick={() => setSelectedPhoto(null)}
           >
             ✕

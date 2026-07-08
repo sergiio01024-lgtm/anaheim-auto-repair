@@ -46,8 +46,9 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
             }}
             className="-m-1.5 p-1.5 flex items-center gap-3"
           >
-            <img src="/lte-mark-black.png" alt="LTE Electric logo" loading="eager" decoding="async" className="h-9 w-auto object-contain block dark:hidden" />
-            <img src="/lte-mark-white.png" alt="LTE Electric logo" loading="eager" decoding="async" className="h-9 w-auto object-contain hidden dark:block" />
+            <div className="h-9 w-9 bg-red-600 rounded-md flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+              Logo
+            </div>
             <div>
               <span className="text-sm font-bold leading-none transition-colors duration-300 text-gray-900 dark:text-white">LTE Electric</span>
               <span className="block text-xs leading-none mt-0.5 transition-colors duration-300 text-gray-600 dark:text-white/60">San Diego Electrician</span>
@@ -111,8 +112,9 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               }}
               className="-m-1.5 p-1.5 flex items-center gap-3"
             >
-              <img src="/lte-mark-black.png" alt="LTE Electric logo" loading="eager" decoding="async" className="h-9 w-auto object-contain block dark:hidden" />
-              <img src="/lte-mark-white.png" alt="LTE Electric logo" loading="eager" decoding="async" className="h-9 w-auto object-contain hidden dark:block" />
+              <div className="h-9 w-9 bg-red-600 rounded-md flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+                Logo
+              </div>
               <span className="text-sm font-bold text-gray-900 dark:text-white">LTE Electric</span>
             </a>
             <div className="flex items-center gap-2">

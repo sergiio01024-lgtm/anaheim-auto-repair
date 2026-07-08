@@ -1,56 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
-@custom-variant dark (&:is(.dark *));
 
 :root {
   --font-size: 14px;
   --font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --background: #f8faff;
-  --foreground: #050b2c;
-  --card: rgba(255, 255, 255, 0.85);
-  --card-foreground: #050b2c;
-  --popover: rgba(255, 255, 255, 0.9);
-  --popover-foreground: #050b2c;
-  --primary: #005bea;
+  --background: #f5f5f5;
+  --foreground: #111111;
+  --card: rgba(255, 255, 255, 0.9);
+  --card-foreground: #111111;
+  --popover: rgba(255, 255, 255, 0.95);
+  --popover-foreground: #111111;
+  --primary: #C8202F;
   --primary-foreground: #ffffff;
-  --secondary: rgba(224, 242, 254, 0.8);
-  --secondary-foreground: #0369a1;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: rgba(186, 230, 253, 0.5);
-  --accent-foreground: #0369a1;
+  --secondary: rgba(244, 244, 245, 0.8);
+  --secondary-foreground: #C8202F;
+  --muted: #e4e4e7;
+  --muted-foreground: #71717a;
+  --accent: rgba(200, 32, 47, 0.1);
+  --accent-foreground: #C8202F;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 91, 234, 0.1);
+  --border: rgba(24, 24, 27, 0.1);
   --input: transparent;
-  --input-background: rgba(255, 255, 255, 0.8);
-  --switch-background: #cbced4;
+  --input-background: rgba(255, 255, 255, 0.9);
+  --switch-background: #d4d4d8;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: rgba(0, 91, 234, 0.3);
-  --chart-1: #0369a1;
-  --chart-2: #0284c7;
-  --chart-3: #0ea5e9;
-  --chart-4: #38bdf8;
-  --chart-5: #7dd3fc;
+  --ring: rgba(200, 32, 47, 0.3);
+  --chart-1: #C8202F;
+  --chart-2: #dc2626;
+  --chart-3: #f87171;
+  --chart-4: #fca5a5;
+  --chart-5: #fee2e2;
   --radius: 1.25rem;
-  --sidebar: rgba(255, 255, 255, 0.8);
-  --sidebar-foreground: #050b2c;
-  --sidebar-primary: #005bea;
+  --sidebar: rgba(255, 255, 255, 0.85);
+  --sidebar-foreground: #111111;
+  --sidebar-primary: #C8202F;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(224, 242, 254, 0.5);
-  --sidebar-accent-foreground: #0369a1;
-  --sidebar-border: rgba(0, 91, 234, 0.1);
-  --sidebar-ring: rgba(0, 91, 234, 0.3);
+  --sidebar-accent: rgba(200, 32, 47, 0.05);
+  --sidebar-accent-foreground: #C8202F;
+  --sidebar-border: rgba(24, 24, 27, 0.1);
+  --sidebar-ring: rgba(200, 32, 47, 0.3);
   
   /* Vision Pro specific variables */
   --glass-background: rgba(255, 255, 255, 0.65);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-blur: 12px;
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --gradient-blue: linear-gradient(135deg, #005bea, #00c6fb);
-  --gradient-energy: linear-gradient(135deg, #ffa53d, #ff7e00);
+  --gradient-blue: linear-gradient(135deg, #C8202F, #F23A2F);
+  --gradient-energy: linear-gradient(135deg, #e11d48, #9f1239);
   --depth-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --depth-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
   --depth-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
@@ -58,49 +54,50 @@
 }
 
 .dark {
-  --background: #050b2c;
-  --foreground: #f8faff;
-  --card: rgba(15, 23, 42, 0.85);
-  --card-foreground: #f8faff;
-  --popover: rgba(15, 23, 42, 0.9);
-  --popover-foreground: #f8faff;
-  --primary: #0ea5e9;
+  --background: #1A1A1A;
+  --foreground: #f4f4f5;
+  --card: rgba(30, 30, 30, 0.85);
+  --card-foreground: #f4f4f5;
+  --popover: rgba(30, 30, 30, 0.95);
+  --popover-foreground: #f4f4f5;
+  --primary: #C8202F;
   --primary-foreground: #ffffff;
-  --secondary: rgba(15, 23, 42, 0.8);
-  --secondary-foreground: #7dd3fc;
-  --muted: rgba(15, 23, 42, 0.7);
-  --muted-foreground: #94a3b8;
-  --accent: rgba(12, 74, 110, 0.5);
-  --accent-foreground: #7dd3fc;
+  --secondary: rgba(38, 38, 38, 0.8);
+  --secondary-foreground: #f4f4f5;
+  --muted: rgba(38, 38, 38, 0.7);
+  --muted-foreground: #a1a1aa;
+  --accent: rgba(200, 32, 47, 0.2);
+  --accent-foreground: #f4f4f5;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(14, 165, 233, 0.15);
-  --input: rgba(15, 23, 42, 0.7);
-  --input-background: rgba(15, 23, 42, 0.5);
-  --ring: rgba(14, 165, 233, 0.3);
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(38, 38, 38, 0.7);
+  --input-background: rgba(38, 38, 38, 0.5);
+  --ring: rgba(200, 32, 47, 0.4);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --chart-1: #0ea5e9;
-  --chart-2: #38bdf8;
-  --chart-3: #7dd3fc;
-  --chart-4: #bae6fd;
-  --chart-5: #e0f2fe;
-  --sidebar: rgba(15, 23, 42, 0.8);
-  --sidebar-foreground: #f8faff;
-  --sidebar-primary: #0ea5e9;
+  --ring: rgba(200, 32, 47, 0.4);
+  --chart-1: #C8202F;
+  --chart-2: #f87171;
+  --chart-3: #fca5a5;
+  --chart-4: #fee2e2;
+  --chart-5: #ffffff;
+  --sidebar: rgba(30, 30, 30, 0.8);
+  --sidebar-foreground: #f4f4f5;
+  --sidebar-primary: #C8202F;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(12, 74, 110, 0.5);
-  --sidebar-accent-foreground: #7dd3fc;
-  --sidebar-border: rgba(14, 165, 233, 0.15);
-  --sidebar-ring: rgba(14, 165, 233, 0.3);
+  --sidebar-accent: rgba(200, 32, 47, 0.2);
+  --sidebar-accent-foreground: #f4f4f5;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: rgba(200, 32, 47, 0.4);
   
   /* Vision Pro specific variables - dark mode */
-  --glass-background: rgba(15, 23, 42, 0.75);
+  --glass-background: rgba(30, 30, 30, 0.75);
   --glass-border: rgba(255, 255, 255, 0.05);
   --glass-blur: 12px;
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  --gradient-blue: linear-gradient(135deg, #0284c7, #38bdf8);
-  --gradient-energy: linear-gradient(135deg, #fb923c, #ea580c);
+  --gradient-blue: linear-gradient(135deg, #C8202F, #F23A2F);
+  --gradient-energy: linear-gradient(135deg, #e11d48, #9f1239);
   --depth-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --depth-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --depth-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -145,6 +142,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Override Tailwind orange colors to point to red */
+  --color-orange-300: #FF5A5F;
+  --color-orange-400: #E63946;
+  --color-orange-500: #C8202F;
+  --color-orange-600: #A81A25;
 }
 
 @layer base {
@@ -161,8 +164,8 @@
     @apply bg-background text-foreground;
     font-family: var(--font-family);
     background-image: 
-      radial-gradient(ellipse at top, rgba(0, 91, 234, 0.05), transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(14, 165, 233, 0.05), transparent 50%);
+      radial-gradient(ellipse at top, rgba(200, 32, 47, 0.05), transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(24, 24, 27, 0.03), transparent 50%);
     background-size: 100% 100%;
     background-attachment: fixed;
   }

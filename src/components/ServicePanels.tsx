@@ -61,10 +61,16 @@ export function ServicePanels() {
             <div
               key={idx}
               className="service-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-              style={{ backgroundImage: `url('${card.photo}')` }}
+              style={{ backgroundColor: idx % 2 === 0 ? "#1C1C1C" : "#222222" }}
             >
+              {/* Centered Placeholder Text */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
+                <span className="text-white/20 text-xs font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
+                <span className="text-white/10 text-[10px] max-w-[150px] text-center">{card.title}</span>
+              </div>
+
               {/* Top-left: eyebrow + title + subtitle */}
-              <div>
+              <div className="z-10">
                 <span className="text-xs font-bold tracking-widest uppercase text-orange-400 block mb-1.5">
                   {card.eyebrow}
                 </span>
@@ -77,7 +83,7 @@ export function ServicePanels() {
               </div>
 
               {/* Bottom-left: buttons */}
-              <div className="flex flex-col sm:flex-row gap-2.5 mt-4">
+              <div className="flex flex-col sm:flex-row gap-2.5 mt-4 z-10">
                 <a
                   href="#contact"
                   onClick={handleQuoteClick}
