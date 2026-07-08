@@ -1,0 +1,83 @@
+/* -----------------------------------------------
+   Service card grid — 2×2 Tesla-style layout
+   ----------------------------------------------- */
+
+.service-card-section {
+  background: #fff;
+  padding: 5rem 1.5rem 4rem;
+}
+
+.dark .service-card-section {
+  background: #030712;
+}
+
+.service-card-section-header {
+  max-width: 56rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.service-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .service-card-section {
+    padding: 4rem 1rem 3rem;
+  }
+  .service-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Individual card */
+.service-card {
+  position: relative;
+  height: 460px;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    height: 360px;
+    padding: 1.5rem;
+  }
+}
+
+/* Dark gradient overlay */
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* All direct children sit above overlay */
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Also-offered list */
+.also-offered {
+  max-width: 72rem;
+  margin: 2rem auto 0;
+  padding: 0 0.5rem;
+  text-align: center;
+}

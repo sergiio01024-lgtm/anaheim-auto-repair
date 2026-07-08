@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+[id^="service-"] {
+  scroll-margin-top: 150px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus {
+  outline: none;
+}
+
+@keyframes scroll-ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.scroll-ticker-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: max-content;
+  animation: scroll-ticker 25s linear infinite;
+}
+
+.scroll-ticker-container:hover {
+  animation-play-state: paused;
+}
+
