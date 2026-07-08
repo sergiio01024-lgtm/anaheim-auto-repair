@@ -1,11 +1,10 @@
 import { ScrollReveal } from "./ScrollReveal";
 
 const cities = [
-  "San Diego", "Chula Vista", "El Cajon", "Santee", "Escondido",
-  "La Mesa", "Lemon Grove", "National City", "Spring Valley",
-  "Lakeside", "Poway", "Coronado", "La Jolla", "Mission Valley",
-  "North Park", "Hillcrest", "Ocean Beach", "Pacific Beach",
-  "Point Loma", "Kearny Mesa",
+  "Anaheim", "Santa Ana", "Garden Grove", "Orange", "Fullerton",
+  "Buena Park", "Stanton", "Cypress", "Placentia", "Yorba Linda",
+  "Tustin", "Costa Mesa", "Westminster", "La Palma", "Brea",
+  "Villa Park", "Fountain Valley", "Anaheim Hills", "La Habra", "Midway City"
 ];
 
 export function ServiceAreaMap() {
@@ -17,10 +16,10 @@ export function ServiceAreaMap() {
             <div>
               <h2 className="text-base font-semibold text-red-400">Service Area</h2>
               <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-                Serving All of San Diego County
+                Serving Anaheim & Orange County
               </p>
               <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
-                Based in San Diego, we serve the entire county — from Coronado to Escondido, and everywhere in between.
+                Located on W Ball Rd in Anaheim, we serve drivers from all over Orange County — walk-ins and appointments welcome.
               </p>
               <div className="mt-8 grid grid-cols-2 gap-2">
                 {cities.map((city) => (
@@ -49,8 +48,8 @@ export function ServiceAreaMap() {
             <div className="mt-12 lg:mt-0">
               <div className="overflow-hidden rounded-2xl ring-1 ring-white/10 h-[500px] lg:h-[600px]">
                 <iframe
-                  title="LTE Electric Service Area"
-                  src="https://maps.google.com/maps?q=San+Diego,+CA&z=10&output=embed"
+                  title="Anaheim Auto Repair Service Area"
+                  src="https://maps.google.com/maps?q=2583+W+Ball+Rd,+Anaheim,+CA+92804&z=14&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}

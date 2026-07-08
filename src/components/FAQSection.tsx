@@ -2,14 +2,14 @@ import { useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 
 const faqs = [
-  { q: "How much does a panel upgrade cost?", a: "Panel upgrades typically range from $1,500 to $3,500 depending on the size of your home and the amperage needed. We provide a free, upfront quote before any work begins — no surprises." },
-  { q: "Do you pull permits?", a: "Yes, always. We pull permits on every job that requires one. This protects you as the homeowner and ensures the work is done to code." },
-  { q: "How fast can you come out?", a: "We do our best to schedule jobs quickly. For electrical emergencies, call (714) 826-4444 and we will assist you as soon as we can." },
-  { q: "Are you licensed and insured?", a: "Yes. LTE Electric is a fully licensed C-10 Electrical Contractor in California (#1072569) and carries $2,000,000 in liability insurance and $25,000 in bonding." },
-  { q: "Do you work on both homes and businesses?", a: "Yes. We handle residential and commercial electrical work across all of San Diego County." },
-  { q: "What areas do you serve?", a: "We serve all of San Diego County including San Diego, Chula Vista, El Cajon, Santee, Escondido, La Mesa, Lemon Grove, National City, Spring Valley, Lakeside, Poway, and surrounding cities." },
-  { q: "Do you offer free estimates?", a: "Yes, we provide free estimates on all jobs. Call us at (714) 826-4444 or fill out our contact form and we'll get back to you to schedule." },
-  { q: "Can you install a Tesla Wall Connector or EV charger?", a: "Absolutely. We install all major EV charger brands including Tesla Wall Connector, ChargePoint, and JuiceBox. We handle permits, wiring, and setup from start to finish." },
+  { q: "Do you do free estimates?", a: "Yes. We give free, upfront quotes — including over the phone for many jobs. Call us at (714) 826-4444 and we'll walk you through it." },
+  { q: "What kind of cars do you work on?", a: "All makes and models, foreign and domestic — Honda, Toyota, Ford, Chevy, BMW, Mercedes, Audi, Nissan, Lexus, and more." },
+  { q: "Do you do mufflers and catalytic converters?", a: "Yes — muffler and exhaust work is our specialty. Muffler replacement, catalytic converters, and full exhaust systems are what we've done best for over 45 years." },
+  { q: "Can I get a quote over the phone?", a: "Often, yes. Call (714) 826-4444 and describe the issue. For exhaust work you can even email photos and we'll quote it." },
+  { q: "Do you do oil changes and routine maintenance?", a: "Absolutely. Oil and filter changes, 30k/60k/90k service, AC recharge, batteries, tune-ups, and more." },
+  { q: "What are your hours?", a: "Monday through Friday 8:30 AM to 5:30 PM, Saturday 8:30 AM to 4:30 PM. Closed Sunday." },
+  { q: "Where are you located?", a: "2583 W Ball Rd, Anaheim, CA 92804 — easy to reach from anywhere in Orange County." },
+  { q: "Do you check engine lights?", a: "Yes. We run check-engine diagnostics and will tell you honestly what's going on before doing any work." },
 ];
 
 export function FAQSection() {
