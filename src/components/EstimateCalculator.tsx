@@ -220,7 +220,7 @@ export function EstimateCalculator() {
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-base font-semibold text-orange-400">Estimate</h2>
+            <h2 className="text-base font-semibold text-red-400">Estimate</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
               Get an Instant Estimate
             </p>
@@ -241,7 +241,7 @@ export function EstimateCalculator() {
                     onClick={() => handleServiceSelect(serviceName)}
                     className={`rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ring-1 ${
                       isSelected
-                        ? "bg-orange-500 text-white ring-orange-500 shadow-md"
+                        ? "bg-red-500 text-white ring-red-500 shadow-md"
                         : "bg-white dark:bg-white/5 ring-gray-200 dark:ring-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10"
                     }`}
                   >
@@ -259,14 +259,14 @@ export function EstimateCalculator() {
                     <button
                       type="button"
                       onClick={handleBack}
-                      className="text-sm font-semibold text-orange-400 hover:text-orange-500 flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="text-sm font-semibold text-red-400 hover:text-red-500 flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       ← Back
                     </button>
                   ) : (
                     <div />
                   )}
-                  <span className="text-xs font-semibold uppercase tracking-wider text-orange-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-red-400">
                     Question {step + 1} of {activeChoice === "Residential Wiring" && answers["workType"] && answers["workType"] !== "Remodel wiring (1 room)" ? 1 : 2}
                   </span>
                 </div>
@@ -294,14 +294,14 @@ export function EstimateCalculator() {
                     <button
                       type="button"
                       onClick={handleBack}
-                      className="text-sm font-semibold text-orange-400 hover:text-orange-500 flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="text-sm font-semibold text-red-400 hover:text-red-500 flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       ← Back
                     </button>
                   </div>
                 )}
 
-                <span className="text-sm font-semibold uppercase tracking-wider text-orange-400 block mb-2">Estimated Range</span>
+                <span className="text-sm font-semibold uppercase tracking-wider text-red-400 block mb-2">Estimated Range</span>
                 <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight sm:text-5xl">
                   {formattedPrice}
                 </p>
@@ -325,7 +325,7 @@ export function EstimateCalculator() {
                 <div className="mt-8">
                   <button
                     onClick={handleCTA}
-                    className="inline-flex rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
+                    className="inline-flex rounded-md bg-red-500 px-6 py-3 text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
                   >
                     Get My Free Quote →
                   </button>

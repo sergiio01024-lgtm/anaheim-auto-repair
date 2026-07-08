@@ -10,7 +10,7 @@ export function AboutSection() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div>
-              <h2 className="text-base font-semibold text-orange-400">About LTE Electric</h2>
+              <h2 className="text-base font-semibold text-red-400">About LTE Electric</h2>
               <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
                 Meet Luke, Founder of LTE Electric
               </p>

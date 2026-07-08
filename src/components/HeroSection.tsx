@@ -3,27 +3,27 @@ import { useState, useEffect } from "react";
 const heroSlides = [
   {
     src: "/photos/luke-generator-rooftop.webp",
-    alt: "Luke with a Generac generator on a rooftop install",
+    alt: "Auto repair shop in Anaheim",
   },
   {
     src: "/photos/luke-van-thumbsup.webp",
-    alt: "LTE Electric owner Luke in front of the company van",
+    alt: "Muffler and exhaust work",
   },
   {
     src: "/photos/luke-lte-shirt-orange.webp",
-    alt: "Luke in an LTE Electric shirt on a job site",
+    alt: "Engine diagnostics",
   },
   {
     src: "/photos/luke-panel-framing-jobsite.jpg",
-    alt: "LTE Electric owner Luke working at a commercial framing job site",
+    alt: "Brake service",
   },
   {
     src: "/photos/lte-crew-generator-panel.jpg",
-    alt: "LTE Electric crew working on a generator panel installation",
+    alt: "Transmission repair",
   },
   {
     src: "/photos/luke-commercial-panel-work.jpg",
-    alt: "Luke servicing a large commercial electrical panel",
+    alt: "Oil change service",
   },
 ];
 
@@ -55,22 +55,22 @@ export function HeroSection() {
           {/* LEFT Column: Text & Stats */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-6">
-              <span className="inline-flex items-center rounded-full bg-orange-500/10 px-3 py-1 text-sm font-semibold text-orange-400 ring-1 ring-inset ring-orange-500/20">
-                Licensed C-10 · California #1072569
+              <span className="inline-flex items-center rounded-full bg-red-500/10 px-3 py-1 text-sm font-semibold text-red-400 ring-1 ring-inset ring-red-500/20">
+                Serving Anaheim & Orange County Since 1978
               </span>
             </div>
             
             <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-6xl lg:text-7xl">
-              San Diego's Trusted Electricians
+              Anaheim's Trusted Auto & Muffler Shop
             </h1>
             
             <p className="mt-6 text-lg font-medium text-gray-600 dark:text-gray-300 sm:text-xl leading-relaxed">
-              Panel upgrades, EV chargers, residential wiring, and more — done right, on time, and at a fair price. Serving all of San Diego County.
+              Muffler & exhaust, brakes, transmission, engine repair, oil changes, and more — honest work at a fair price. Family-owned and trusted in Anaheim for over 45 years.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <a href="tel:8589979251" className="rounded-md bg-orange-500 px-6 py-3.5 text-base font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 text-center">
-                Call (858) 997-9251
+              <a href="tel:7148264444" className="rounded-md bg-red-500 px-6 py-3.5 text-base font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 text-center">
+                Call (714) 826-4444
               </a>
               <a
                 href="#contact"
@@ -87,19 +87,19 @@ export function HeroSection() {
             <dl className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4 border-t border-gray-200 dark:border-white/5 pt-8">
               <div className="flex flex-col-reverse gap-1">
                 <dt className="text-base text-gray-500 dark:text-gray-400">Yelp Rating</dt>
-                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">5.0 ★</dd>
+                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">4.7 ★</dd>
               </div>
               <div className="flex flex-col-reverse gap-1">
-                <dt className="text-base text-gray-500 dark:text-gray-400">Years Experience</dt>
-                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">16+</dd>
+                <dt className="text-base text-gray-500 dark:text-gray-400">Years in Business</dt>
+                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">45+</dd>
               </div>
               <div className="flex flex-col-reverse gap-1">
-                <dt className="text-base text-gray-500 dark:text-gray-400">Insurance</dt>
-                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">$2M</dd>
+                <dt className="text-base text-gray-500 dark:text-gray-400">Yelp Reviews</dt>
+                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">590+</dd>
               </div>
               <div className="flex flex-col-reverse gap-1">
-                <dt className="text-base text-gray-500 dark:text-gray-400">Mon–Sat · Emergency Service</dt>
-                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">24 Hrs</dd>
+                <dt className="text-base text-gray-500 dark:text-gray-400">Mon–Sat · Open</dt>
+                <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">6 Days</dd>
               </div>
             </dl>
           </div>

@@ -217,7 +217,7 @@ export function PhotoGallery() {
         {/* Header & Categories */}
         <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-10">
           <div className="mx-auto max-w-2xl lg:text-center mb-12">
-            <h2 className="text-base font-semibold text-orange-400">Our Work</h2>
+            <h2 className="text-base font-semibold text-red-400">Our Work</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
               Photo Gallery
             </p>
@@ -237,7 +237,7 @@ export function PhotoGallery() {
                 }}
                 className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer ${
                   activeCategory === cat
-                    ? "bg-orange-500 text-white"
+                    ? "bg-red-500 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-white/20"
                 }`}
               >
@@ -355,9 +355,9 @@ export function PhotoGallery() {
                     onClick={() => setActiveIndex(i)}
                     className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 cursor-pointer transition-all duration-200 ${
                       isPrimary
-                        ? "ring-4 ring-orange-500 scale-105 z-10 shadow-md"
+                        ? "ring-4 ring-red-500 scale-105 z-10 shadow-md"
                         : isSecondary
-                        ? "ring-2 ring-orange-500/40 opacity-90"
+                        ? "ring-2 ring-red-500/40 opacity-90"
                         : "ring-1 ring-gray-200 dark:ring-white/10 opacity-70 hover:opacity-100"
                     }`}
                   >
@@ -420,7 +420,7 @@ export function PhotoGallery() {
                 e.preventDefault();
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-orange-400 hover:text-orange-300 font-semibold"
+              className="text-red-400 hover:text-red-300 font-semibold"
             >
               Get a free quote →
             </a>

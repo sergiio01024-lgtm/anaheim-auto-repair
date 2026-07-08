@@ -6,11 +6,11 @@ export function PricingSection() {
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center mb-16">
-            <h2 className="text-base font-semibold text-orange-400">Pricing</h2>
+            <h2 className="text-base font-semibold text-red-400">Pricing</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
               Ballpark Price Ranges
             </p>
-            <p className="mt-4 text-xl font-medium text-orange-400">
+            <p className="mt-4 text-xl font-medium text-red-400">
               Free estimates on all jobs.
             </p>
             <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
@@ -20,7 +20,7 @@ export function PricingSection() {
 
           <div className="mx-auto grid max-w-lg grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-4">
             {/* Card 1: Panel Upgrades */}
-            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-orange-500/30 transition-all duration-300">
+            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-red-500/30 transition-all duration-300">
               <div>
                 <h3 className="text-lg font-semibold leading-8 text-gray-900 dark:text-white">Panel Upgrades</h3>
                 <p className="mt-4 flex items-baseline gap-x-2">
@@ -33,7 +33,7 @@ export function PricingSection() {
             </div>
 
             {/* Card 2: EV Charger Installation */}
-            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-orange-500/30 transition-all duration-300">
+            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-red-500/30 transition-all duration-300">
               <div>
                 <h3 className="text-lg font-semibold leading-8 text-gray-900 dark:text-white">EV Charger Installation</h3>
                 <p className="mt-4 flex items-baseline gap-x-2">
@@ -46,7 +46,7 @@ export function PricingSection() {
             </div>
 
             {/* Card 3: Residential Wiring */}
-            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-orange-500/30 transition-all duration-300">
+            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-red-500/30 transition-all duration-300">
               <div>
                 <h3 className="text-lg font-semibold leading-8 text-gray-900 dark:text-white">Residential Wiring</h3>
                 <p className="mt-4 flex items-baseline gap-x-2">
@@ -59,7 +59,7 @@ export function PricingSection() {
             </div>
 
             {/* Card 4: Commercial Electrical */}
-            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-orange-500/30 transition-all duration-300">
+            <div className="flex flex-col justify-between rounded-3xl bg-white dark:bg-white/5 p-8 ring-1 ring-gray-200 dark:ring-white/10 hover:ring-red-500/30 transition-all duration-300">
               <div>
                 <h3 className="text-lg font-semibold leading-8 text-gray-900 dark:text-white">Commercial Electrical</h3>
                 <p className="mt-4 flex items-baseline gap-x-2">
@@ -79,7 +79,7 @@ export function PricingSection() {
                 e.preventDefault();
                 document.querySelector("#contact")?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+              className="rounded-md bg-red-500 px-6 py-3 text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
             >
               Get a Free Quote
             </a>

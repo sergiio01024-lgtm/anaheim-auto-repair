@@ -15,7 +15,7 @@ export function ServiceAreaMap() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div>
-              <h2 className="text-base font-semibold text-orange-400">Service Area</h2>
+              <h2 className="text-base font-semibold text-red-400">Service Area</h2>
               <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
                 Serving All of San Diego County
               </p>
@@ -25,7 +25,7 @@ export function ServiceAreaMap() {
               <div className="mt-8 grid grid-cols-2 gap-2">
                 {cities.map((city) => (
                   <div key={city} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                    <svg className="size-4 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="size-4 text-red-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" strokeLinecap="round" strokeLinejoin="round" />
                       <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -40,7 +40,7 @@ export function ServiceAreaMap() {
                     e.preventDefault();
                     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="rounded-md bg-orange-500 px-6 py-3 text-sm font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+                  className="rounded-md bg-red-500 px-6 py-3 text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
                 >
                   Check Your Area →
                 </a>

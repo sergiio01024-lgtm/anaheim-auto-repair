@@ -39,7 +39,7 @@ export function WhyChooseUs() {
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold text-orange-400">Why LTE Electric</h2>
+            <h2 className="text-base font-semibold text-red-400">Why LTE Electric</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-balance">
               The Standard Every Job Is Held To
             </p>
@@ -52,7 +52,7 @@ export function WhyChooseUs() {
               {reasons.map((reason) => (
                 <div key={reason.title} className="relative pl-16">
                   <dt className="text-base font-semibold text-gray-900 dark:text-white">
-                    <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-orange-500">
+                    <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-red-500">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" className="size-6 text-white">
                         <path d={reason.icon} strokeLinecap="round" strokeLinejoin="round" />
                       </svg>

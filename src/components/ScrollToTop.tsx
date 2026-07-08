@@ -72,7 +72,7 @@ export function ScrollToTop() {
       {/* Scroll to Bottom Button */}
       <button
         onClick={handleScrollBottomClick}
-        className={`fixed z-40 flex items-center justify-center rounded-full bg-orange-500 hover:bg-orange-400 text-white shadow-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 size-10 ${
+        className={`fixed z-40 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-400 text-white shadow-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 size-10 ${
           isVisible
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"
@@ -85,7 +85,7 @@ export function ScrollToTop() {
       {/* Scroll to Top Button */}
       <button
         onClick={handleScrollTopClick}
-        className={`fixed z-40 flex items-center justify-center rounded-full bg-orange-500 hover:bg-orange-400 text-white shadow-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 size-10 ${
+        className={`fixed z-40 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-400 text-white shadow-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 size-10 ${
           isVisible
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"

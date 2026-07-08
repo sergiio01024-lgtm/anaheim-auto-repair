@@ -143,11 +143,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Override Tailwind orange colors to point to red */
-  --color-orange-300: #FF5A5F;
-  --color-orange-400: #E63946;
-  --color-orange-500: #C8202F;
-  --color-orange-600: #A81A25;
 }
 
 @layer base {

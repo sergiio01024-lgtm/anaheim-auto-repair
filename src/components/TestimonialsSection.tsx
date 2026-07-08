@@ -27,7 +27,7 @@ export function TestimonialsSection() {
       <div className="absolute inset-0 -z-10 bg-gray-50 dark:bg-gray-950 opacity-10" />
       <ScrollReveal>
         <div className="mx-auto max-w-2xl lg:max-w-4xl text-center mb-16">
-          <h2 className="text-base font-semibold text-orange-400">Customer Reviews</h2>
+          <h2 className="text-base font-semibold text-red-400">Customer Reviews</h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
             What Our Customers Say
           </p>
@@ -49,7 +49,7 @@ export function TestimonialsSection() {
                 </blockquote>
               </div>
               <figcaption className="mt-6 flex items-center gap-x-4">
-                <div className="size-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-sm">
+                <div className="size-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold text-sm">
                   {review.name[0]}
                 </div>
                 <div>

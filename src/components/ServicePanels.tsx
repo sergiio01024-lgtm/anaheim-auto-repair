@@ -47,7 +47,7 @@ export function ServicePanels() {
       <ScrollReveal>
         {/* Section header */}
         <div className="service-card-section-header">
-          <span className="text-sm font-semibold tracking-wider uppercase text-orange-400 block mb-2">
+          <span className="text-sm font-semibold tracking-wider uppercase text-red-400 block mb-2">
             Our Services
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -71,7 +71,7 @@ export function ServicePanels() {
 
               {/* Top-left: eyebrow + title + subtitle */}
               <div className="z-10">
-                <span className="text-xs font-bold tracking-widest uppercase text-orange-400 block mb-1.5">
+                <span className="text-xs font-bold tracking-widest uppercase text-red-400 block mb-1.5">
                   {card.eyebrow}
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight">
@@ -87,7 +87,7 @@ export function ServicePanels() {
                 <a
                   href="#contact"
                   onClick={handleQuoteClick}
-                  className="rounded-full bg-orange-500 hover:bg-orange-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center"
+                  className="rounded-full bg-red-500 hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center"
                 >
                   Get a Free Quote
                 </a>

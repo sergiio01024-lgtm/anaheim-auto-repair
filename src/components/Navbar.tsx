@@ -50,8 +50,8 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               Logo
             </div>
             <div>
-              <span className="text-sm font-bold leading-none transition-colors duration-300 text-gray-900 dark:text-white">LTE Electric</span>
-              <span className="block text-xs leading-none mt-0.5 transition-colors duration-300 text-gray-600 dark:text-white/60">San Diego Electrician</span>
+              <span className="text-sm font-bold leading-none transition-colors duration-300 text-gray-900 dark:text-white">Anaheim Auto Repair</span>
+              <span className="block text-xs leading-none mt-0.5 transition-colors duration-300 text-gray-600 dark:text-white/60">Auto & Muffler Repair · Anaheim</span>
             </div>
           </a>
         </div>
@@ -76,7 +76,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                 e.preventDefault();
                 document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-sm font-semibold hover:text-orange-400 transition-colors text-gray-900 dark:text-white"
+              className="text-sm font-semibold hover:text-red-400 transition-colors text-gray-900 dark:text-white"
             >
               {link.label}
             </a>
@@ -84,8 +84,8 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
           <ThemeToggle />
-          <a href="tel:8589979251" className="text-sm font-semibold transition-colors duration-300 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white">
-            (858) 997-9251
+          <a href="tel:7148264444" className="text-sm font-semibold transition-colors duration-300 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white">
+            (714) 826-4444
           </a>
           <a
             href="#contact"
@@ -93,7 +93,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               e.preventDefault();
               document.querySelector("#contact")?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="rounded-md bg-orange-500 px-3.5 py-2 text-sm font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+            className="rounded-md bg-red-500 px-3.5 py-2 text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
           >
             Free Quote
           </a>
@@ -115,7 +115,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               <div className="h-9 w-9 bg-red-600 rounded-md flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
                 Logo
               </div>
-              <span className="text-sm font-bold text-gray-900 dark:text-white">LTE Electric</span>
+              <span className="text-sm font-bold text-gray-900 dark:text-white">Anaheim Auto Repair</span>
             </a>
             <div className="flex items-center gap-2">
               <ThemeToggle />
@@ -146,8 +146,8 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                 ))}
               </div>
               <div className="py-6 flex flex-col gap-3">
-                <a href="tel:8589979251" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5">
-                  Call (858) 997-9251
+                <a href="tel:7148264444" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5">
+                  Call (714) 826-4444
                 </a>
                 <a
                   href="#contact"
@@ -156,7 +156,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                     setMobileOpen(false);
                     document.querySelector("#contact")?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="block rounded-md bg-orange-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-orange-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+                  className="block rounded-md bg-red-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
                 >
                   Get a Free Quote
                 </a>

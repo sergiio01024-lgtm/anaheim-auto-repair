@@ -27,7 +27,7 @@ export function FAQSection() {
                 </h2>
                 <p className="mt-4 text-gray-600 dark:text-gray-400">
                   Can't find the answer you're looking for? Call us at{" "}
-                  <a href="tel:8589979251" className="font-semibold text-orange-400 hover:text-orange-300">
+                  <a href="tel:8589979251" className="font-semibold text-red-400 hover:text-red-300">
                     (858) 997-9251
                   </a>
                 </p>

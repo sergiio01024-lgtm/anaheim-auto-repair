@@ -22,7 +22,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="size-8 rounded-lg bg-orange-500 flex items-center justify-center">
+              <div className="size-8 rounded-lg bg-red-500 flex items-center justify-center">
                 <svg className="size-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t border-gray-200 dark:border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} LTE Electric. All rights reserved. Licensed Electrical Contractor · San Diego, CA</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Built by <a href="https://kratosintelligence.com" className="text-orange-400 hover:text-orange-300">Kratos Intelligence</a></p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">Built by <a href="https://kratosintelligence.com" className="text-red-400 hover:text-red-300">Kratos Intelligence</a></p>
         </div>
       </div>
     </footer>
