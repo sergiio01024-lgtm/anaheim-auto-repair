@@ -22,7 +22,7 @@ export function ContactSection() {
       "Other": "general",
     };
     try {
-      const res = await fetch("https://n8n.kratosintelligence.com/webhook/lte-electric-lead", {
+      const res = await fetch("https://n8n.kratosintelligence.com/webhook/anaheim-auto-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
