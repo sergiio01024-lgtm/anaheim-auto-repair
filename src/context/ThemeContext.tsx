@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("lte-theme") as Theme | null;
+      const saved = localStorage.getItem("anaheim-theme") as Theme | null;
       if (saved === "light" || saved === "dark") {
         return saved;
       }
@@ -27,7 +27,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("lte-theme", theme);
+    localStorage.setItem("anaheim-theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {

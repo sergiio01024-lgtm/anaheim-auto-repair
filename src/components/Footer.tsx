@@ -1,19 +1,31 @@
 const services = [
-  "Panel Upgrades",
-  "EV Charger Installation",
-  "Residential Wiring",
-  "Commercial Electrical",
-  "Lighting Installation",
-  "Outlet & Switch Repair",
-  "Emergency Repairs",
-  "Ceiling Fan Installation",
-  "Security Lighting",
-  "Low Voltage",
-  "Troubleshooting",
-  "Generator Installations",
-  "Temporary Power Connections",
+  "Muffler & Exhaust",
+  "Brakes & Suspension",
+  "Engine Repair",
+  "Transmission Service",
+  "Oil Changes",
+  "AC & Heating Repair",
+  "Check Engine Diagnostics",
+  "Tune-Ups",
+  "Alignment",
+  "Batteries",
+  "Catalytic Converters",
+  "Smog Check Prep",
 ];
-const cities = ["San Diego", "Chula Vista", "El Cajon", "Santee", "Escondido", "La Mesa", "Lemon Grove", "National City", "Spring Valley", "Lakeside", "Poway", "Coronado"];
+const cities = [
+  "Anaheim",
+  "Santa Ana",
+  "Garden Grove",
+  "Orange",
+  "Fullerton",
+  "Buena Park",
+  "Stanton",
+  "Cypress",
+  "Placentia",
+  "Yorba Linda",
+  "Tustin",
+  "Westminster",
+];
 
 export function Footer() {
   return (
@@ -27,15 +39,15 @@ export function Footer() {
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <span className="font-bold text-gray-900 dark:text-white">LTE Electric</span>
+              <span className="font-bold text-gray-900 dark:text-white">Anaheim Auto Repair</span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-400 mb-4">Licensed C-10 electrical contractor serving all of San Diego County since 2018.</p>
+            <p className="text-sm text-gray-700 dark:text-gray-400 mb-4">Family-owned auto & muffler repair serving Anaheim & Orange County since 1978.</p>
             <div className="space-y-2 text-sm text-gray-700 dark:text-gray-400">
               <p><a href="tel:7148264444" className="hover:text-gray-900 dark:hover:text-white transition-colors">(714) 826-4444</a></p>
-              <p>San Diego, CA</p>
-              <p>CA C-10 License #1072569</p>
+              <p>2583 W Ball Rd, Anaheim, CA 92804</p>
               <p className="mt-3 text-sm font-semibold text-gray-900 dark:text-white">Hours</p>
-              <p>Mon – Sat: Open 24 Hours</p>
+              <p>Mon–Fri: 8:30am – 5:30pm</p>
+              <p>Sat: 8:30am – 4:30pm</p>
               <p>Sun: Closed</p>
             </div>
           </div>
@@ -83,14 +95,14 @@ export function Footer() {
               ))}
             </ul>
             <div className="mt-8 rounded-xl bg-white dark:bg-white/5 ring-1 ring-gray-200 dark:ring-white/10 p-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400">$2,000,000 Liability Insurance</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">$25,000 Bonded</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">BuildZoom Score: 112 (Top 3%)</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">4.7 ★ on Yelp</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">595 Reviews</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Serving Anaheim Since 1978</p>
             </div>
           </div>
         </div>
         <div className="mt-12 border-t border-gray-200 dark:border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} LTE Electric. All rights reserved. Licensed Electrical Contractor · San Diego, CA</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} Anaheim Auto Repair and Muffler Care. All rights reserved. · Anaheim, CA</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Built by <a href="https://kratosintelligence.com" className="text-red-400 hover:text-red-300">Kratos Intelligence</a></p>
         </div>
       </div>

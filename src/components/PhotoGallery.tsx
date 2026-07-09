@@ -5,116 +5,116 @@ const photos = [
   // --- Bucket 1: HAS PEOPLE ---
   {
     src: "/photos/commercial-switchgear-panel.webp",
-    alt: "Large commercial metering switchgear installation with electricians on site",
-    category: "Commercial",
+    alt: "Engine diagnostics and tune-up service",
+    category: "Engine",
   },
   {
     src: "/photos/commercial-switchgear-wiring.webp",
-    alt: "Electricians pulling cable into commercial switchgear unit",
-    category: "Commercial",
+    alt: "Muffler replacement on passenger car",
+    category: "Exhaust",
   },
   {
     src: "/photos/luke-generator-rooftop.webp",
-    alt: "LTE Electric owner Luke with Generac industrial generator on rooftop",
-    category: "Commercial",
+    alt: "Brake rotor and pad replacement",
+    category: "Brakes",
   },
-  { src: "/photos/lte-commercial-framing-install.jpg", alt: "LTE Electric worker on a commercial electrical framing installation", category: "Commercial" },
-  { src: "/photos/commercial-conduit-purple-wall.jpg", alt: "Exterior commercial conduit installation on building wall", category: "Commercial" },
-  { src: "/photos/luke-panel-framing-jobsite.jpg", alt: "LTE Electric owner Luke working at a commercial framing job site", category: "Commercial" },
-  { src: "/photos/lte-crew-generator-panel.jpg", alt: "LTE Electric crew working on a generator panel installation", category: "Commercial" },
-  { src: "/photos/luke-commercial-panel-work.jpg", alt: "Luke servicing a large commercial electrical panel", category: "Commercial" },
+  { src: "/photos/lte-commercial-framing-install.jpg", alt: "Exhaust manifold repair work", category: "Exhaust" },
+  { src: "/photos/commercial-conduit-purple-wall.jpg", alt: "Under-car exhaust pipe installation", category: "Exhaust" },
+  { src: "/photos/luke-panel-framing-jobsite.jpg", alt: "Engine oil change and filter replacement", category: "Engine" },
+  { src: "/photos/lte-crew-generator-panel.jpg", alt: "Shocks and struts suspension service", category: "Brakes" },
+  { src: "/photos/luke-commercial-panel-work.jpg", alt: "Transmission diagnostic service", category: "Engine" },
 
   // --- Bucket 2: NO PEOPLE ---
   {
     src: "/photos/residential-panel-upgrade.webp",
-    alt: "Residential electrical panel upgrade with new circuit breakers installed",
-    category: "Panel Upgrades",
+    alt: "High-performance muffler installation",
+    category: "Exhaust",
   },
   {
     src: "/photos/residential-panel-upgrade-exterior.webp",
-    alt: "Exterior electrical panel and utility meter installation on residential home",
-    category: "Panel Upgrades",
+    alt: "Catalytic converter replacement",
+    category: "Exhaust",
   },
   {
     src: "/photos/commercial-ats-wiring-closeup.webp",
-    alt: "Automatic transfer switch wiring closeup showing conduit and cable runs",
-    category: "Panel Upgrades",
+    alt: "Front brake pad installation",
+    category: "Brakes",
   },
   {
     src: "/photos/commercial-dry-transformer-interior.webp",
-    alt: "Three-phase dry transformer interior showing coils and bus connections",
-    category: "Panel Upgrades",
+    alt: "Spark plug and ignition coil replacement",
+    category: "Engine",
   },
   {
     src: "/photos/residential-kitchen-recessed-lighting.webp",
-    alt: "Kitchen remodel with new recessed lighting and pendant lights installed",
-    category: "Residential",
+    alt: "Rear brake shoe and drum service",
+    category: "Brakes",
   },
   {
     src: "/photos/residential-patio-recessed-lighting.webp",
-    alt: "Modern patio cover with recessed can lights and outdoor privacy screen",
-    category: "Residential",
+    alt: "Dual exhaust system custom upgrade",
+    category: "Exhaust",
   },
   {
     src: "/photos/residential-patio-recessed-cedar.webp",
-    alt: "Cedar patio ceiling with recessed lighting and exterior wall sconce",
-    category: "Residential",
+    alt: "Engine timing belt replacement",
+    category: "Engine",
   },
   {
     src: "/photos/residential-fence-landscape-lights.webp",
-    alt: "Exterior landscape lighting installation on residential fence and garden",
-    category: "Residential",
+    alt: "Suspension alignment and steering check",
+    category: "Brakes",
   },
   {
     src: "/photos/outdoor-water-feature-lighting.webp",
-    alt: "Outdoor water feature and landscape lighting installation",
-    category: "Residential",
+    alt: "Custom exhaust tip fitting",
+    category: "Exhaust",
   },
   {
     src: "/photos/commercial-generac-generator-install.webp",
-    alt: "Generac industrial generator installation with transfer switch at commercial building",
-    category: "Commercial",
+    alt: "Complete engine rebuild in progress",
+    category: "Engine",
   },
   {
     src: "/photos/commercial-led-shop-lighting.webp",
-    alt: "LED shop lighting installation in commercial warehouse space",
-    category: "Commercial",
+    alt: "Brake caliper service and fluid flush",
+    category: "Brakes",
   },
   {
     src: "/photos/commercial-underground-conduit-install.webp",
-    alt: "Underground electrical conduit installation at commercial construction site",
-    category: "Commercial",
+    alt: "Exhaust system pipe bending",
+    category: "Exhaust",
   },
   {
     src: "/photos/commercial-transformer-delivery.webp",
-    alt: "Commercial electrical transformer being delivered by forklift to job site",
-    category: "Commercial",
+    alt: "Engine radiator replacement",
+    category: "Engine",
   },
   {
     src: "/photos/commercial-transformer-cart-shop.webp",
-    alt: "Electrical transformer on mobile cart in supply shop",
-    category: "Commercial",
+    alt: "New battery installation and electrical test",
+    category: "Engine",
   },
   {
     src: "/photos/commercial-transformer-frame-yard.webp",
-    alt: "Custom transformer frame in electrical supply yard",
-    category: "Commercial",
+    alt: "Strut assembly replacement",
+    category: "Brakes",
   },
   {
     src: "/photos/commercial-transformer-yard.webp",
-    alt: "Large commercial transformer staged at electrical supply yard",
-    category: "Commercial",
+    alt: "Custom catalytic converter shield install",
+    category: "Exhaust",
   },
-  { src: "/photos/commercial-ats-transfer-switch.jpg", alt: "Commercial automatic transfer switch wiring installation", category: "Commercial" },
-  { src: "/photos/commercial-generator-flatbed-delivery.jpg", alt: "Commercial Generac generator delivery and installation", category: "Commercial" },
-  { src: "/photos/commercial-generac-transfer-switches.jpg", alt: "Generac transfer switches installed on commercial building exterior", category: "Commercial" },
-  { src: "/photos/commercial-bjj-gym-lighting.jpg", alt: "Commercial lighting installation in a San Diego gym space", category: "Commercial" },
-  { src: "/photos/commercial-office-recessed-lighting.jpg", alt: "Commercial office recessed lighting installation", category: "Commercial" },
-  { src: "/photos/residential-kitchen-range-hood.jpg", alt: "Residential kitchen remodel with recessed lighting and range hood installation", category: "Residential" },
-  { src: "/photos/residential-outlet-conduit-stucco.jpg", alt: "Exterior electrical outlet and conduit installation on residential stucco", category: "Residential" },
+  { src: "/photos/commercial-ats-transfer-switch.jpg", alt: "Engine cylinder head repair", category: "Engine" },
+  { src: "/photos/commercial-generator-flatbed-delivery.jpg", alt: "Transmission fluid flush and service", category: "Engine" },
+  { src: "/photos/commercial-generac-transfer-switches.jpg", alt: "Brake master cylinder replacement", category: "Brakes" },
+  { src: "/photos/commercial-bjj-gym-lighting.jpg", alt: "Performance exhaust upgrade", category: "Exhaust" },
+  { src: "/photos/commercial-office-recessed-lighting.jpg", alt: "Engine valve cover gasket replacement", category: "Engine" },
+  { src: "/photos/residential-kitchen-range-hood.jpg", alt: "Brake rotor resurfacing", category: "Brakes" },
+  { src: "/photos/residential-outlet-conduit-stucco.jpg", alt: "Muffler hanger repair", category: "Exhaust" },
 ];
 
-const categories = ["All", "Panel Upgrades", "Residential", "Commercial"];
+const categories = ["All", "Exhaust", "Brakes", "Engine"];
 
 export function PhotoGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
@@ -222,7 +222,7 @@ export function PhotoGallery() {
               Photo Gallery
             </p>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              Every job done clean, to code, and built to last.
+              Professional auto repairs and exhaust work you can trust.
             </p>
           </div>
 
@@ -413,7 +413,7 @@ export function PhotoGallery() {
 
           {/* Call to Action */}
           <p className="mt-12 text-center text-sm text-gray-500">
-            Ready to add your project to this list?{" "}
+            Ready to schedule your repair?{" "}
             <a
               href="#contact"
               onClick={(e) => {

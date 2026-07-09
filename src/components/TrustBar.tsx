@@ -1,13 +1,13 @@
 const badges = [
-  "Licensed C-10 Contractor",
-  "Fully Insured & Bonded",
-  "5-Star Yelp Rated",
-  "Permits Pulled on Every Job",
-  "Union-Trained Electrician",
-  "Accepts Credit Cards",
-  "16 Years Experience",
+  "Serving Anaheim Since 1978",
+  "4.7★ on Yelp",
+  "595+ Reviews",
+  "Honest, No Upsell",
+  "All Makes & Models",
+  "Muffler & Exhaust Specialists",
   "Free Estimates",
-  "Locally Owned & Operated",
+  "Straight Phone Quotes",
+  "Family-Owned & Operated",
 ];
 
 export function TrustBar() {
