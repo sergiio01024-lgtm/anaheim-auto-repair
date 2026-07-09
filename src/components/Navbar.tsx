@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { Wrench } from "lucide-react";
 
 
 
@@ -46,12 +47,16 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
             }}
             className="-m-1.5 p-1.5 flex items-center gap-3"
           >
-            <div className="h-9 w-9 bg-red-600 rounded-md flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
-              Logo
+            <div className="size-9 bg-red-600 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+              <Wrench className="size-5" />
             </div>
-            <div>
-              <span className="text-sm font-bold leading-none transition-colors duration-300 text-gray-900 dark:text-white">Anaheim Auto Repair</span>
-              <span className="block text-xs leading-none mt-0.5 transition-colors duration-300 text-gray-600 dark:text-white/60">Auto & Muffler Repair · Anaheim</span>
+            <div className="flex flex-col justify-center">
+              <span className="text-sm md:text-base font-extrabold tracking-tight leading-none text-[#1A1A1A] dark:text-white uppercase">
+                Anaheim Auto Repair
+              </span>
+              <span className="hidden sm:inline-block text-[9px] md:text-[10px] font-bold tracking-widest leading-none mt-1 text-[#CC0000] dark:text-red-400 uppercase">
+                & Muffler Care
+              </span>
             </div>
           </a>
         </div>
@@ -112,10 +117,17 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               }}
               className="-m-1.5 p-1.5 flex items-center gap-3"
             >
-              <div className="h-9 w-9 bg-red-600 rounded-md flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
-                Logo
+              <div className="size-9 bg-red-600 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+                <Wrench className="size-5" />
               </div>
-              <span className="text-sm font-bold text-gray-900 dark:text-white">Anaheim Auto Repair</span>
+              <div className="flex flex-col justify-center">
+                <span className="text-sm font-extrabold tracking-tight leading-none text-gray-900 dark:text-white uppercase">
+                  Anaheim Auto Repair
+                </span>
+                <span className="text-[9px] font-bold tracking-widest leading-none mt-1 text-[#CC0000] dark:text-red-400 uppercase">
+                  & Muffler Care
+                </span>
+              </div>
             </a>
             <div className="flex items-center gap-2">
               <ThemeToggle />
