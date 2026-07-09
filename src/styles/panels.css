@@ -38,46 +38,19 @@
 /* Individual card */
 .service-card {
   position: relative;
-  height: 460px;
   overflow: hidden;
-  border-radius: 1rem;
-  background-color: #FFFFFF;
-  border: 1px solid #E2E4E8;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem;
-  color: #1A1A1A;
-}
-
-.dark .service-card {
-  background-color: #1A1A1A;
-  border: 1px solid rgba(200, 32, 47, 0.15);
-  color: #fff;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .service-card {
-    height: 360px;
-    padding: 1.5rem;
+    /* Paddings will be driven by utility classes */
   }
 }
 
-/* Dark gradient overlay */
-.dark .service-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
-  z-index: 0;
-  border-radius: inherit;
-}
 
-/* All direct children sit above overlay */
-.service-card > * {
-  position: relative;
-  z-index: 1;
-}
 
 /* Also-offered list */
 .also-offered {

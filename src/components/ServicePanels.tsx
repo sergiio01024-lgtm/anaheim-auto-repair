@@ -56,43 +56,49 @@ export function ServicePanels() {
         </div>
 
         {/* 2×2 card grid */}
-        <div className="service-card-grid">
+        <div className="service-card-grid items-stretch">
           {cardsData.map((card, idx) => (
             <div
               key={idx}
-              className="service-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-black/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10"
+              className="service-card flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Centered Placeholder Text */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-                <span className="text-gray-900/10 dark:text-white/20 text-xs font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
-                <span className="text-gray-900/5 dark:text-white/10 text-[10px] max-w-[150px] text-center">{card.title}</span>
-              </div>
-
-              {/* Top-left: eyebrow + title + subtitle */}
-              <div className="z-10">
-                <span className="text-xs font-bold tracking-widest uppercase text-red-650 dark:text-red-400 block mb-1.5">
-                  {card.eyebrow}
+              {/* Shrunk Photo Banner Strip */}
+              <div className="relative w-full aspect-[16/9] mb-6 rounded-xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 dark:from-zinc-800 dark:to-zinc-900 border border-gray-200/50 dark:border-white/5 flex flex-col items-center justify-center p-4">
+                <span className="text-gray-400 dark:text-gray-500 text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-1">
+                  Photo coming soon
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight text-gray-900 dark:text-white">
+                <span className="text-gray-300 dark:text-gray-600 text-[8px] sm:text-[10px] max-w-[150px] text-center">
                   {card.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-xs">
-                  {card.subtitle}
-                </p>
+                </span>
               </div>
 
-              {/* Bottom-left: buttons */}
-              <div className="flex flex-col sm:flex-row gap-2.5 mt-4 z-10">
+              {/* Eyebrow Label */}
+              <span className="text-xs font-bold tracking-widest uppercase text-red-650 dark:text-red-400 block mb-2">
+                {card.eyebrow}
+              </span>
+
+              {/* Title */}
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 leading-tight text-gray-900 dark:text-white">
+                {card.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6 flex-grow">
+                {card.subtitle}
+              </p>
+
+              {/* Button Row */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <a
                   href="#contact"
                   onClick={handleQuoteClick}
-                  className="rounded-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center shadow-sm"
+                  className="flex-1 rounded-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center shadow-sm whitespace-nowrap"
                 >
                   Get a Free Quote
                 </a>
                 <a
                   href="tel:+17148264444"
-                  className="rounded-full bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-900 dark:border-white dark:text-white dark:hover:bg-white/5 transition-all duration-200 hover:scale-105 active:scale-95 text-center"
+                  className="flex-1 rounded-full bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-700 dark:text-gray-300 dark:border-white/20 dark:hover:bg-white/5 px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center whitespace-nowrap"
                 >
                   Call (714) 826-4444
                 </a>
