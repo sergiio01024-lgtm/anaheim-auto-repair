@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 
 const heroSlides = [
   {
-    src: "/photos/luke-generator-rooftop.webp",
+    src: "/photos/auto-shop-1.webp",
     alt: "Auto repair shop in Anaheim",
   },
   {
-    src: "/photos/luke-van-thumbsup.webp",
+    src: "/photos/auto-shop-2.webp",
     alt: "Muffler and exhaust work",
   },
   {
-    src: "/photos/luke-lte-shirt-orange.webp",
+    src: "/photos/auto-shop-3.webp",
     alt: "Engine diagnostics",
   },
   {
-    src: "/photos/luke-panel-framing-jobsite.jpg",
+    src: "/photos/auto-shop-4.jpg",
     alt: "Brake service",
   },
   {
@@ -22,7 +22,7 @@ const heroSlides = [
     alt: "Transmission repair",
   },
   {
-    src: "/photos/luke-commercial-panel-work.jpg",
+    src: "/photos/auto-shop-5.jpg",
     alt: "Oil change service",
   },
 ];

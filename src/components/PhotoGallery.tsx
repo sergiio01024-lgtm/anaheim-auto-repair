@@ -14,15 +14,15 @@ const photos = [
     category: "Exhaust",
   },
   {
-    src: "/photos/luke-generator-rooftop.webp",
+    src: "/photos/auto-shop-1.webp",
     alt: "Brake rotor and pad replacement",
     category: "Brakes",
   },
   { src: "/photos/lte-commercial-framing-install.jpg", alt: "Exhaust manifold repair work", category: "Exhaust" },
   { src: "/photos/commercial-conduit-purple-wall.jpg", alt: "Under-car exhaust pipe installation", category: "Exhaust" },
-  { src: "/photos/luke-panel-framing-jobsite.jpg", alt: "Engine oil change and filter replacement", category: "Engine" },
+  { src: "/photos/auto-shop-4.jpg", alt: "Engine oil change and filter replacement", category: "Engine" },
   { src: "/photos/lte-crew-generator-panel.jpg", alt: "Shocks and struts suspension service", category: "Brakes" },
-  { src: "/photos/luke-commercial-panel-work.jpg", alt: "Transmission diagnostic service", category: "Engine" },
+  { src: "/photos/auto-shop-5.jpg", alt: "Transmission diagnostic service", category: "Engine" },
 
   // --- Bucket 2: NO PEOPLE ---
   {
