@@ -52,7 +52,7 @@ export function ServiceAreaMap() {
               <div className="overflow-hidden rounded-2xl ring-1 ring-gray-200 dark:ring-white/10 h-[500px] lg:h-[600px]">
                 <iframe
                   title="Anaheim Auto Repair Service Area"
-                  src="https://maps.google.com/maps?q=2583+W+Ball+Rd,+Anaheim,+CA+92804&z=14&output=embed"
+                  src="https://maps.google.com/maps?q=Anaheim+Auto+Repair+Muffler+Care,+2583+W+Ball+Rd,+Anaheim,+CA+92804&z=15&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: theme === "dark" ? "invert(90%) hue-rotate(180deg)" : "none" }}
