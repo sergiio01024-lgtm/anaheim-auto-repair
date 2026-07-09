@@ -121,29 +121,34 @@ export function ServicePanels() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6 flex-grow">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
                   {card.subtitle}
                 </p>
-
-                {/* Button Row */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <a
-                    href="#contact"
-                    onClick={handleQuoteClick}
-                    className="flex-1 rounded-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center shadow-sm whitespace-nowrap"
-                  >
-                    Get a Free Quote
-                  </a>
-                  <a
-                    href="tel:+17148264444"
-                    className="flex-1 rounded-full bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-700 dark:text-gray-300 dark:border-white/20 dark:hover:bg-white/5 px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center whitespace-nowrap"
-                  >
-                    Call (714) 826-4444
-                  </a>
-                </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Shared CTA Block */}
+        <div className="mt-12 text-center max-w-xl mx-auto flex flex-col items-center">
+          <p className="text-gray-600 dark:text-gray-300 font-medium mb-4 text-sm sm:text-base">
+            Not sure what you need? Tell us and we'll give you a free quote.
+          </p>
+          <div className="flex flex-row gap-3">
+            <a
+              href="#contact"
+              onClick={handleQuoteClick}
+              className="rounded-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center shadow-sm"
+            >
+              Get a Free Quote
+            </a>
+            <a
+              href="tel:+17148264444"
+              className="rounded-full bg-transparent hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-300 dark:border-white/20 text-gray-700 dark:text-gray-300 px-6 py-3 text-sm font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-center"
+            >
+              Call (714) 826-4444
+            </a>
+          </div>
         </div>
 
         {/* Full Service List Grid */}
