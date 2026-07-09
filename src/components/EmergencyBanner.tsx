@@ -18,10 +18,10 @@ export function EmergencyBanner({ isOpen, setIsOpen }: EmergencyBannerProps) {
   return (
     <a
       href="tel:7148264444"
-      className="fixed bottom-16 left-0 right-0 z-50 bg-red-500 hover:bg-red-400 text-white font-bold text-center py-3 text-sm md:fixed md:top-0 md:bottom-auto md:py-2.5 block transition-colors duration-300"
+      className="fixed bottom-16 left-0 right-0 z-50 bg-red-600 hover:bg-red-700 text-white font-bold text-center py-3 text-sm md:fixed md:top-0 md:bottom-auto md:py-2.5 block transition-colors duration-300"
     >
       <span className="flex items-center justify-center gap-1.5 px-8">
-        ⚡ Electrical Emergency? Call Now: (714) 826-4444
+        🛠️ Need Auto Repair or Muffler Care? Call Now: (714) 826-4444
       </span>
       <button
         onClick={handleClose}

@@ -217,7 +217,7 @@ export function PhotoGallery() {
         {/* Header & Categories */}
         <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-10">
           <div className="mx-auto max-w-2xl lg:text-center mb-12">
-            <h2 className="text-base font-semibold text-red-400">Our Work</h2>
+            <h2 className="text-base font-semibold text-red-650 dark:text-red-400">Our Work</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
               Photo Gallery
             </p>
@@ -248,16 +248,16 @@ export function PhotoGallery() {
         </div>
 
         {/* Hero Row (Full-bleed, black borders) */}
-        <div className="w-full bg-gray-900 border-y border-black">
+        <div className="w-full bg-gray-50 dark:bg-gray-900 border-y border-gray-200 dark:border-black">
           {len > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-0">
               {/* Image 1 (Desktop Only - Left preview) - Tinted and Blurred */}
               <div
                 onClick={() => setSelectedPhoto(filteredPhotos[index0].src)}
-                className="hidden sm:block relative w-full aspect-[4/3] bg-gray-950 cursor-pointer group overflow-hidden"
+                className="hidden sm:block relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-950 cursor-pointer group overflow-hidden"
               >
                 <div
-                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-950/90 text-gray-500 transition-all duration-500 group-hover:bg-zinc-900 group-hover:text-gray-400"
+                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gray-100/90 dark:bg-zinc-950/90 text-gray-700 dark:text-gray-500 transition-all duration-500 group-hover:bg-gray-200 dark:group-hover:bg-zinc-900 group-hover:text-gray-900 dark:group-hover:text-gray-400"
                 >
                   <span className="text-[10px] font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
                   <span className="text-[8px] max-w-[150px] line-clamp-2">{filteredPhotos[index0].alt}</span>
@@ -266,7 +266,7 @@ export function PhotoGallery() {
 
               {/* Image 2 (Mobile & Desktop - Center active photo) - Full Color, Sharp, No Tint */}
               <div
-                className="relative w-full aspect-[4/3] bg-gray-950 group/image overflow-hidden"
+                className="relative w-full aspect-[4/3] bg-gray-200 dark:bg-gray-950 group/image overflow-hidden"
               >
                 {/* Click target to open lightbox */}
                 <div
@@ -274,10 +274,10 @@ export function PhotoGallery() {
                   className="w-full h-full cursor-pointer"
                 >
                   <div
-                    className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-red-950/45 border border-red-900/25 text-gray-300 transition-transform duration-500 group-hover/image:scale-105"
+                    className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-red-50/50 dark:bg-red-950/45 border border-red-200 dark:border-red-900/25 text-red-950 dark:text-gray-300 transition-transform duration-500 group-hover/image:scale-105"
                   >
                     <span className="text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
-                    <span className="text-xs text-gray-400 max-w-[200px] line-clamp-3">{filteredPhotos[index1].alt}</span>
+                    <span className="text-xs text-red-900 dark:text-gray-400 max-w-[200px] line-clamp-3">{filteredPhotos[index1].alt}</span>
                   </div>
                 </div>
 
@@ -313,10 +313,10 @@ export function PhotoGallery() {
               {/* Image 3 (Desktop Only - Right preview) - Tinted and Blurred */}
               <div
                 onClick={() => setSelectedPhoto(filteredPhotos[index2].src)}
-                className="hidden sm:block relative w-full aspect-[4/3] bg-gray-950 cursor-pointer group overflow-hidden"
+                className="hidden sm:block relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-950 cursor-pointer group overflow-hidden"
               >
                 <div
-                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-950/90 text-gray-500 transition-all duration-500 group-hover:bg-zinc-900 group-hover:text-gray-400"
+                  className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gray-100/90 dark:bg-zinc-950/90 text-gray-700 dark:text-gray-500 transition-all duration-500 group-hover:bg-gray-200 dark:group-hover:bg-zinc-900 group-hover:text-gray-900 dark:group-hover:text-gray-400"
                 >
                   <span className="text-[10px] font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
                   <span className="text-[8px] max-w-[150px] line-clamp-2">{filteredPhotos[index2].alt}</span>
@@ -362,8 +362,10 @@ export function PhotoGallery() {
                     }`}
                   >
                     <div
-                      className={`size-full flex flex-col items-center justify-center p-1 text-center ${
-                        i % 2 === 0 ? "bg-zinc-900" : "bg-red-950/60"
+                      className={`size-full flex flex-col items-center justify-center p-1 text-center border transition-colors ${
+                        i % 2 === 0 
+                          ? "bg-gray-100 border-gray-200 text-gray-800 dark:bg-zinc-900 dark:border-transparent dark:text-gray-400" 
+                          : "bg-red-50/50 border-red-200 text-red-950 dark:bg-red-950/60 dark:border-transparent dark:text-gray-400"
                       }`}
                     >
                       <span className="text-[8px] text-gray-400 font-semibold uppercase leading-none mb-1">Photo</span>

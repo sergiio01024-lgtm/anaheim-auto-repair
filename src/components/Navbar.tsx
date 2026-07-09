@@ -76,7 +76,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                 e.preventDefault();
                 document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-sm font-semibold hover:text-red-400 transition-colors text-gray-900 dark:text-white"
+              className="text-sm font-semibold hover:text-red-600 dark:hover:text-red-400 transition-colors text-gray-900 dark:text-white"
             >
               {link.label}
             </a>
@@ -84,7 +84,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
           <ThemeToggle />
-          <a href="tel:7148264444" className="text-sm font-semibold transition-colors duration-300 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white">
+          <a href="tel:7148264444" className="text-sm font-semibold transition-colors duration-300 text-gray-700 dark:text-white/70 hover:text-red-600 dark:hover:text-red-400">
             (714) 826-4444
           </a>
           <a
@@ -93,7 +93,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
               e.preventDefault();
               document.querySelector("#contact")?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="rounded-md bg-red-500 px-3.5 py-2 text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+            className="rounded-md bg-red-600 px-3.5 py-2 text-sm font-semibold text-white hover:bg-red-700 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
           >
             Free Quote
           </a>
@@ -139,14 +139,14 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                       setMobileOpen(false);
                       document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 hover:text-red-600 dark:hover:bg-white/5 dark:hover:text-red-400"
                   >
                     {link.label}
                   </a>
                 ))}
               </div>
               <div className="py-6 flex flex-col gap-3">
-                <a href="tel:7148264444" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5">
+                <a href="tel:7148264444" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-100 hover:text-red-600 dark:hover:bg-white/5 dark:hover:text-red-400">
                   Call (714) 826-4444
                 </a>
                 <a
@@ -156,7 +156,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
                     setMobileOpen(false);
                     document.querySelector("#contact")?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="block rounded-md bg-red-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+                  className="block rounded-md bg-red-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-700 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
                 >
                   Get a Free Quote
                 </a>

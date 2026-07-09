@@ -39,7 +39,7 @@ export function WhyChooseUs() {
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold text-red-400">Why Choose Us</h2>
+            <h2 className="text-base font-semibold text-red-650 dark:text-red-400">Why Choose Us</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-balance">
               The Standard Every Job Is Held To
             </p>
@@ -48,21 +48,21 @@ export function WhyChooseUs() {
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {reasons.map((reason) => (
-                <div key={reason.title} className="relative pl-16">
-                  <dt className="text-base font-semibold text-gray-900 dark:text-white">
-                    <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-red-500">
+                <div key={reason.title} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-8 hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-red-600 dark:bg-red-500 shrink-0">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" className="size-6 text-white">
                         <path d={reason.icon} strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    {reason.title}
-                  </dt>
-                  <dd className="mt-2 text-base text-gray-600 dark:text-gray-400">{reason.description}</dd>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{reason.title}</h3>
+                  </div>
+                  <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">{reason.description}</p>
                 </div>
               ))}
-            </dl>
+            </div>
           </div>
         </div>
       </ScrollReveal>

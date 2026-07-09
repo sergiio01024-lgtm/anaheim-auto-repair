@@ -43,11 +43,11 @@ export function ServicePanels() {
   };
 
   return (
-    <div id="services" className="service-card-section">
+    <div id="services" className="service-card-section bg-gray-50 dark:bg-gray-950/40 border-y border-gray-200 dark:border-white/5">
       <ScrollReveal>
         {/* Section header */}
         <div className="service-card-section-header">
-          <span className="text-sm font-semibold tracking-wider uppercase text-red-400 block mb-2">
+          <span className="text-sm font-semibold tracking-wider uppercase text-red-650 dark:text-red-400 block mb-2">
             Our Services
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -60,24 +60,23 @@ export function ServicePanels() {
           {cardsData.map((card, idx) => (
             <div
               key={idx}
-              className="service-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-              style={{ backgroundColor: idx % 2 === 0 ? "#1C1C1C" : "#222222" }}
+              className="service-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-black/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10"
             >
               {/* Centered Placeholder Text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-                <span className="text-white/20 text-xs font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
-                <span className="text-white/10 text-[10px] max-w-[150px] text-center">{card.title}</span>
+                <span className="text-gray-900/10 dark:text-white/20 text-xs font-semibold tracking-wider uppercase mb-1">Photo coming soon</span>
+                <span className="text-gray-900/5 dark:text-white/10 text-[10px] max-w-[150px] text-center">{card.title}</span>
               </div>
 
               {/* Top-left: eyebrow + title + subtitle */}
               <div className="z-10">
-                <span className="text-xs font-bold tracking-widest uppercase text-red-400 block mb-1.5">
+                <span className="text-xs font-bold tracking-widest uppercase text-red-650 dark:text-red-400 block mb-1.5">
                   {card.eyebrow}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight text-gray-900 dark:text-white">
                   {card.title}
                 </h3>
-                <p className="text-sm sm:text-base text-gray-200 leading-relaxed max-w-xs">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-xs">
                   {card.subtitle}
                 </p>
               </div>
@@ -87,13 +86,13 @@ export function ServicePanels() {
                 <a
                   href="#contact"
                   onClick={handleQuoteClick}
-                  className="rounded-full bg-red-500 hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center"
+                  className="rounded-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center shadow-sm"
                 >
                   Get a Free Quote
                 </a>
                 <a
                   href="tel:+17148264444"
-                  className="rounded-full bg-transparent hover:bg-white hover:text-gray-900 border border-white px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 text-center"
+                  className="rounded-full bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-900 dark:border-white dark:text-white dark:hover:bg-white/5 transition-all duration-200 hover:scale-105 active:scale-95 text-center"
                 >
                   Call (714) 826-4444
                 </a>

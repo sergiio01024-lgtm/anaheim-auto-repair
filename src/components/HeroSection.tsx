@@ -55,7 +55,7 @@ export function HeroSection() {
           {/* LEFT Column: Text & Stats */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-6">
-              <span className="inline-flex items-center rounded-full bg-red-500/10 px-3 py-1 text-sm font-semibold text-red-400 ring-1 ring-inset ring-red-500/20">
+              <span className="inline-flex items-center rounded-full bg-red-500/10 px-3 py-1 text-sm font-semibold text-red-650 dark:text-red-400 ring-1 ring-inset ring-red-500/20">
                 Serving Anaheim & Orange County Since 1978
               </span>
             </div>
@@ -69,7 +69,7 @@ export function HeroSection() {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <a href="tel:7148264444" className="rounded-md bg-red-500 px-6 py-3.5 text-base font-semibold text-white hover:bg-red-400 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 text-center">
+              <a href="tel:7148264444" className="rounded-md bg-red-600 px-6 py-3.5 text-base font-semibold text-white hover:bg-red-700 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 text-center">
                 Call (714) 826-4444
               </a>
               <a
@@ -113,11 +113,13 @@ export function HeroSection() {
                   className={`absolute inset-0 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-[1200ms] ease-in-out ${
                     idx === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0"
                   } ${
-                    idx % 2 === 0 ? "bg-zinc-900" : "bg-red-950/60 border border-red-900/30"
+                    idx % 2 === 0 
+                      ? "bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-transparent" 
+                      : "bg-red-50/50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/30"
                   }`}
                 >
-                  <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
-                  <span className="text-gray-500 text-xs max-w-[200px]">{slide.alt}</span>
+                  <span className="text-gray-700 dark:text-gray-400 text-sm font-semibold tracking-wider uppercase mb-2">Photo coming soon</span>
+                  <span className="text-gray-500 dark:text-gray-500 text-xs max-w-[200px]">{slide.alt}</span>
                 </div>
               ))}
             </div>
