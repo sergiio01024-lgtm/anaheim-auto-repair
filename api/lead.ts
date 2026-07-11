@@ -328,9 +328,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    // 6. Config check / Fail-Closed on missing Webhook URL
+    // 6. Config check / Fail-Closed on missing Webhook URL or Secret
     const webhookUrl = process.env.N8N_ANAHEIM_WEBHOOK_URL;
     const webhookSecret = process.env.N8N_ANAHEIM_WEBHOOK_SECRET;
+
+    if (webhookUrl && !webhookSecret) {
+      console.error(
+        JSON.stringify({
+          requestId,
+          status: "error",
+          reason: "missing_webhook_secret",
+          message: "N8N_ANAHEIM_WEBHOOK_SECRET environment variable is missing while webhook URL is set."
+        })
+      );
+      return res.status(503).json({
+        error: "Service temporarily unavailable. Please call the shop directly."
+      });
+    }
 
     if (!webhookUrl) {
       console.error(
@@ -389,7 +403,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const normalizedSymptoms = message.trim();
     const parsedYear = parseInt(year, 10);
     const parsedMileage = mileage ? parseInt(mileage, 10) : null;
-    const isDrivable = drivable === true || drivable === "true";
+    let isDrivable: boolean | null = null;
+    if (drivable === true || drivable === "true") {
+      isDrivable = true;
+    } else if (drivable === false || drivable === "false") {
+      isDrivable = false;
+    }
     const hasSmsConsent = sms_consent === true || sms_consent === "true";
 
     // 8. Build Canonical Payload
@@ -425,7 +444,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         : "No Warning Lights";
     const mileageLabel = canonicalPayload.mileage ? `Mileage: ${canonicalPayload.mileage}` : "";
     const drivableLabel =
-      canonicalPayload.drivable !== undefined
+      canonicalPayload.drivable !== null && canonicalPayload.drivable !== undefined
         ? `Drivable: ${canonicalPayload.drivable ? "Yes" : "No"}`
         : "";
 

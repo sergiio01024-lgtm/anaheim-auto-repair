@@ -178,6 +178,7 @@ describe("/api/lead Serverless Function", () => {
 
   it("should handle n8n non-2xx failures gracefully with 502", async () => {
     process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
     mockReq.body = {
       name: "Dylan",
       phone: "(714) 826-4444",
@@ -199,5 +200,136 @@ describe("/api/lead Serverless Function", () => {
     expect(jsonMock).toHaveBeenCalledWith({
       error: "Failed to forward request to dispatch webhook.",
     });
+  });
+
+  it("should map unanswered drivable to null and omit from job description", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
+    mockReq.body = {
+      name: "Dylan",
+      phone: "(714) 826-4444",
+      year: "2015",
+      make: "Honda",
+      model: "Civic",
+      service: "muffler-exhaust",
+      message: "Replacing exhaust segments",
+      drivable: "", // empty / unanswered
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://n8n.test/webhook",
+      expect.objectContaining({
+        body: expect.stringContaining('"drivable":null'),
+      })
+    );
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://n8n.test/webhook",
+      expect.objectContaining({
+        body: expect.not.stringContaining("Drivable:"),
+      })
+    );
+  });
+
+  it("should map drivable true and false correctly", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
+    // Test true
+    mockReq.body = {
+      name: "Dylan",
+      phone: "(714) 826-4444",
+      year: "2015",
+      make: "Honda",
+      model: "Civic",
+      service: "muffler-exhaust",
+      message: "Replacing exhaust segments",
+      drivable: "true",
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://n8n.test/webhook",
+      expect.objectContaining({
+        body: expect.stringContaining('"drivable":true'),
+      })
+    );
+
+    // Test false
+    mockReq.body.drivable = false;
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://n8n.test/webhook",
+      expect.objectContaining({
+        body: expect.stringContaining('"drivable":false'),
+      })
+    );
+  });
+
+  it("should return 503 if webhook URL is configured but webhook secret is missing, and not forward request", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    delete process.env.N8N_ANAHEIM_WEBHOOK_SECRET;
+
+    mockReq.body = {
+      name: "Dylan",
+      phone: "(714) 826-4444",
+      year: "2015",
+      make: "Honda",
+      model: "Civic",
+      service: "muffler-exhaust",
+      message: "Replacing exhaust segments",
+    };
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(503);
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("should require client Turnstile token if Turnstile secret key is configured", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+    process.env.TURNSTILE_SECRET_KEY = "turnstile_secret";
+
+    mockReq.body = {
+      name: "Dylan",
+      phone: "(714) 826-4444",
+      year: "2015",
+      make: "Honda",
+      model: "Civic",
+      service: "muffler-exhaust",
+      message: "Replacing exhaust segments",
+      // missing cf-turnstile-response
+    };
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(400);
+    expect(jsonMock).toHaveBeenCalledWith(
+      expect.objectContaining({ error: "Bot verification token is missing." })
+    );
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 });

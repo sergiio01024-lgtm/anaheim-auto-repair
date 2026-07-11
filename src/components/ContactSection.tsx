@@ -27,6 +27,14 @@ interface FormFields {
 }
 
 export function ContactSection() {
+  const getSiteKey = (): string | undefined => {
+    try {
+      return (import.meta as any).env.VITE_TURNSTILE_SITE_KEY || (typeof process !== "undefined" ? process.env.VITE_TURNSTILE_SITE_KEY : undefined);
+    } catch (e) {
+      return typeof process !== "undefined" ? process.env.VITE_TURNSTILE_SITE_KEY : undefined;
+    }
+  };
+
   const [formData, setFormData] = useState<FormFields>({
     name: "",
     phone: "",
@@ -54,6 +62,73 @@ export function ContactSection() {
   const [errorMessage, setErrorMessage] = useState("");
   const formStarted = useRef(false);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
+
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+
+  // Load Turnstile script dynamically
+  useEffect(() => {
+    const siteKey = getSiteKey();
+    if (!siteKey) return;
+
+    const scriptId = "cloudflare-turnstile-script";
+    let script = document.getElementById(scriptId) as HTMLScriptElement;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+
+    let isMounted = true;
+
+    const initTurnstile = () => {
+      if (typeof window !== "undefined" && (window as any).turnstile) {
+        if (isMounted && !turnstileWidgetId.current) {
+          try {
+            turnstileWidgetId.current = (window as any).turnstile.render("#turnstile-container", {
+              sitekey: siteKey,
+              callback: (token: string) => {
+                setTurnstileToken(token);
+                // Clear validation error when token is received
+                setErrors((prev) => {
+                  const copy = { ...prev };
+                  delete copy.turnstile;
+                  return copy;
+                });
+              },
+              "expired-callback": () => {
+                setTurnstileToken(null);
+              },
+              "error-callback": () => {
+                setTurnstileToken(null);
+              },
+            });
+          } catch (e) {
+            console.error("Turnstile render error:", e);
+          }
+        }
+      } else {
+        setTimeout(initTurnstile, 100);
+      }
+    };
+
+    initTurnstile();
+
+    return () => {
+      isMounted = false;
+      if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
+        try {
+          (window as any).turnstile.remove(turnstileWidgetId.current);
+          turnstileWidgetId.current = null;
+        } catch (e) {
+          // ignore
+        }
+      }
+    };
+  }, []);
 
   // Track estimate_form_start on first interaction
   const handleInteraction = () => {
@@ -142,6 +217,10 @@ export function ContactSection() {
       newErrors.email = "Please enter a valid email address.";
     }
 
+    if (getSiteKey() && !turnstileToken) {
+      newErrors.turnstile = "Please complete the bot verification.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -161,6 +240,7 @@ export function ContactSection() {
         },
         body: JSON.stringify({
           ...formData,
+          "cf-turnstile-response": turnstileToken,
           page_url: window.location.href,
           referrer: document.referrer || "",
         }),
@@ -192,18 +272,42 @@ export function ContactSection() {
           fax_number: "",
           zipcode_check: "",
         });
+        setTurnstileToken(null);
+        if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
+          try {
+            (window as any).turnstile.reset(turnstileWidgetId.current);
+          } catch (e) {
+            console.error("Turnstile reset error:", e);
+          }
+        }
         formStarted.current = false;
       } else {
         const errText = data.error || "Submission failed.";
         setStatus("error");
         setErrorMessage(errText);
         trackEvent({ type: "estimate_submit_error", error: errText });
+        if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
+          try {
+            (window as any).turnstile.reset(turnstileWidgetId.current);
+          } catch (e) {
+            console.error("Turnstile reset error:", e);
+          }
+        }
+        setTurnstileToken(null);
       }
     } catch (err: any) {
       setStatus("error");
       const errText = String(err.message || err);
       setErrorMessage("Could not connect to the server. Please call us directly.");
       trackEvent({ type: "estimate_submit_error", error: errText });
+      if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
+        try {
+          (window as any).turnstile.reset(turnstileWidgetId.current);
+        } catch (e) {
+          console.error("Turnstile reset error:", e);
+        }
+      }
+      setTurnstileToken(null);
     }
   };
 
@@ -696,6 +800,25 @@ export function ContactSection() {
                   </label>
                 </div>
               </div>
+
+              {/* Bot Verification (Turnstile) */}
+              {getSiteKey() && (
+                <div className="mt-6 border-b border-zinc-150 pb-6">
+                  <span className="block text-sm font-bold text-zinc-850 mb-2">
+                    Security Verification
+                  </span>
+                  <div
+                    id="turnstile-container"
+                    className="min-h-[65px]"
+                    aria-live="polite"
+                  ></div>
+                  {errors.turnstile && (
+                    <p id="turnstile-error" className="mt-2 text-xs text-primary font-bold">
+                      {errors.turnstile}
+                    </p>
+                  )}
+                </div>
+              )}
 
               {/* Submit Action */}
               <div className="mt-8">

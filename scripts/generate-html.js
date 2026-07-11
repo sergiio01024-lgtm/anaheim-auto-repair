@@ -232,7 +232,7 @@ ${renderFAQ(page.faq)}
     <meta property="og:url" content="https://anaheim-auto-repair.vercel.app/${key}" />
     <meta property="og:title" content="${page.title.split("|")[0].trim()}" />
     <meta property="og:description" content="${page.description}" />
-    <meta property="og:image" content="https://anaheim-auto-repair.vercel.app/social-preview.png" />
+    <meta property="og:image" content="https://anaheim-auto-repair.vercel.app/social-preview.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -241,7 +241,7 @@ ${renderFAQ(page.faq)}
     <meta name="twitter:url" content="https://anaheim-auto-repair.vercel.app/${key}" />
     <meta name="twitter:title" content="${page.title.split("|")[0].trim()}" />
     <meta name="twitter:description" content="${page.description}" />
-    <meta name="twitter:image" content="https://anaheim-auto-repair.vercel.app/social-preview.png" />
+    <meta name="twitter:image" content="https://anaheim-auto-repair.vercel.app/social-preview.jpg" />
     
     <!-- Structured Data -->
     <script type="application/ld+json">

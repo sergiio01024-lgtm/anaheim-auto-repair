@@ -120,4 +120,72 @@ describe("ContactSection Auto-Repair Intake Form", () => {
       expect(callLink).toHaveAttribute("href", businessConfig.phone.link);
     });
   });
+
+  it("shows Turnstile widget and requires Turnstile token if VITE_TURNSTILE_SITE_KEY is set", async () => {
+    // Mock the site key env variable
+    vi.stubEnv("VITE_TURNSTILE_SITE_KEY", "test-site-key");
+
+    // Mock turnstile global object on window
+    const mockRender = vi.fn().mockImplementation((_el, options) => {
+      // Simulate calling callback after rendering
+      options.callback("mocked-turnstile-token");
+      return "widget-id-123";
+    });
+    const mockReset = vi.fn();
+    const mockRemove = vi.fn();
+
+    (window as any).turnstile = {
+      render: mockRender,
+      reset: mockReset,
+      remove: mockRemove,
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true, request_id: "test-req-123" }),
+    });
+
+    render(<ContactSection />);
+
+    // Wait for Turnstile init
+    await waitFor(() => {
+      expect(mockRender).toHaveBeenCalledWith("#turnstile-container", expect.any(Object));
+    });
+
+    // Fill out form
+    fireEvent.change(screen.getByLabelText(/Name \*/), { target: { value: "Dylan" } });
+    fireEvent.change(screen.getByLabelText(/Phone Number \*/), { target: { value: "7148264444" } });
+    fireEvent.change(screen.getByLabelText(/Year \*/), { target: { value: "2018" } });
+    fireEvent.change(screen.getByLabelText(/Make \*/), { target: { value: "Subaru" } });
+    fireEvent.change(screen.getByLabelText(/Model \*/), { target: { value: "Outback" } });
+    fireEvent.change(screen.getByLabelText(/Primary Service Category \*/), {
+      target: { value: "muffler-exhaust" },
+    });
+    fireEvent.change(screen.getByLabelText(/Describe the Issue or Symptoms \*/), {
+      target: { value: "Rattling noise" },
+    });
+
+    const submitBtn = screen.getByRole("button", { name: /Submit Estimate Request/ });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText("Estimate Requested Successfully!")).toBeInTheDocument();
+    });
+
+    // Fetch should have been called with the turnstile token in the payload
+    expect(global.fetch).toHaveBeenCalledWith(
+      "/api/lead",
+      expect.objectContaining({
+        body: expect.stringContaining('"cf-turnstile-response":"mocked-turnstile-token"'),
+      })
+    );
+
+    // Turnstile reset should be called
+    expect(mockReset).toHaveBeenCalledWith("widget-id-123");
+
+    // Clean up
+    vi.unstubAllEnvs();
+    delete (window as any).turnstile;
+  });
 });
