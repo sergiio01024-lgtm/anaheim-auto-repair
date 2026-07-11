@@ -17,6 +17,19 @@ export default defineConfig({
   build: {
     target: 'esnext',
     outDir: 'build',
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        muffler: path.resolve(__dirname, 'muffler-repair-anaheim.html'),
+        catalytic: path.resolve(__dirname, 'catalytic-converter-anaheim.html'),
+        brake: path.resolve(__dirname, 'brake-repair-anaheim.html'),
+        engine: path.resolve(__dirname, 'engine-repair-anaheim.html'),
+        transmission: path.resolve(__dirname, 'transmission-repair-anaheim.html'),
+        maintenance: path.resolve(__dirname, 'auto-maintenance-anaheim.html'),
+        contact: path.resolve(__dirname, 'contact.html'),
+        privacy: path.resolve(__dirname, 'privacy.html'),
+      },
+    },
   },
   server: {
     port: 3000,

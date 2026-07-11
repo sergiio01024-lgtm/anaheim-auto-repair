@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Wrench } from "lucide-react";
 import { businessConfig } from "../config/business";
+import { trackEvent } from "../utils/analytics";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -42,7 +43,6 @@ export function Navbar() {
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       if (focusable.length > 0) {
-        // Delay slightly to ensure render and prevent immediate triggers
         setTimeout(() => focusable[0].focus(), 50);
       }
     }
@@ -72,6 +72,43 @@ export function Navbar() {
     }
   };
 
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
+    const isCTA = href === "#contact";
+    trackEvent({
+      type: "estimate_cta_click",
+      label: isCTA ? "Request Estimate" : href.replace("#", ""),
+    });
+
+    if (window.location.pathname !== "/") {
+      window.history.pushState({}, "", "/");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+
+      // Wait for homepage to render, then scroll to target
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
+    if (window.location.pathname !== "/") {
+      window.history.pushState({}, "", "/");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const links = [
     { label: "Services", href: "#services" },
     { label: "Reviews", href: "#reviews" },
@@ -96,6 +133,9 @@ export function Navbar() {
           <div>
             <a
               href={businessConfig.phone.link}
+              onClick={() =>
+                trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+              }
               className="text-primary hover:underline font-semibold flex items-center gap-1"
             >
               📞 Call Shop: {businessConfig.phone.display}
@@ -115,14 +155,7 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between">
           <div className="flex lg:flex-1">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="flex items-center gap-3"
-            >
+            <a href="/" onClick={handleLogoClick} className="flex items-center gap-3">
               <div className="size-9 bg-primary rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                 <Wrench className="size-5" />
               </div>
@@ -170,10 +203,7 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={(e) => handleLinkClick(e, link.href)}
                 className="text-sm font-semibold text-zinc-700 hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded px-1"
               >
                 {link.label}
@@ -185,16 +215,16 @@ export function Navbar() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
             <a
               href={businessConfig.phone.link}
+              onClick={() =>
+                trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+              }
               className="text-sm font-semibold text-zinc-700 hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded px-1"
             >
               {businessConfig.phone.display}
             </a>
             <a
               href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={(e) => handleLinkClick(e, "#contact")}
               className="rounded-md bg-primary hover:bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Request Estimate
@@ -215,15 +245,7 @@ export function Navbar() {
         >
           <div>
             <div className="flex items-center justify-between">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileOpen(false);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className="flex items-center gap-3"
-              >
+              <a href="/" onClick={handleLogoClick} className="flex items-center gap-3">
                 <div className="size-9 bg-primary rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                   <Wrench className="size-5" />
                 </div>
@@ -261,11 +283,7 @@ export function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMobileOpen(false);
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
-                    }}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="block rounded-lg px-3 py-2 text-base font-semibold text-zinc-800 hover:bg-zinc-50 hover:text-primary transition-all focus-visible:outline-2 focus-visible:outline-primary"
                   >
                     {link.label}
@@ -278,18 +296,17 @@ export function Navbar() {
           <div className="border-t border-zinc-200 pt-6 pb-4 flex flex-col gap-3">
             <a
               href={businessConfig.phone.link}
+              onClick={() =>
+                trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+              }
               className="block rounded-md border border-zinc-300 px-4 py-3 text-center text-base font-semibold text-zinc-800 hover:bg-zinc-50 transition-colors focus-visible:outline-2 focus-visible:outline-primary"
             >
               Call {businessConfig.phone.display}
             </a>
             <a
               href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileOpen(false);
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="block rounded-md bg-primary hover:bg-red-700 px-4 py-3 text-center text-base font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary"
+              onClick={(e) => handleLinkClick(e, "#contact")}
+              className="block rounded-md bg-primary hover:bg-red-700 px-4 py-3 text-center text-base font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Request Estimate
             </a>

@@ -1,8 +1,33 @@
 import { Wrench } from "lucide-react";
-import { footerServices } from "../data/services";
 import { businessConfig } from "../config/business";
+import { trackEvent } from "../utils/analytics";
+
+const pathMap: Record<string, string> = {
+  "Muffler & Exhaust": "/muffler-repair-anaheim",
+  "Catalytic Converters": "/catalytic-converter-anaheim",
+  "Brakes & Suspension": "/brake-repair-anaheim",
+  "Engine Diagnostics": "/engine-repair-anaheim",
+  "Transmission Service": "/transmission-repair-anaheim",
+  "Routine Maintenance": "/auto-maintenance-anaheim",
+};
+
+const footerServicesList = [
+  "Muffler & Exhaust",
+  "Catalytic Converters",
+  "Brakes & Suspension",
+  "Engine Diagnostics",
+  "Transmission Service",
+  "Routine Maintenance",
+];
 
 export function Footer() {
+  const handleNavigation = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    trackEvent({ type: "service_page_view", path });
+    window.history.pushState({}, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
+
   return (
     <footer className="bg-zinc-900 text-zinc-400 border-t border-zinc-800">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
@@ -22,7 +47,7 @@ export function Footer() {
                 </span>
               </div>
             </div>
-            <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+            <p className="text-xs text-zinc-400 mb-6 leading-relaxed font-semibold">
               Family-owned auto repair and muffler specialty shop serving Anaheim and Orange County
               since {businessConfig.established}.
             </p>
@@ -31,13 +56,16 @@ export function Footer() {
                 📞{" "}
                 <a
                   href={businessConfig.phone.link}
+                  onClick={() =>
+                    trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+                  }
                   className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
                 >
                   {businessConfig.phone.display}
                 </a>
               </p>
               <p>📍 {businessConfig.address.full}</p>
-              <p className="pt-2 text-zinc-400 text-[10px] font-bold uppercase tracking-wider">
+              <p className="pt-2 text-zinc-450 text-[10px] font-bold uppercase tracking-wider">
                 Hours
               </p>
               <p>Mon–Fri: {businessConfig.hours.weekdays}</p>
@@ -49,21 +77,21 @@ export function Footer() {
           {/* Column 2: Services */}
           <div>
             <h3 className="text-sm font-bold text-white mb-4">Services</h3>
-            <ul className="space-y-2 text-xs">
-              {footerServices.map((s) => (
-                <li key={s}>
-                  <a
-                    href="#services"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
-                  >
-                    {s}
-                  </a>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs font-semibold">
+              {footerServicesList.map((s) => {
+                const path = pathMap[s] || "/";
+                return (
+                  <li key={s}>
+                    <a
+                      href={path}
+                      onClick={(e) => handleNavigation(e, path)}
+                      className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                    >
+                      {s}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -76,6 +104,7 @@ export function Footer() {
                   href={businessConfig.urls.yelp}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent({ type: "reviews_click", source: "yelp" })}
                   className="hover:text-white transition-colors text-primary flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-primary rounded"
                 >
                   Read Yelp Reviews ↗
@@ -86,13 +115,14 @@ export function Footer() {
                   href="https://www.google.com/maps/dir/?api=1&destination=Anaheim+Auto+Repair+Muffler+Care,+2583+W+Ball+Rd,+Anaheim,+CA+92804"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent({ type: "directions_click" })}
                   className="hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-primary rounded"
                 >
                   Get Directions on Google Maps ↗
                 </a>
               </li>
             </ul>
-            <div className="mt-6 rounded-lg bg-zinc-800 border border-zinc-700 p-4 max-w-[200px]">
+            <div className="mt-6 rounded-lg bg-zinc-850 border border-zinc-800 p-4 max-w-[200px]">
               <p className="text-xs font-bold text-white">
                 {businessConfig.rating.value} ★ on Yelp
               </p>
@@ -104,10 +134,30 @@ export function Footer() {
 
           {/* Column 4: Nearby Areas */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-4">Service Areas</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-semibold">
-              Proudly serving drivers in Anaheim, Garden Grove, Stanton, Orange, Cypress, Buena
-              Park, and surrounding Orange County communities.
+            <h3 className="text-sm font-bold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-xs font-semibold mb-4">
+              <li>
+                <a
+                  href="/contact"
+                  onClick={(e) => handleNavigation(e, "/contact")}
+                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy"
+                  onClick={(e) => handleNavigation(e, "/privacy")}
+                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+            <p className="text-xs text-zinc-450 leading-relaxed font-semibold">
+              Serving drivers in Anaheim, Garden Grove, Stanton, Orange, Cypress, Buena Park, and
+              surrounding Orange County communities.
             </p>
           </div>
         </div>

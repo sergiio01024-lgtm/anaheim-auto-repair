@@ -2,13 +2,34 @@ import React, { useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { primaryServices, secondaryServices } from "../data/services";
 import { businessConfig } from "../config/business";
+import { trackEvent } from "../utils/analytics";
+
+const pathMap: Record<string, string> = {
+  "muffler-exhaust": "/muffler-repair-anaheim",
+  "catalytic-converters": "/catalytic-converter-anaheim",
+  "brakes-suspension": "/brake-repair-anaheim",
+  "engine-diagnostics": "/engine-repair-anaheim",
+  "transmission-service": "/transmission-repair-anaheim",
+  "routine-maintenance": "/auto-maintenance-anaheim",
+};
 
 export function ServicePanels() {
   const [showSecondary, setShowSecondary] = useState(false);
 
-  const handleQuoteClick = (e: React.MouseEvent) => {
+  const handleServiceClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+    const path = pathMap[id] || "/";
+    trackEvent({ type: "estimate_cta_click", label: `View Service: ${id}` });
+    window.history.pushState({}, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
+
+  const handleSecondaryClick = () => {
+    setShowSecondary(!showSecondary);
+    trackEvent({
+      type: "estimate_cta_click",
+      label: showSecondary ? "Hide Secondary Services" : "Show Secondary Services",
+    });
   };
 
   return (
@@ -22,7 +43,7 @@ export function ServicePanels() {
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900">
             Professional Auto Repair & Muffler Services
           </h2>
-          <p className="mt-4 text-base text-zinc-600 font-medium">
+          <p className="mt-4 text-base text-zinc-650 font-semibold">
             From specialized custom exhaust systems to complete automotive mechanical diagnostics.
           </p>
         </div>
@@ -31,6 +52,7 @@ export function ServicePanels() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {primaryServices.map((service) => {
             const IconComponent = service.icon;
+            const path = pathMap[service.id] || "/";
             return (
               <div
                 key={service.id}
@@ -41,21 +63,27 @@ export function ServicePanels() {
                     <IconComponent className="size-6" />
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 mb-3">{service.title}</h3>
-                  <p className="text-sm text-zinc-600 leading-relaxed mb-6 font-medium">
+                  <p className="text-sm text-zinc-600 leading-relaxed mb-6 font-semibold">
                     {service.description}
                   </p>
                 </div>
 
                 <div className="border-t border-zinc-100 pt-4 flex items-center justify-between">
                   <a
-                    href="#contact"
-                    onClick={handleQuoteClick}
+                    href={path}
+                    onClick={(e) => handleServiceClick(e, service.id)}
                     className="text-sm font-bold text-primary hover:text-red-700 transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
                   >
-                    {service.ctaText} →
+                    View Details & Get Quote →
                   </a>
                   <a
                     href={businessConfig.phone.link}
+                    onClick={() =>
+                      trackEvent({
+                        type: "phone_click",
+                        displayPhone: businessConfig.phone.display,
+                      })
+                    }
                     className="text-xs text-zinc-500 hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
                   >
                     Call Shop
@@ -69,7 +97,7 @@ export function ServicePanels() {
         {/* Secondary Services Disclosure */}
         <div className="mt-16 text-center px-6">
           <button
-            onClick={() => setShowSecondary(!showSecondary)}
+            onClick={handleSecondaryClick}
             className="inline-flex items-center gap-2 rounded-md border border-zinc-300 bg-white hover:bg-zinc-50 px-5 py-2.5 text-sm font-bold text-zinc-700 shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary"
             aria-expanded={showSecondary}
             aria-controls="secondary-services-list"
@@ -105,19 +133,25 @@ export function ServicePanels() {
 
         {/* CTA Block */}
         <div className="mt-16 text-center max-w-xl mx-auto px-6">
-          <p className="text-zinc-600 font-semibold mb-4 text-sm">
+          <p className="text-zinc-650 font-semibold mb-4 text-sm">
             Need a repair or service not listed? Speak with our mechanics.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <a
               href="#contact"
-              onClick={handleQuoteClick}
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="rounded-md bg-primary hover:bg-red-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors text-center focus-visible:outline-2 focus-visible:outline-primary"
             >
               Get a Free Quote
             </a>
             <a
               href={businessConfig.phone.link}
+              onClick={() =>
+                trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+              }
               className="rounded-md bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-700 px-5 py-3 text-sm font-bold shadow-sm transition-colors text-center focus-visible:outline-2 focus-visible:outline-primary"
             >
               Call {businessConfig.phone.display}
