@@ -20,6 +20,10 @@ export function ContactSection() {
     service: "",
     message: "",
     property_address: "",
+    year: "",
+    make: "",
+    model: "",
+    vin: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -41,6 +45,11 @@ export function ContactSection() {
       Diagnostics: "diagnostics",
       Other: "general",
     };
+
+    // Combine vehicle information into job_description to keep payload structure unchanged
+    const vehicleInfo = `[Vehicle Info: ${formData.year || "N/A"} ${formData.make || "N/A"} ${formData.model || "N/A"} ${formData.vin ? `(VIN: ${formData.vin})` : ""}]`;
+    const fullJobDescription = `${vehicleInfo}\n\n${formData.message}`;
+
     try {
       const res = await fetch("https://n8n.kratosintelligence.com/webhook/anaheim-auto-lead", {
         method: "POST",
@@ -50,16 +59,16 @@ export function ContactSection() {
           phone: formData.phone,
           email: formData.email,
           service_type: serviceMap[formData.service] || "general",
-          job_description: formData.message,
+          job_description: fullJobDescription,
           property_address: formData.property_address,
           preferred_date: "",
           preferred_time: "",
           request_type: "quote",
-          message: formData.message,
+          message: fullJobDescription,
         }),
       });
       setStatus(res.ok ? "success" : "error");
-      if (res.ok)
+      if (res.ok) {
         setFormData({
           name: "",
           phone: "",
@@ -67,7 +76,12 @@ export function ContactSection() {
           service: "",
           message: "",
           property_address: "",
+          year: "",
+          make: "",
+          model: "",
+          vin: "",
         });
+      }
     } catch {
       setStatus("error");
     }
@@ -76,22 +90,23 @@ export function ContactSection() {
   return (
     <div
       id="contact"
-      className="isolate bg-white dark:bg-gray-950 px-6 py-24 sm:py-32 lg:px-8 border-t border-gray-200 dark:border-white/10"
+      className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8 border-t border-zinc-200"
     >
       <ScrollReveal>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base font-semibold text-primary dark:text-red-400">Get in Touch</h2>
-          <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+          <h2 className="text-base font-semibold text-primary">Get in Touch</h2>
+          <p className="mt-2 text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
             Request an Estimate
           </p>
-          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
-            Tell us what your car needs and we'll get back to you with a free ballpark quote.
+          <p className="mt-6 text-base text-zinc-600 font-medium">
+            Describe what your car needs, and we'll get back to you with a free ballpark quote.
           </p>
         </div>
+
         {status === "success" ? (
-          <div className="mx-auto mt-16 max-w-xl text-center bg-red-500/10 border border-red-500/25 rounded-xl p-8">
-            <h3 className="text-xl font-semibold text-red-500">Thank You!</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
+          <div className="mx-auto mt-16 max-w-xl text-center bg-red-50 border border-red-200 rounded-xl p-8 shadow-sm">
+            <h3 className="text-xl font-bold text-primary">Thank You!</h3>
+            <p className="mt-2 text-sm text-zinc-650 font-semibold">
               Your request has been received. {businessConfig.staff.manager} or someone from our
               team will get back to you shortly.
             </p>
@@ -99,11 +114,9 @@ export function ContactSection() {
         ) : (
           <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              {/* Contact Info */}
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
-                >
+                <label htmlFor="name" className="block text-sm font-semibold text-zinc-800">
                   Name *
                 </label>
                 <div className="mt-2.5">
@@ -114,15 +127,13 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     placeholder="Your Name"
-                    className="block w-full rounded-md bg-white dark:bg-white/5 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                   />
                 </div>
               </div>
+
               <div className="sm:col-span-2 md:col-span-1">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
-                >
+                <label htmlFor="phone" className="block text-sm font-semibold text-zinc-800">
                   Phone *
                 </label>
                 <div className="mt-2.5">
@@ -133,15 +144,13 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     placeholder="(714) 000-0000"
-                    className="block w-full rounded-md bg-white dark:bg-white/5 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                   />
                 </div>
               </div>
+
               <div className="sm:col-span-2 md:col-span-1">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
-                >
+                <label htmlFor="email" className="block text-sm font-semibold text-zinc-800">
                   Email
                 </label>
                 <div className="mt-2.5">
@@ -151,15 +160,14 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className="block w-full rounded-md bg-white dark:bg-white/5 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                   />
                 </div>
               </div>
+
+              {/* Service Selection */}
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="service"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
-                >
+                <label htmlFor="service" className="block text-sm font-semibold text-zinc-800">
                   Service Needed *
                 </label>
                 <div className="mt-2.5">
@@ -168,30 +176,86 @@ export function ContactSection() {
                     value={formData.service}
                     onChange={handleChange}
                     required
-                    className="block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                    className="block w-full rounded-md bg-white px-3.5 py-2.5 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                   >
-                    <option
-                      value=""
-                      disabled
-                      className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    >
+                    <option value="" disabled>
                       Select a service...
                     </option>
                     {contactServices.map((service) => (
-                      <option
-                        key={service}
-                        className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      >
-                        {service}
-                      </option>
+                      <option key={service}>{service}</option>
                     ))}
                   </select>
                 </div>
               </div>
+
+              {/* Vehicle Sub-grid for Visual Automotive Focus */}
+              <div className="sm:col-span-2 border-t border-zinc-100 pt-6 mt-2">
+                <span className="block text-sm font-bold text-zinc-900 mb-4">
+                  Vehicle Details (Optional)
+                </span>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label htmlFor="year" className="block text-xs font-semibold text-zinc-700">
+                      Year
+                    </label>
+                    <input
+                      type="number"
+                      id="year"
+                      value={formData.year}
+                      onChange={handleChange}
+                      placeholder="YYYY"
+                      min="1900"
+                      max="2030"
+                      className="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="make" className="block text-xs font-semibold text-zinc-700">
+                      Make
+                    </label>
+                    <input
+                      type="text"
+                      id="make"
+                      value={formData.make}
+                      onChange={handleChange}
+                      placeholder="e.g. Toyota"
+                      className="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="model" className="block text-xs font-semibold text-zinc-700">
+                      Model
+                    </label>
+                    <input
+                      type="text"
+                      id="model"
+                      value={formData.model}
+                      onChange={handleChange}
+                      placeholder="e.g. Camry"
+                      className="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                    />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <label htmlFor="vin" className="block text-xs font-semibold text-zinc-700">
+                    VIN (17 characters)
+                  </label>
+                  <input
+                    type="text"
+                    id="vin"
+                    value={formData.vin}
+                    onChange={handleChange}
+                    placeholder="Optional VIN"
+                    maxLength={17}
+                    className="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                  />
+                </div>
+              </div>
+
               <div className="sm:col-span-2">
                 <label
                   htmlFor="property_address"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
+                  className="block text-sm font-semibold text-zinc-800"
                 >
                   Address
                 </label>
@@ -200,18 +264,16 @@ export function ContactSection() {
                     type="text"
                     id="property_address"
                     value={formData.property_address}
-                    placeholder="123 Main St, Anaheim, CA 92804"
+                    placeholder="123 Main St, Anaheim, CA"
                     onChange={handleChange}
-                    className="block w-full rounded-md bg-white dark:bg-white/5 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                   />
                 </div>
               </div>
+
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-semibold text-gray-700 dark:text-white"
-                >
-                  Tell us about the job
+                <label htmlFor="message" className="block text-sm font-semibold text-zinc-800">
+                  Describe What is Happening *
                 </label>
                 <div className="mt-2.5">
                   <textarea
@@ -219,26 +281,29 @@ export function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    placeholder="Describe what you need help with..."
-                    className="block w-full rounded-md bg-white dark:bg-white/5 px-3.5 py-2 text-base text-gray-900 dark:text-white outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600 resize-none"
+                    required
+                    placeholder="Tell us about the issue, noises, or required service..."
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary resize-none"
                   />
                 </div>
               </div>
             </div>
+
             {status === "error" && (
-              <p className="mt-4 text-primary dark:text-red-400 text-sm">
+              <p className="mt-4 text-primary text-sm font-semibold">
                 Something went wrong. Please try again or call us.
               </p>
             )}
+
             <div className="mt-10">
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="block w-full rounded-md bg-red-600 hover:bg-red-700 px-3.5 py-2.5 text-center text-sm font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 disabled:opacity-50"
+                className="block w-full rounded-md bg-primary hover:bg-red-700 px-3.5 py-2.5 text-center text-sm font-bold text-white shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
               >
-                {status === "loading" ? "Sending..." : "Request a Free Quote"}
+                {status === "loading" ? "Submitting Estimate..." : "Submit Estimate Request"}
               </button>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center">
+              <p className="text-[11px] text-zinc-500 mt-3 text-center leading-normal">
                 By submitting this form, you agree to receive SMS text messages from Anaheim Auto
                 Repair and Muffler Care about your service request and appointment updates. Message
                 and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP

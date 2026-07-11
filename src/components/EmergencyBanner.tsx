@@ -26,7 +26,7 @@ export function EmergencyBanner({ isOpen, setIsOpen }: EmergencyBannerProps) {
       </a>
       <button
         onClick={handleClose}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-white/80 hover:text-white transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-white/80 hover:text-white transition-colors"
         aria-label="Dismiss banner"
       >
         <X className="size-4" />

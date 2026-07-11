@@ -1,94 +1,84 @@
-import {
-  Wind,
-  Disc,
-  Settings,
-  Wrench,
-  Droplet,
-  Gauge,
-  Thermometer,
-  Battery,
-  Zap,
-  CircleDot,
-  LucideIcon,
-} from "lucide-react";
+import { Wind, Disc, Settings, Wrench, Gauge, Activity, LucideIcon } from "lucide-react";
 
-export interface ServiceCard {
-  eyebrow: string;
+export interface ServiceItem {
+  id: string;
   title: string;
-  subtitle: string;
+  description: string;
   icon: LucideIcon;
+  ctaText: string;
 }
 
-export interface FullService {
-  name: string;
-  icon: LucideIcon;
-}
-
-export const cardsData: ServiceCard[] = [
+export const primaryServices: ServiceItem[] = [
   {
-    eyebrow: "MUFFLER & EXHAUST",
+    id: "muffler-exhaust",
     title: "Muffler & Exhaust Repair",
-    subtitle:
-      "Muffler replacement, catalytic converters, and full exhaust work — our specialty for over 45 years. We fix the rattle, the roar, and the check-engine light.",
+    description:
+      "Muffler replacement, custom pipe bending, and exhaust leak repairs. Our core specialty for over 45 years.",
     icon: Wind,
+    ctaText: "Exhaust Quote",
   },
   {
-    eyebrow: "BRAKES & SUSPENSION",
+    id: "catalytic-converters",
+    title: "Catalytic Converters",
+    description:
+      "Yelp-verified catalytic converter replacement, theft-prevention shield installations, and smog diagnostics.",
+    icon: Activity,
+    ctaText: "Converter Quote",
+  },
+  {
+    id: "brakes-suspension",
     title: "Brakes & Suspension",
-    subtitle:
-      "Brake pads, rotors, shocks, struts, alignment, and steering. Stop safely and ride smooth — inspected and done right the first time.",
+    description:
+      "Brake pads, rotors, calipers, shock absorbers, struts, and steering linkages for a smooth, safe ride.",
     icon: Disc,
+    ctaText: "Brake Quote",
   },
   {
-    eyebrow: "ENGINE & TRANSMISSION",
-    title: "Engine & Transmission",
-    subtitle:
-      "Check-engine diagnostics, timing belts, transmission service and rebuilds, and major engine repair. The hard jobs other shops send away.",
+    id: "engine-diagnostics",
+    title: "Engine Diagnostics & Repair",
+    description:
+      "Precise check-engine light diagnostics, spark plugs, timing belts, and major mechanical repair work.",
+    icon: Gauge,
+    ctaText: "Engine Quote",
+  },
+  {
+    id: "transmission-service",
+    title: "Transmission Service & Repair",
+    description:
+      "Transmission fluid flushes, clutch repairs, and rebuilds to ensure reliable gear shifting and power transfer.",
     icon: Settings,
+    ctaText: "Transmission Quote",
   },
   {
-    eyebrow: "MAINTENANCE",
-    title: "Oil Changes & Maintenance",
-    subtitle:
-      "Oil and filter changes, 30k/60k/90k service, AC recharge, batteries, and tune-ups. Keep your car running and avoid the big repairs.",
+    id: "routine-maintenance",
+    title: "Routine Maintenance & Oil Changes",
+    description:
+      "Oil and filter changes, fluid checks, 30k/60k/90k mileage checkups, and general preventative care.",
     icon: Wrench,
+    ctaText: "Book Maintenance",
   },
 ];
 
-export const fullServices: FullService[] = [
-  { name: "Muffler & Exhaust", icon: Wind },
-  { name: "Catalytic Converters", icon: Wind },
-  { name: "Brake Repair", icon: Disc },
-  { name: "Suspension & Struts", icon: CircleDot },
-  { name: "Engine Repair", icon: Settings },
-  { name: "Transmission Service", icon: Settings },
-  { name: "Check Engine Diagnostics", icon: Gauge },
-  { name: "Oil Changes", icon: Droplet },
-  { name: "30k/60k/90k Service", icon: Wrench },
-  { name: "AC & Heating Repair", icon: Thermometer },
-  { name: "Alignment", icon: Settings },
-  { name: "Tires & Rotation", icon: Disc },
-  { name: "Batteries & Starting", icon: Battery },
-  { name: "Radiators & Water Pumps", icon: Droplet },
-  { name: "CV Boots & Axles", icon: Wrench },
-  { name: "Timing Belts", icon: Settings },
-  { name: "Tune-Ups", icon: Zap },
-  { name: "Fuel System Cleaning", icon: Droplet },
-  { name: "Smog Check Prep", icon: Gauge },
-  { name: "Wheel Balancing", icon: Disc },
+export const secondaryServices = [
+  "Wheel Alignment",
+  "Tire Rotation & Balancing",
+  "Battery Replacement & Testing",
+  "AC Recharge & Heating Repair",
+  "Radiators & Water Pumps",
+  "CV Boots & Axles",
+  "Timing Belt Replacement",
+  "Ignition System Tune-Ups",
+  "Fuel System Cleaning",
+  "Smog Check Preparation",
+  "Starter & Alternator Repair",
+  "Belt & Hose Replacements",
 ];
 
-export const footerServices: string[] = [
+export const footerServices = [
   "Muffler & Exhaust",
-  "Brakes & Suspension",
-  "Engine Repair",
-  "Transmission Service",
-  "Oil Changes",
-  "AC & Heating Repair",
-  "Check Engine Diagnostics",
-  "Tune-Ups",
-  "Alignment",
-  "Batteries",
   "Catalytic Converters",
-  "Smog Check Prep",
+  "Brakes & Suspension",
+  "Engine Diagnostics",
+  "Transmission Service",
+  "Routine Maintenance",
 ];

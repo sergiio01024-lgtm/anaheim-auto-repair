@@ -5,7 +5,7 @@ import { FAQSection } from "../components/FAQSection";
 describe("FAQSection Component", () => {
   it("renders correctly with questions", () => {
     render(<FAQSection />);
-    expect(screen.getByText("Frequently asked questions")).toBeInTheDocument();
+    expect(screen.getByText("Frequently Asked Questions")).toBeInTheDocument();
     expect(screen.getByText("Do you do free estimates?")).toBeInTheDocument();
   });
 

@@ -6,7 +6,7 @@ export function MobileCallBar() {
       <div className="flex h-16">
         <a
           href={businessConfig.phone.link}
-          className="flex flex-1 items-center justify-center gap-2 text-white font-semibold text-sm border-r border-white/10 hover:bg-white/5 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+          className="flex flex-1 items-center justify-center gap-2 text-white font-semibold text-sm border-r border-white/10 hover:bg-white/5 transition-colors"
         >
           <svg
             className="size-5 text-red-400"
@@ -29,7 +29,7 @@ export function MobileCallBar() {
             e.preventDefault();
             document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
           }}
-          className="flex flex-1 items-center justify-center gap-2 text-white font-semibold text-sm hover:bg-white/5 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+          className="flex flex-1 items-center justify-center gap-2 text-white font-semibold text-sm hover:bg-white/5 transition-colors"
         >
           <svg
             className="size-5 text-red-400"

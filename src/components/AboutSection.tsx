@@ -3,70 +3,41 @@ import { businessConfig } from "../config/business";
 
 export function AboutSection() {
   return (
-    <div
-      id="about"
-      className="relative isolate overflow-hidden bg-white dark:bg-gray-950 py-24 sm:py-32"
-    >
+    <section id="about" className="bg-white py-24 border-b border-zinc-200">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-4xl">
-            <div>
-              <h2 className="text-base font-semibold text-primary dark:text-red-400">
-                About Our Shop
-              </h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-                Family-Owned & Trusted in Anaheim Since {businessConfig.established}
-              </p>
-              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold tracking-widest uppercase text-primary block mb-3">
+              About Our Shop
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900">
+              Family-Owned & Trusted in Anaheim Since {businessConfig.established}
+            </h2>
+
+            <div className="mt-8 text-base sm:text-lg text-zinc-650 leading-relaxed font-semibold space-y-6 text-left">
+              <p>
                 For over {businessConfig.yearsInBusiness} years, {businessConfig.name.full} has been
-                the shop Anaheim drivers trust for honest work at a fair price. We work on all makes
-                and models — from Honda, Toyota, and Ford to BMW, Mercedes, and Audi.
+                the local automotive shop Anaheim drivers count on for quality work and transparent
+                pricing. Our technicians handle everything from complete muffler replacements and
+                catalytic converters to suspension service, brake repair, and check-engine
+                diagnostics.
               </p>
-              <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-                Muffler and exhaust work is our specialty, but our team handles everything from
-                brakes and transmissions to engine diagnostics and routine maintenance. Our
-                customers consistently tell us the same thing: we're{" "}
-                <strong className="font-semibold text-gray-950 dark:text-white">
-                  honest, fast, and we don't upsell you
-                </strong>{" "}
-                on work you don't need.
+              <p>
+                When you call, you speak directly with our shop manager,{" "}
+                {businessConfig.staff.manager}. We pride ourselves on giving clear quotes over the
+                phone and standing by them when you arrive. We operate with a simple philosophy: we
+                do honest work, charge a fair price, and never push repairs you do not need.
               </p>
-              <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-                When you call, you get a real person — like our manager{" "}
-                {businessConfig.staff.manager} — who will give you a straight quote over the phone
-                and stand behind it when you come in. That's how we've kept customers coming back
-                for three generations.
-              </p>
-              <dl className="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-4">
-                <div className="flex flex-col-reverse gap-1">
-                  <dt className="text-base text-gray-600 dark:text-gray-300">Years in Business</dt>
-                  <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {businessConfig.yearsInBusiness}+
-                  </dd>
-                </div>
-                <div className="flex flex-col-reverse gap-1">
-                  <dt className="text-base text-gray-600 dark:text-gray-300">Established</dt>
-                  <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {businessConfig.established}
-                  </dd>
-                </div>
-                <div className="flex flex-col-reverse gap-1">
-                  <dt className="text-base text-gray-600 dark:text-gray-300">Yelp Rating</dt>
-                  <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {businessConfig.rating.value} ★
-                  </dd>
-                </div>
-                <div className="flex flex-col-reverse gap-1">
-                  <dt className="text-base text-gray-600 dark:text-gray-300">Yelp Reviews</dt>
-                  <dd className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {businessConfig.rating.reviewsCount}
-                  </dd>
-                </div>
-              </dl>
+            </div>
+
+            <div className="mt-10 border-t border-zinc-150 pt-8 flex justify-center gap-8 text-sm text-zinc-500 font-semibold">
+              <div>📍 2583 W Ball Rd, Anaheim</div>
+              <div>📞 {businessConfig.phone.display}</div>
+              <div>🕒 {businessConfig.hours.summary}</div>
             </div>
           </div>
         </div>
       </ScrollReveal>
-    </div>
+    </section>
   );
 }
