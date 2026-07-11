@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Wrench } from "lucide-react";
 import { businessConfig } from "../config/business";
 
-export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
+export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -81,11 +81,7 @@ export function Navbar({ bannerOpen = false }: { bannerOpen?: boolean }) {
   ];
 
   return (
-    <header
-      className={`fixed inset-x-0 z-50 transition-all duration-300 ${
-        bannerOpen ? "top-0 md:top-10" : "top-0"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
       {/* 1. Utility Bar */}
       <div className="bg-zinc-50 border-b border-zinc-200 py-2 px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-zinc-600 font-medium">

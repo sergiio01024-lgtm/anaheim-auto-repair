@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { TrustBar } from "./components/TrustBar";
@@ -11,16 +11,11 @@ import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { MobileCallBar } from "./components/MobileCallBar";
 import { ScrollToTop } from "./components/ScrollToTop";
-import { EmergencyBanner } from "./components/EmergencyBanner";
 import { ServicePanels } from "./components/ServicePanels";
 import "./styles/images.css";
 import "./styles/panels.css";
 
 export default function App() {
-  const [bannerOpen, setBannerOpen] = useState(() => {
-    return sessionStorage.getItem("emergency-banner-closed") !== "true";
-  });
-
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
@@ -36,11 +31,8 @@ export default function App() {
       >
         Skip to main content
       </a>
-      <EmergencyBanner isOpen={bannerOpen} setIsOpen={setBannerOpen} />
-      <div
-        className={`min-h-screen ${bannerOpen ? "pb-28" : "pb-16"} md:pb-0 transition-all duration-300 ${bannerOpen ? "md:pt-10" : ""}`}
-      >
-        <Navbar bannerOpen={bannerOpen} />
+      <div className="min-h-screen pb-20 md:pb-0">
+        <Navbar />
         <main id="main-content">
           <HeroSection />
           <TrustBar />
