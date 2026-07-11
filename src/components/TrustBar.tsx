@@ -1,16 +1,18 @@
-const badges = [
-  "Serving Anaheim Since 1978",
-  "4.7★ on Yelp",
-  "595+ Reviews",
-  "Honest, No Upsell",
-  "All Makes & Models",
-  "Muffler & Exhaust Specialists",
-  "Free Estimates",
-  "Straight Phone Quotes",
-  "Family-Owned & Operated",
-];
+import { businessConfig } from "../config/business";
 
 export function TrustBar() {
+  const badges = [
+    `Serving Anaheim Since ${businessConfig.established}`,
+    `${businessConfig.rating.value}★ on Yelp`,
+    `${businessConfig.rating.reviewsCount}+ Reviews`,
+    "Honest, No Upsell",
+    "All Makes & Models",
+    "Muffler & Exhaust Specialists",
+    "Free Estimates",
+    "Straight Phone Quotes",
+    "Family-Owned & Operated",
+  ];
+
   const doubledBadges = [...badges, ...badges];
 
   return (

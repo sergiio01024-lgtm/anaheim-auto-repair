@@ -3,9 +3,6 @@ import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { TrustBar } from "./components/TrustBar";
 import { WhyChooseUs } from "./components/WhyChooseUs";
-
-
-import { PhotoGallery } from "./components/PhotoGallery";
 import { AboutSection } from "./components/AboutSection";
 import { ServiceAreaMap } from "./components/ServiceAreaMap";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -15,7 +12,6 @@ import { Footer } from "./components/Footer";
 import { MobileCallBar } from "./components/MobileCallBar";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { EmergencyBanner } from "./components/EmergencyBanner";
-import { ScrollReveal } from "./components/ScrollReveal";
 import { ServicePanels } from "./components/ServicePanels";
 import "./styles/images.css";
 import "./styles/panels.css";
@@ -34,24 +30,28 @@ export default function App() {
 
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-md focus:border focus:border-gray-200 focus:shadow-md"
+      >
+        Skip to main content
+      </a>
       <EmergencyBanner isOpen={bannerOpen} setIsOpen={setBannerOpen} />
-      <div className={`min-h-screen ${bannerOpen ? "pb-28" : "pb-16"} md:pb-0 transition-all duration-300 ${bannerOpen ? "md:pt-10" : ""}`}>
+      <div
+        className={`min-h-screen ${bannerOpen ? "pb-28" : "pb-16"} md:pb-0 transition-all duration-300 ${bannerOpen ? "md:pt-10" : ""}`}
+      >
         <Navbar bannerOpen={bannerOpen} />
-        <HeroSection />
-        <TrustBar />
-        
-        <WhyChooseUs />
-        
-
-        <ServicePanels />
-        
-        <PhotoGallery />
-        <AboutSection />
-        <ServiceAreaMap />
-        <TestimonialsSection />
-        <FAQSection />
-        <ContactSection />
-        
+        <main id="main-content">
+          <HeroSection />
+          <TrustBar />
+          <WhyChooseUs />
+          <ServicePanels />
+          <AboutSection />
+          <ServiceAreaMap />
+          <TestimonialsSection />
+          <FAQSection />
+          <ContactSection />
+        </main>
         <Footer />
         <ScrollToTop />
         <MobileCallBar />
