@@ -11,7 +11,7 @@ export function ContactPage() {
 
   return (
     <div className="pt-24 min-h-screen bg-white">
-      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-6 text-center">
           Contact Our Shop
         </h1>
@@ -25,8 +25,7 @@ export function ContactPage() {
               {businessConfig.address.full}
             </p>
             <p className="text-xs text-zinc-500 font-semibold leading-relaxed">
-              Located on W Ball Rd. Free customer parking is available directly in front of our
-              service bays.
+              Located on W Ball Rd. On-site customer parking is available.
             </p>
           </div>
 
@@ -44,7 +43,7 @@ export function ContactPage() {
         </div>
 
         <ContactSection />
-      </main>
+      </div>
     </div>
   );
 }

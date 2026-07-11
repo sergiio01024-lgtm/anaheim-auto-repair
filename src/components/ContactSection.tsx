@@ -67,20 +67,20 @@ export function ContactSection() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     handleInteraction();
-    const id = e.target.id;
+    const nameOrId = e.target.name || e.target.id;
     const value =
       e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value;
 
     setFormData((prev) => ({
       ...prev,
-      [id]: value,
+      [nameOrId]: value,
     }));
 
-    // Clear field error when user starts typing
-    if (errors[id]) {
+    // Clear field error when user interacts
+    if (errors[nameOrId]) {
       setErrors((prev) => {
         const copy = { ...prev };
-        delete copy[id];
+        delete copy[nameOrId];
         return copy;
       });
     }
@@ -115,8 +115,11 @@ export function ContactSection() {
     if (!formData.name.trim()) newErrors.name = "Name is required.";
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required.";
-    } else if (formData.phone.replace(/[^\d]/g, "").length < 7) {
-      newErrors.phone = "Please enter a valid phone number (at least 7 digits).";
+    } else {
+      const digitCount = formData.phone.replace(/\D/g, "").length;
+      if (digitCount < 7 || digitCount > 15) {
+        newErrors.phone = "Please enter a valid phone number (7-15 digits).";
+      }
     }
 
     if (!formData.year.trim()) {
@@ -133,7 +136,9 @@ export function ContactSection() {
     if (!formData.service) newErrors.service = "Please select a service category.";
     if (!formData.message.trim()) newErrors.message = "Please describe the symptoms or problems.";
 
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (formData.preferred_contact === "email" && !formData.email.trim()) {
+      newErrors.email = "Email is required when preferred contact is email.";
+    } else if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
 
@@ -400,7 +405,7 @@ export function ContactSection() {
                 <h3 className="text-base font-bold text-zinc-900 mb-4">
                   2. Vehicle Specifications
                 </h3>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label htmlFor="year" className="block text-xs font-bold text-zinc-700">
                       Year *
@@ -418,6 +423,11 @@ export function ContactSection() {
                       aria-describedby={errors.year ? "year-error" : undefined}
                       className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.year ? "outline-primary ring-1 ring-primary" : ""}`}
                     />
+                    {errors.year && (
+                      <p id="year-error" className="mt-1 text-xs text-primary font-bold">
+                        {errors.year}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="make" className="block text-xs font-bold text-zinc-700">
@@ -431,8 +441,14 @@ export function ContactSection() {
                       required
                       placeholder="e.g. Toyota"
                       aria-invalid={!!errors.make}
+                      aria-describedby={errors.make ? "make-error" : undefined}
                       className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.make ? "outline-primary ring-1 ring-primary" : ""}`}
                     />
+                    {errors.make && (
+                      <p id="make-error" className="mt-1 text-xs text-primary font-bold">
+                        {errors.make}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="model" className="block text-xs font-bold text-zinc-700">
@@ -446,21 +462,13 @@ export function ContactSection() {
                       required
                       placeholder="e.g. Camry"
                       aria-invalid={!!errors.model}
+                      aria-describedby={errors.model ? "model-error" : undefined}
                       className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.model ? "outline-primary ring-1 ring-primary" : ""}`}
                     />
-                  </div>
-
-                  <div className="col-span-3">
-                    {errors.year && (
-                      <p id="year-error" className="text-xs text-primary font-bold">
-                        {errors.year}
+                    {errors.model && (
+                      <p id="model-error" className="mt-1 text-xs text-primary font-bold">
+                        {errors.model}
                       </p>
-                    )}
-                    {errors.make && !errors.year && (
-                      <p className="text-xs text-primary font-bold">{errors.make}</p>
-                    )}
-                    {errors.model && !errors.year && !errors.make && (
-                      <p className="text-xs text-primary font-bold">{errors.model}</p>
                     )}
                   </div>
                 </div>
@@ -504,7 +512,7 @@ export function ContactSection() {
                     <label className="inline-flex items-center text-sm font-semibold text-zinc-700">
                       <input
                         type="radio"
-                        id="drivable"
+                        id="drivable-yes"
                         name="drivable"
                         value="true"
                         checked={formData.drivable === "true"}
@@ -516,7 +524,7 @@ export function ContactSection() {
                     <label className="inline-flex items-center text-sm font-semibold text-zinc-700">
                       <input
                         type="radio"
-                        id="drivable"
+                        id="drivable-no"
                         name="drivable"
                         value="false"
                         checked={formData.drivable === "false"}

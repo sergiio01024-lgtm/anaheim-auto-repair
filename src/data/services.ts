@@ -13,7 +13,7 @@ export const primaryServices: ServiceItem[] = [
     id: "muffler-exhaust",
     title: "Muffler & Exhaust Repair",
     description:
-      "Muffler replacement, custom pipe bending, and exhaust leak repairs. Our core specialty for over 45 years.",
+      "Muffler replacement, exhaust pipe fitting, and exhaust leak repairs. Our core specialty for over 45 years.",
     icon: Wind,
     ctaText: "Exhaust Quote",
   },
@@ -21,7 +21,7 @@ export const primaryServices: ServiceItem[] = [
     id: "catalytic-converters",
     title: "Catalytic Converters",
     description:
-      "Yelp-verified catalytic converter replacement, theft-prevention shield installations, and smog diagnostics.",
+      "Catalytic converter replacement, theft-prevention shield installations, and smog diagnostics.",
     icon: Activity,
     ctaText: "Converter Quote",
   },

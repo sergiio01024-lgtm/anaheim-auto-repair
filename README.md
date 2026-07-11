@@ -2,7 +2,7 @@
 
 A professional React + TypeScript + Tailwind CSS web application for **Anaheim Auto Repair & Muffler Care**, a family-owned auto repair and muffler specialty shop serving Anaheim and Orange County, CA since 1978.
 
-This project was refined to remove inherited boilerplate, establish strict coding standards, set up quality gates, and consolidate business data into a single source of truth.
+This project has been refined to establish strict coding standards, set up quality gates, and consolidate business data into a single source of truth.
 
 ---
 
@@ -64,24 +64,44 @@ The app will start at `http://localhost:3000` and automatically open in your def
 * **Run Tests:** `npm run test` (Executes Vitest unit & integration tests)
 * **Formatting Check:** `npm run format:check`
 * **Format Files:** `npm run format`
+* **Generate HTML:** `node scripts/generate-html.js` (Regenerates static page entries from pagesContent.json)
 
 ---
 
 ## Lead-Flow Architecture
 
-Lead request submissions from the **Request an Estimate** form are handled as follows:
+Lead request submissions from the **Request an Estimate** form are processed as follows:
 
-1. User enters name, phone, email, service needed, address, and job description in `src/components/ContactSection.tsx`.
-2. The form triggers a client-side `fetch` POST request to a webhook hosted at `https://n8n.kratosintelligence.com/webhook/anaheim-auto-lead`.
-3. Payload matches the parameters expected by the lead processor:
-   * `name`: string
-   * `phone`: string
-   * `email`: string
-   * `service_type`: string (mapped internally from the display service select option to internal keys like `muffler_exhaust`, `brakes_suspension`, etc.)
-   * `job_description`: string
-   * `property_address`: string
-   * `request_type`: `"quote"`
-4. Upon successful receipt (`res.ok`), a confirmation banner is displayed to the user.
+```
+Browser (Intake Form) 
+   └── [POST /api/lead] 
+         ├── Server Validation (Strict typeguards & field limits)
+         ├── Bot Verification (Cloudflare Turnstile or Google reCAPTCHA)
+         └── Proxy Request (HTTP POST with X-Anaheim-Token)
+               └── Protected n8n Dispatch Webhook
+```
+
+1. **Intake Form:** User enters estimate details in `src/components/ContactSection.tsx`.
+2. **Serverless Endpoint:** The form POSTs a JSON request to `/api/lead`.
+3. **Strict Validation:** The serverless function validates all types, digit counts, bounds, and ranges. Unexpected parameters or structures are rejected with HTTP `400`.
+4. **Bot Filtering:** If Turnstile or reCAPTCHA is configured, the handler verifies the client token against the provider API. Providers are given a 4-second timeout, failing closed on outage with HTTP `503`.
+5. **Proxy Webhook:** The handler forwards the normalized compatibility payload to n8n with a 5-second timeout, appending authorization headers including `X-Anaheim-Token` to protect the webhook.
+
+---
+
+## Environment Variables
+
+Configure the following environment variables in your hosting provider (e.g. Vercel) or a local `.env` file:
+
+* `N8N_ANAHEIM_WEBHOOK_URL`: The URL of the protected n8n lead-intake webhook.
+* `N8N_ANAHEIM_WEBHOOK_SECRET`: The shared authorization secret sent in the `Authorization` (Bearer) and `X-Anaheim-Token` headers.
+* `TURNSTILE_SECRET_KEY`: (Optional) The Cloudflare Turnstile secret key. If set, verification is mandatory.
+* `RECAPTCHA_SECRET_KEY`: (Optional) The Google reCAPTCHA secret key. Fallback verification provider.
+* `VITE_TURNSTILE_SITE_KEY`: (Optional) Cloudflare Turnstile site key exposed to the client.
+* `ALLOW_LEAD_SIMULATION`: Set to `true` in local development (`NODE_ENV === "development"`) to simulate lead success if the webhook URL is unconfigured.
+* `VITE_GA_MEASUREMENT_ID`: Google Analytics measurement ID (neutralized, failsafe wrapper).
+
+Production canonical URL is: `https://anaheim-auto-repair.vercel.app`
 
 ---
 
@@ -90,10 +110,9 @@ Lead request submissions from the **Request an Estimate** form are handled as fo
 To maintain high data integrity and prevent regressions:
 
 1. **Fact Verification:** Do not invent ratings, review counts, warranties, or staff names. All business facts must match records verified in `src/config/business.ts`.
-2. **Ratings & Reviews:** External Yelp ratings, review counts, and staff lists must include a code comment/field stating when they were `lastVerified`.
-3. **No Image Placeholders:** Do not render fallback blocks showing "Photo coming soon" or placeholder boxes on production. If genuine image assets are missing, hide the affected section entirely (e.g., photo galleries) rather than rendering placeholders.
-4. **Interactive Controls:** All buttons, inputs, and links must have a visible `:focus-visible` state. Do not disable outlines globally.
-5. **No Credentials:** Never commit credentials, API keys, or webhooks inside client code. Use environment variables if secrets are required.
+2. **No Image Placeholders:** Do not render fallback blocks showing "Photo coming soon" or placeholder boxes. If genuine image assets are missing, hide the affected section entirely.
+3. **Interactive Controls:** All buttons, inputs, and links must have a visible `:focus-visible` state. Do not disable outlines globally.
+4. **No Credentials:** Never commit credentials, API keys, or webhooks inside client code. Use environment variables.
 
 ---
 

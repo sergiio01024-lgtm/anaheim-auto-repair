@@ -21,7 +21,7 @@ export function ServiceAreaMap() {
                   <h3 className="text-zinc-900 font-bold text-lg mb-1">📍 Address</h3>
                   <p>{businessConfig.address.full}</p>
                   <p className="text-xs text-zinc-500 font-medium mt-1">
-                    Free customer parking is available directly in front of our service bays.
+                    On-site customer parking is available.
                   </p>
                 </div>
 

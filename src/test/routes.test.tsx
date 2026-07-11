@@ -29,14 +29,14 @@ describe("Client-Side Routing in App.tsx", () => {
     (window as any).location.pathname = "/muffler-repair-anaheim";
     render(<App />);
     expect(screen.getByRole("heading", { name: "Muffler & Exhaust Repair in Anaheim, CA" })).toBeInTheDocument();
-    expect(screen.getByText(/For over 45 years, we have been the premier muffler shop in Anaheim/)).toBeInTheDocument();
+    expect(screen.getByText(/For over 45 years, we have provided dedicated muffler/)).toBeInTheDocument();
   });
 
   it("should render the Catalytic Converter specialty page when path is '/catalytic-converter-anaheim'", () => {
     (window as any).location.pathname = "/catalytic-converter-anaheim";
     render(<App />);
     expect(screen.getByRole("heading", { name: "Catalytic Converter Replacement in Anaheim, CA" })).toBeInTheDocument();
-    expect(screen.getByText(/We are Yelp-verified specialists for catalytic converter work/)).toBeInTheDocument();
+    expect(screen.getByText(/We specialize in emissions diagnostic assessments/)).toBeInTheDocument();
   });
 
   it("should render the Privacy Policy page when path is '/privacy'", () => {

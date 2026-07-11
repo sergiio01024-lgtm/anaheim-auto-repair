@@ -10,7 +10,7 @@ export function PrivacyPage() {
 
   return (
     <div className="pt-24 min-h-screen bg-white">
-      <main id="main-content" className="mx-auto max-w-3xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-3xl px-6 py-12 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-2">
           Privacy Policy
         </h1>
@@ -70,7 +70,7 @@ export function PrivacyPage() {
             Phone: {businessConfig.phone.display}
           </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

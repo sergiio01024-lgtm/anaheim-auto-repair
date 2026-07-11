@@ -34,7 +34,7 @@ export function HeroSection() {
               Years of Local Trust
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-primary text-base">✓</span> Yelp-Verified 4.7★ (595 Reviews)
+              <span className="text-primary text-base">✓</span> Yelp-Rated {businessConfig.rating.value}★ ({businessConfig.rating.reviewsCount} Reviews)
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-primary text-base">✓</span> Clear Quotes & No Upselling

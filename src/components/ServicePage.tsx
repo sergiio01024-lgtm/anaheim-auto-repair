@@ -33,7 +33,7 @@ export function ServicePage({
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Header Space padding is handled by pt-24 */}
-      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         {/* Breadcrumbs */}
         <nav className="text-xs text-zinc-500 mb-8" aria-label="Breadcrumb">
           <ol className="flex gap-2">
@@ -160,7 +160,7 @@ export function ServicePage({
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Intake form preview included on all service detail pages */}
       <ContactSection />
