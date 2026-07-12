@@ -57,7 +57,10 @@ describe("/api/lead Serverless Function", () => {
     expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ error: expect.any(String) }));
   });
 
-  it("should detect bot honeypot and return 200 silent success", async () => {
+  it("should forward bot honeypot lead with suspected_spam flag to n8n instead of dropping it", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
     mockReq.body = {
       name: "Spam Bot",
       phone: "1234567890",
@@ -66,20 +69,29 @@ describe("/api/lead Serverless Function", () => {
       model: "Corolla",
       service: "muffler-exhaust",
       message: "Spam",
-      hp_b: "555-555-5555", // Honeypot
+      hp_b: "555-555-5555", // Honeypot filled
+      form_elapsed_ms: 8000,
     };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
 
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);
 
     expect(statusMock).toHaveBeenCalledWith(200);
-    expect(jsonMock).toHaveBeenCalledWith({
-      success: true,
-      message: "Request received successfully.",
-    });
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://n8n.test/webhook",
+      expect.objectContaining({
+        body: expect.stringContaining('"suspected_spam":true'),
+      })
+    );
   });
 
-  it("should trigger timing trap if submitted too fast (<2500ms)", async () => {
+  it("should return 200 silent success and not call fetch if timing trap is triggered", async () => {
     mockReq.body = {
       name: "Spam Bot",
       phone: "1234567890",
@@ -88,7 +100,7 @@ describe("/api/lead Serverless Function", () => {
       model: "Corolla",
       service: "muffler-exhaust",
       message: "Spam",
-      form_elapsed_ms: 1000,
+      form_elapsed_ms: 300, // too fast
     };
 
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);

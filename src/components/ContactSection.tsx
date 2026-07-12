@@ -67,6 +67,13 @@ export function ContactSection() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileWidgetId = useRef<string | null>(null);
 
+  const [showHoneypot, setShowHoneypot] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowHoneypot(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+
   // Load Turnstile script dynamically
   useEffect(() => {
     const siteKey = getSiteKey();
@@ -410,54 +417,56 @@ export function ContactSection() {
               )}
 
               {/* Hidden Honeypot Fields for Bot Rejection */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  left: "-9999px",
-                  top: "-9999px",
-                  width: "1px",
-                  height: "1px",
-                  overflow: "hidden",
-                }}
-              >
-                <input
-                  type="text"
-                  id="hp_a"
-                  name="hp_a"
-                  value={formData.hp_a}
-                  onChange={handleInputChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                />
-                <input
-                  type="text"
-                  id="hp_b"
-                  name="hp_b"
-                  value={formData.hp_b}
-                  onChange={handleInputChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                />
-                <input
-                  type="text"
-                  id="hp_c"
-                  name="hp_c"
-                  value={formData.hp_c}
-                  onChange={handleInputChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                />
-              </div>
+              {showHoneypot && (
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    top: "-9999px",
+                    width: "1px",
+                    height: "1px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <input
+                    type="text"
+                    id="hp_a"
+                    name="hp_a"
+                    value={formData.hp_a}
+                    onChange={handleInputChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-form-type="other"
+                  />
+                  <input
+                    type="text"
+                    id="hp_b"
+                    name="hp_b"
+                    value={formData.hp_b}
+                    onChange={handleInputChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-form-type="other"
+                  />
+                  <input
+                    type="text"
+                    id="hp_c"
+                    name="hp_c"
+                    value={formData.hp_c}
+                    onChange={handleInputChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-form-type="other"
+                  />
+                </div>
+              )}
 
               {/* Section 1: Customer Details */}
               <div className="border-b border-zinc-150 pb-6">

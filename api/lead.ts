@@ -22,6 +22,7 @@ interface CanonicalPayload {
   sms_consent: boolean;
   campaign?: string;
   referrer?: string;
+  suspected_spam?: boolean;
 }
 
 function validateInput(body: any): { isValid: boolean; error?: string } {
@@ -236,11 +237,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const body = req.body;
 
+    let suspectedSpam = false;
     // 3. Honeypot check (hidden fields commonly filled by spam bots)
     if (body.hp_a || body.hp_b || body.hp_c) {
-      console.warn(JSON.stringify({ requestId, status: "rejected", reason: "honeypot_triggered" }));
-      // Return a fake success to confuse the spam bot
-      return res.status(200).json({ success: true, message: "Request received successfully." });
+      suspectedSpam = true;
+      console.warn(JSON.stringify({ requestId, status: "flagged", reason: "honeypot_filled_forwarding_anyway" }));
     }
 
     const elapsed = Number(body.form_elapsed_ms);
@@ -440,6 +441,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sms_consent: hasSmsConsent,
       referrer: referrer || undefined,
       campaign: campaign || undefined,
+      suspected_spam: suspectedSpam || undefined,
     };
 
     // Format job description combining specs for the legacy n8n parser
