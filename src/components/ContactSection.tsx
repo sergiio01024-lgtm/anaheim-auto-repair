@@ -21,9 +21,9 @@ interface FormFields {
   sms_consent: boolean;
 
   // Honeypot fields to trap bots
-  website_url: string;
-  fax_number: string;
-  zipcode_check: string;
+  hp_a: string;
+  hp_b: string;
+  hp_c: string;
 }
 
 export function ContactSection() {
@@ -52,9 +52,9 @@ export function ContactSection() {
     preferred_date: "",
     preferred_time: "",
     sms_consent: false,
-    website_url: "",
-    fax_number: "",
-    zipcode_check: "",
+    hp_a: "",
+    hp_b: "",
+    hp_c: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -62,6 +62,7 @@ export function ContactSection() {
   const [errorMessage, setErrorMessage] = useState("");
   const formStarted = useRef(false);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const formLoadedAt = useRef<number>(Date.now());
 
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileWidgetId = useRef<string | null>(null);
@@ -241,6 +242,7 @@ export function ContactSection() {
         body: JSON.stringify({
           ...formData,
           "cf-turnstile-response": turnstileToken,
+          form_elapsed_ms: Date.now() - formLoadedAt.current,
           page_url: window.location.href,
           referrer: document.referrer || "",
         }),
@@ -268,10 +270,11 @@ export function ContactSection() {
           preferred_date: "",
           preferred_time: "",
           sms_consent: false,
-          website_url: "",
-          fax_number: "",
-          zipcode_check: "",
+          hp_a: "",
+          hp_b: "",
+          hp_c: "",
         });
+        formLoadedAt.current = Date.now();
         setTurnstileToken(null);
         if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
           try {
@@ -407,30 +410,52 @@ export function ContactSection() {
               )}
 
               {/* Hidden Honeypot Fields for Bot Rejection */}
-              <div className="sr-only" aria-hidden="true">
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  top: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                }}
+              >
                 <input
                   type="text"
-                  id="website_url"
-                  value={formData.website_url}
+                  id="hp_a"
+                  name="hp_a"
+                  value={formData.hp_a}
                   onChange={handleInputChange}
                   tabIndex={-1}
                   autoComplete="off"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
                 />
                 <input
                   type="text"
-                  id="fax_number"
-                  value={formData.fax_number}
+                  id="hp_b"
+                  name="hp_b"
+                  value={formData.hp_b}
                   onChange={handleInputChange}
                   tabIndex={-1}
                   autoComplete="off"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
                 />
                 <input
                   type="text"
-                  id="zipcode_check"
-                  value={formData.zipcode_check}
+                  id="hp_c"
+                  name="hp_c"
+                  value={formData.hp_c}
                   onChange={handleInputChange}
                   tabIndex={-1}
                   autoComplete="off"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
                 />
               </div>
 

@@ -30,13 +30,13 @@ function validateInput(body: any): { isValid: boolean; error?: string } {
   }
 
   // Honeypots must be strings if provided
-  if (body.website_url !== undefined && typeof body.website_url !== "string") {
+  if (body.hp_a !== undefined && typeof body.hp_a !== "string") {
     return { isValid: false, error: "Invalid honeypot type." };
   }
-  if (body.fax_number !== undefined && typeof body.fax_number !== "string") {
+  if (body.hp_b !== undefined && typeof body.hp_b !== "string") {
     return { isValid: false, error: "Invalid honeypot type." };
   }
-  if (body.zipcode_check !== undefined && typeof body.zipcode_check !== "string") {
+  if (body.hp_c !== undefined && typeof body.hp_c !== "string") {
     return { isValid: false, error: "Invalid honeypot type." };
   }
 
@@ -237,9 +237,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const body = req.body;
 
     // 3. Honeypot check (hidden fields commonly filled by spam bots)
-    if (body.website_url || body.fax_number || body.zipcode_check) {
+    if (body.hp_a || body.hp_b || body.hp_c) {
       console.warn(JSON.stringify({ requestId, status: "rejected", reason: "honeypot_triggered" }));
       // Return a fake success to confuse the spam bot
+      return res.status(200).json({ success: true, message: "Request received successfully." });
+    }
+
+    const elapsed = Number(body.form_elapsed_ms);
+    if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500) {
+      console.warn(JSON.stringify({ requestId, status: "rejected", reason: "submitted_too_fast", elapsed }));
       return res.status(200).json({ success: true, message: "Request received successfully." });
     }
 

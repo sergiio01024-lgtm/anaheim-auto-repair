@@ -66,7 +66,29 @@ describe("/api/lead Serverless Function", () => {
       model: "Corolla",
       service: "muffler-exhaust",
       message: "Spam",
-      fax_number: "555-555-5555", // Honeypot
+      hp_b: "555-555-5555", // Honeypot
+    };
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(jsonMock).toHaveBeenCalledWith({
+      success: true,
+      message: "Request received successfully.",
+    });
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("should trigger timing trap if submitted too fast (<2500ms)", async () => {
+    mockReq.body = {
+      name: "Spam Bot",
+      phone: "1234567890",
+      year: "2020",
+      make: "Toyota",
+      model: "Corolla",
+      service: "muffler-exhaust",
+      message: "Spam",
+      form_elapsed_ms: 1000,
     };
 
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);
