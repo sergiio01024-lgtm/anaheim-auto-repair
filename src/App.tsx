@@ -11,7 +11,6 @@ import { FAQSection } from "./components/FAQSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { MobileCallBar } from "./components/MobileCallBar";
-import { ScrollToTop } from "./components/ScrollToTop";
 import { ServicePanels } from "./components/ServicePanels";
 import { ServicePage } from "./components/ServicePage";
 import { PrivacyPage } from "./components/PrivacyPage";
@@ -104,7 +103,6 @@ export default function App() {
           {renderRoute()}
         </main>
         <Footer />
-        <ScrollToTop />
         <MobileCallBar />
       </div>
     </>
