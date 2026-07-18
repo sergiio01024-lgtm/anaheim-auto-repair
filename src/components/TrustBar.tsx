@@ -10,7 +10,7 @@ export function TrustBar() {
               Since {businessConfig.established}
             </span>
             <span className="text-xs text-zinc-500 font-semibold mt-1">
-              45+ Years of Local Trust
+              48+ Years of Local Trust
             </span>
           </div>
 
