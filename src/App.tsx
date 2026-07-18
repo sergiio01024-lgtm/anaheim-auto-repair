@@ -4,6 +4,7 @@ import { HeroSection } from "./components/HeroSection";
 import { TrustBar } from "./components/TrustBar";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { AboutSection } from "./components/AboutSection";
+import { GallerySection } from "./components/GallerySection";
 import { ServiceAreaMap } from "./components/ServiceAreaMap";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { FAQSection } from "./components/FAQSection";
@@ -79,6 +80,7 @@ export default function App() {
             <WhyChooseUs />
             <ServicePanels />
             <AboutSection />
+            <GallerySection />
             <ServiceAreaMap />
             <TestimonialsSection />
             <FAQSection />

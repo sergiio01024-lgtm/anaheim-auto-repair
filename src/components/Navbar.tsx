@@ -113,6 +113,7 @@ export function Navbar() {
     { label: "Services", href: "#services" },
     { label: "Reviews", href: "#reviews" },
     { label: "About", href: "#about" },
+    { label: "Gallery", href: "#gallery" },
     { label: "Location", href: "#location" },
     { label: "FAQ", href: "#faq" },
   ];
