@@ -3,7 +3,9 @@ import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { TrustBar } from "./components/TrustBar";
 import { ServicePanels } from "./components/ServicePanels";
+import { ReputationHub } from "./components/ReputationHub";
 import { ProcessSection } from "./components/ProcessSection";
+import { TransparencySection } from "./components/TransparencySection";
 import { AboutSection } from "./components/AboutSection";
 import { GallerySection } from "./components/GallerySection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -77,7 +79,9 @@ export default function App() {
             <HeroSection />
             <TrustBar />
             <ServicePanels />
+            <ReputationHub />
             <ProcessSection />
+            <TransparencySection />
             <AboutSection />
             <GallerySection />
             <TestimonialsSection />

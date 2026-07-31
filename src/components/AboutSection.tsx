@@ -3,28 +3,28 @@ import { businessConfig } from "../config/business";
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-[#F6F6F3] py-20 sm:py-24">
+    <section id="about" aria-label="About Our Shop" className="bg-[#F6F6F3] py-20 sm:py-24 border-b border-[#DDE0E3]">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text Content */}
             <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">Our Shop</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">OUR SHOP & HISTORY</span>
               <h2
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#16191D] leading-tight mb-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Same Corner. Same Family. Since {businessConfig.established}.
+                Serving Anaheim Drivers Since {businessConfig.established}.
               </h2>
               <div className="space-y-4 text-base text-[#606770] leading-relaxed">
                 <p>
-                  Anaheim Auto Repair & Muffler Care started on West Ball Road in {businessConfig.established} as a muffler and exhaust shop. That's still our specialty — but over {businessConfig.yearsInBusiness} years, we've grown into a full-service repair center trusted by families across Orange County.
+                  Anaheim Auto Repair & Muffler Care started on West Ball Road in {businessConfig.established} as a specialty muffler and exhaust shop. Over {businessConfig.yearsInBusiness} years, we&apos;ve grown into a full-service repair center trusted by generations of Orange County drivers.
                 </p>
                 <p>
-                  Owner {businessConfig.staff.owner} built this shop on a simple idea: be upfront about what's wrong, give an honest price, and do the job right. That approach hasn't changed. His nephew {businessConfig.staff.manager} runs the front office now, and master mechanic {businessConfig.staff.mechanic} has been running the bays for over a decade.
+                  Built on a simple principle: diagnose accurately, communicate clearly, and complete repair work with integrity. We service domestic and import vehicles — Honda, Toyota, Ford, Chevrolet, BMW, Mercedes, Nissan, Lexus, and more.
                 </p>
                 <p>
-                  We work on all makes and models — Honda, Toyota, Ford, Chevy, BMW, Mercedes, Nissan, Lexus, and more. Prices are quoted upfront. There's no pressure and no fine print.
+                  All repair recommendations are explained prior to work, focusing on vehicle safety, performance, and transparent customer service.
                 </p>
               </div>
 
@@ -67,7 +67,7 @@ export function AboutSection() {
                 <div className="aspect-[4/3]">
                   <img
                     src="/images/front-desk.webp"
-                    alt="Front desk and customer area at Anaheim Auto Repair"
+                    alt="Customer service front desk area at Anaheim Auto Repair"
                     className="img-cover"
                     loading="lazy"
                   />
@@ -77,7 +77,7 @@ export function AboutSection() {
                 <div className="aspect-[4/3]">
                   <img
                     src="/images/storefront-daytime.webp"
-                    alt="Exterior view of Anaheim Auto Repair shop"
+                    alt="Exterior view of Anaheim Auto Repair shop on West Ball Road"
                     className="img-cover"
                     loading="lazy"
                   />

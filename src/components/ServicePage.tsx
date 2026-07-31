@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { trackEvent } from "../utils/analytics";
 import { ContactSection } from "./ContactSection";
 import { businessConfig } from "../config/business";
+import { reputationConfig } from "../config/reputation";
 
 export interface ServicePageProps {
   title: string;
@@ -29,6 +30,10 @@ export function ServicePage({
     trackEvent({ type: "service_page_view", path });
     window.scrollTo(0, 0);
   }, [path]);
+
+  const handleYelpClick = () => {
+    trackEvent({ type: "reviews_click", source: "service_page_sidebar" });
+  };
 
   return (
     <div className="pt-24 min-h-screen bg-white">
@@ -134,6 +139,28 @@ export function ServicePage({
                 className="block w-full rounded-md bg-primary hover:bg-red-700 py-3 text-center text-sm font-bold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary"
               >
                 📞 Call {businessConfig.phone.display}
+              </a>
+            </div>
+
+            {/* Verified Reputation Sidebar Card */}
+            <div className="border border-[#DDE0E3] rounded-xl p-6 bg-white shadow-sm text-center">
+              <span className="text-[11px] font-bold text-[#C8202F] uppercase tracking-wider block mb-1">
+                VERIFIED REPUTATION
+              </span>
+              <div className="text-2xl font-black text-[#16191D] mb-1">
+                4.7 ★ Yelp Rating
+              </div>
+              <p className="text-xs text-[#606770] font-medium mb-4">
+                590+ reviews · Est. {reputationConfig.established} in Anaheim
+              </p>
+              <a
+                href={reputationConfig.externalLinks.yelpProfile}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleYelpClick}
+                className="inline-flex items-center justify-center w-full py-2.5 px-4 bg-[#F1F2F2] border border-[#DDE0E3] text-[#16191D] font-bold text-xs rounded-lg hover:bg-white transition-colors"
+              >
+                Read Reviews on Yelp ↗
               </a>
             </div>
 
