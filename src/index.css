@@ -10,6 +10,19 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ── Section Reveal Animation ────────────────── */
+@keyframes section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scroll Ticker (service area) ────────────── */
 @keyframes scroll-ticker {
   0% {
     transform: translateX(0);
@@ -29,4 +42,68 @@
 
 .scroll-ticker-container:hover {
   animation-play-state: paused;
+}
+
+/* ── Subtle Pulse for Status Indicators ──────── */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-dot {
+  animation: status-pulse 3s ease-in-out infinite;
+}
+
+/* ── Monospace Label Utility ─────────────────── */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.label-mono-lg {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ── Section Surface Utilities ───────────────── */
+.surface-garage {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.surface-garage-deep {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.surface-paper {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.surface-paper-bright {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+/* ── Signal Line ─────────────────────────────── */
+.signal-line-top {
+  position: relative;
+}
+.signal-line-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--signal-red);
 }

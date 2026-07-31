@@ -6,7 +6,6 @@ describe("Client-Side Routing in App.tsx", () => {
   const originalLocation = window.location;
 
   beforeEach(() => {
-    // Reset window.location mock
     delete (window as any).location;
     (window as any).location = {
       ...originalLocation,
@@ -21,8 +20,8 @@ describe("Client-Side Routing in App.tsx", () => {
 
   it("should render the homepage by default when path is '/'", () => {
     render(<App />);
-    expect(screen.getByText("Anaheim's Trusted Auto & Muffler Repair Shop")).toBeInTheDocument();
-    expect(screen.getByText("The Standard Every Job Is Held To")).toBeInTheDocument();
+    expect(screen.getByText("Auto Repair Without the Runaround.")).toBeInTheDocument();
+    expect(screen.getByText("Professional Auto Repair & Muffler Services")).toBeInTheDocument();
   });
 
   it("should render the Muffler & Exhaust specialty page when path is '/muffler-repair-anaheim'", () => {

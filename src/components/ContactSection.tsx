@@ -26,6 +26,11 @@ interface FormFields {
   hp_c: string;
 }
 
+const inputBase =
+  "mt-1.5 block w-full rounded-lg px-4 py-3 text-base outline outline-1 -outline-offset-1 outline-[#DDE0E3] placeholder:text-[#818891] focus:outline-2 focus:-outline-offset-2 focus:outline-[#C8202F] transition-colors bg-white text-[#16191D]";
+const inputError = "outline-[#C8202F] ring-1 ring-[#C8202F]";
+const labelBase = "block text-sm font-semibold mb-1 text-[#16191D]";
+
 export function ContactSection() {
   const getSiteKey = (): string | undefined => {
     try {
@@ -100,7 +105,6 @@ export function ContactSection() {
               sitekey: siteKey,
               callback: (token: string) => {
                 setTurnstileToken(token);
-                // Clear validation error when token is received
                 setErrors((prev) => {
                   const copy = { ...prev };
                   delete copy.turnstile;
@@ -138,7 +142,6 @@ export function ContactSection() {
     };
   }, []);
 
-  // Track estimate_form_start on first interaction
   const handleInteraction = () => {
     if (!formStarted.current) {
       formStarted.current = true;
@@ -159,7 +162,6 @@ export function ContactSection() {
       [nameOrId]: value,
     }));
 
-    // Clear field error when user interacts
     if (errors[nameOrId]) {
       setErrors((prev) => {
         const copy = { ...prev };
@@ -185,7 +187,6 @@ export function ContactSection() {
     });
   };
 
-  // Focus error summary if validation fails
   useEffect(() => {
     if (Object.keys(errors).length > 0 && errorSummaryRef.current) {
       errorSummaryRef.current.focus();
@@ -324,80 +325,104 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-white py-24 border-t border-zinc-200"
+      className="surface-garage py-24 sm:py-28"
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center mb-12">
-          <span className="text-sm font-bold tracking-widest uppercase text-primary block mb-3">
-            Service Intake
-          </span>
+        {/* Section Header */}
+        <div className="max-w-2xl mb-14 sm:mb-16">
+          <span className="label-mono text-steel-500 block mb-4">Service Intake</span>
           <h2
             id="contact-heading"
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
           >
-            Request an Estimate
+            Request a Free Estimate
           </h2>
-          <p className="mt-4 text-base text-zinc-600 font-medium">
-            Describe your car's symptoms or maintenance needs. We'll reply with a ballpark estimate.
+          <p className="mt-5 text-lg text-steel-400 leading-relaxed">
+            Describe your vehicle's issue. We'll respond with a ballpark estimate — or call{" "}
+            <a
+              href={businessConfig.phone.link}
+              className="text-signal-red hover:text-white transition-colors font-semibold"
+            >
+              {businessConfig.phone.display}
+            </a>{" "}
+            for an immediate quote.
           </p>
         </div>
 
-        <div className="mx-auto max-w-xl">
-          {/* 1. Success Message */}
+        {/* Form Panel */}
+        <div
+          className="mx-auto max-w-[1100px] rounded-2xl p-6 sm:p-10 lg:p-12"
+          style={{ backgroundColor: "var(--paper-bright)" }}
+        >
+          {/* Success State */}
           {status === "success" && (
             <div
-              className="bg-red-50 border border-red-200 rounded-xl p-8 text-center shadow-sm"
+              className="rounded-xl p-8 text-center border border-success-green/20"
+              style={{ backgroundColor: "rgba(77, 170, 114, 0.06)" }}
               role="alert"
             >
-              <h3 className="text-xl font-bold text-primary">Estimate Requested Successfully!</h3>
-              <p className="mt-3 text-sm text-zinc-650 font-semibold leading-relaxed">
-                Your request has been securely processed. Carson or a shop technician will contact
-                you shortly during business hours.
-              </p>
-              <div className="mt-6">
-                <button
-                  onClick={() => setStatus("idle")}
-                  className="rounded-md bg-white border border-zinc-300 hover:bg-zinc-50 px-4 py-2 text-xs font-bold text-zinc-700 shadow-sm"
-                >
-                  Submit Another Request
-                </button>
+              <div className="w-14 h-14 rounded-full mx-auto mb-5 flex items-center justify-center" style={{ backgroundColor: 'var(--success-green)' }}>
+                <svg className="size-7 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
               </div>
+              <h3
+                className="text-xl font-bold mb-3"
+                style={{ fontFamily: "var(--font-display)", color: "var(--garage-950)" }}
+              >
+                Estimate Requested Successfully!
+              </h3>
+              <p className="text-base text-steel-600 leading-relaxed max-w-md mx-auto">
+                {businessConfig.staff.manager} or a shop technician will contact you shortly during business hours.
+              </p>
+              <button
+                onClick={() => setStatus("idle")}
+                className="mt-6 rounded-lg border border-steel-300 hover:border-garage-950 px-5 py-2.5 text-sm font-semibold transition-colors"
+                style={{ color: "var(--garage-950)" }}
+              >
+                Submit Another Request
+              </button>
             </div>
           )}
 
-          {/* 2. Failure Recovery Banners */}
+          {/* Error State */}
           {status === "error" && (
             <div
-              className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 shadow-sm flex flex-col items-center text-center"
+              className="rounded-xl p-6 mb-8 border border-signal-red/20 text-center"
+              style={{ backgroundColor: "rgba(209, 38, 54, 0.04)" }}
               role="alert"
             >
-              <span className="text-primary font-bold text-base">⚠️ Submission Error</span>
-              <p className="text-sm text-zinc-700 font-semibold mt-2">{errorMessage}</p>
+              <span className="text-signal-red font-bold text-base">⚠ Submission Error</span>
+              <p className="text-sm font-medium mt-2" style={{ color: "var(--garage-950)" }}>
+                {errorMessage}
+              </p>
               <a
                 href={businessConfig.phone.link}
-                className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary hover:bg-red-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-signal-red hover:bg-signal-red-hover px-5 py-3 text-sm font-semibold text-white transition-colors"
               >
-                📞 Call Shop Directly: {businessConfig.phone.display}
+                Call Shop Directly: {businessConfig.phone.display}
               </a>
             </div>
           )}
 
           {status !== "success" && (
-            <form onSubmit={handleSubmit} noValidate className="space-y-6">
-              {/* Accessible Error Summary */}
+            <form onSubmit={handleSubmit} noValidate>
+              {/* Error Summary */}
               {Object.keys(errors).length > 0 && (
                 <div
                   ref={errorSummaryRef}
                   tabIndex={-1}
-                  className="bg-red-50 border-l-4 border-primary p-4 rounded-md focus:outline-none mb-6"
+                  className="rounded-lg border-l-4 border-signal-red p-4 mb-8 focus:outline-none"
+                  style={{ backgroundColor: "rgba(209, 38, 54, 0.04)" }}
                   role="alert"
                   aria-labelledby="error-summary-title"
                 >
-                  <h3 id="error-summary-title" className="text-sm font-bold text-primary">
+                  <h3 id="error-summary-title" className="text-sm font-bold text-signal-red">
                     Please correct the following {Object.keys(errors).length} errors:
                   </h3>
-                  <ul className="mt-2 list-disc list-inside text-xs text-primary font-semibold space-y-1">
+                  <ul className="mt-2 list-disc list-inside text-xs text-signal-red font-semibold space-y-1">
                     {Object.entries(errors).map(([field, msg]) => (
                       <li key={field}>
                         <a
@@ -416,7 +441,7 @@ export function ContactSection() {
                 </div>
               )}
 
-              {/* Hidden Honeypot Fields for Bot Rejection */}
+              {/* Honeypot */}
               {showHoneypot && (
                 <div
                   aria-hidden="true"
@@ -429,375 +454,186 @@ export function ContactSection() {
                     overflow: "hidden",
                   }}
                 >
-                  <input
-                    type="text"
-                    id="hp_a"
-                    name="hp_a"
-                    value={formData.hp_a}
-                    onChange={handleInputChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    data-form-type="other"
-                  />
-                  <input
-                    type="text"
-                    id="hp_b"
-                    name="hp_b"
-                    value={formData.hp_b}
-                    onChange={handleInputChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    data-form-type="other"
-                  />
-                  <input
-                    type="text"
-                    id="hp_c"
-                    name="hp_c"
-                    value={formData.hp_c}
-                    onChange={handleInputChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    data-form-type="other"
-                  />
+                  <input type="text" id="hp_a" name="hp_a" value={formData.hp_a} onChange={handleInputChange} tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore="true" data-form-type="other" />
+                  <input type="text" id="hp_b" name="hp_b" value={formData.hp_b} onChange={handleInputChange} tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore="true" data-form-type="other" />
+                  <input type="text" id="hp_c" name="hp_c" value={formData.hp_c} onChange={handleInputChange} tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore="true" data-form-type="other" />
                 </div>
               )}
 
-              {/* Section 1: Customer Details */}
-              <div className="border-b border-zinc-150 pb-6">
-                <h3 className="text-base font-bold text-zinc-900 mb-4">1. Contact Information</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* ── 01 Contact ─────────────────────── */}
+              <div className="pb-8 mb-8 border-b border-[#DDE0E3]">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-xs font-mono font-bold text-[#C8202F]">01</span>
+                  <h3 className="text-base font-bold text-[#16191D]" style={{ fontFamily: "var(--font-display)" }}>
+                    Contact Information
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold text-zinc-800">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? "name-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3.5 py-2 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.name ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="name" className={labelBase}>Name *</label>
+                    <input type="text" id="name" value={formData.name} onChange={handleInputChange} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined}
+                      className={`${inputBase} ${errors.name ? inputError : ""}`}
                     />
-                    {errors.name && (
-                      <p id="name-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.name}
-                      </p>
-                    )}
+                    {errors.name && <p id="name-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.name}</p>}
                   </div>
-
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-bold text-zinc-800">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="(714) 826-4444"
-                      aria-invalid={!!errors.phone}
-                      aria-describedby={errors.phone ? "phone-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3.5 py-2 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.phone ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="phone" className={labelBase}>Phone Number *</label>
+                    <input type="tel" id="phone" value={formData.phone} onChange={handleInputChange} required aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined}
+                      className={`${inputBase} ${errors.phone ? inputError : ""}`}
                     />
-                    {errors.phone && (
-                      <p id="phone-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.phone}
-                      </p>
-                    )}
+                    {errors.phone && <p id="phone-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.phone}</p>}
                   </div>
-
                   <div className="sm:col-span-2">
-                    <label htmlFor="email" className="block text-sm font-bold text-zinc-800">
-                      Email Address (Optional)
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="driver@anaheim.com"
-                      aria-invalid={!!errors.email}
-                      aria-describedby={errors.email ? "email-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3.5 py-2 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.email ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="email" className={labelBase}>Email Address (Optional)</label>
+                    <input type="email" id="email" value={formData.email} onChange={handleInputChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined}
+                      className={`${inputBase} ${errors.email ? inputError : ""}`}
                     />
-                    {errors.email && (
-                      <p id="email-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.email}
-                      </p>
-                    )}
+                    {errors.email && <p id="email-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.email}</p>}
                   </div>
                 </div>
               </div>
 
-              {/* Section 2: Vehicle Specs */}
-              <div className="border-b border-zinc-150 pb-6">
-                <h3 className="text-base font-bold text-zinc-900 mb-4">
-                  2. Vehicle Specifications
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* ── 02 Vehicle ─────────────────────── */}
+              <div className="pb-8 mb-8 border-b border-[#DDE0E3]">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-xs font-mono font-bold text-[#C8202F]">02</span>
+                  <h3 className="text-base font-bold text-[#16191D]" style={{ fontFamily: "var(--font-display)" }}>
+                    Vehicle Details
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                   <div>
-                    <label htmlFor="year" className="block text-xs font-bold text-zinc-700">
-                      Year *
-                    </label>
-                    <input
-                      type="number"
-                      id="year"
-                      value={formData.year}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="YYYY"
-                      min="1900"
-                      max={new Date().getFullYear() + 2}
-                      aria-invalid={!!errors.year}
-                      aria-describedby={errors.year ? "year-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.year ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="year" className={labelBase}>Year *</label>
+                    <input type="text" id="year" inputMode="numeric" maxLength={4} value={formData.year} onChange={handleInputChange} required aria-invalid={!!errors.year} aria-describedby={errors.year ? "year-error" : undefined} placeholder="e.g. 2019"
+                      className={`${inputBase} ${errors.year ? inputError : ""}`}
                     />
-                    {errors.year && (
-                      <p id="year-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.year}
-                      </p>
-                    )}
+                    {errors.year && <p id="year-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.year}</p>}
                   </div>
                   <div>
-                    <label htmlFor="make" className="block text-xs font-bold text-zinc-700">
-                      Make *
-                    </label>
-                    <input
-                      type="text"
-                      id="make"
-                      value={formData.make}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="e.g. Toyota"
-                      aria-invalid={!!errors.make}
-                      aria-describedby={errors.make ? "make-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.make ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="make" className={labelBase}>Make *</label>
+                    <input type="text" id="make" value={formData.make} onChange={handleInputChange} required aria-invalid={!!errors.make} aria-describedby={errors.make ? "make-error" : undefined} placeholder="e.g. Honda"
+                      className={`${inputBase} ${errors.make ? inputError : ""}`}
                     />
-                    {errors.make && (
-                      <p id="make-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.make}
-                      </p>
-                    )}
+                    {errors.make && <p id="make-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.make}</p>}
                   </div>
                   <div>
-                    <label htmlFor="model" className="block text-xs font-bold text-zinc-700">
-                      Model *
-                    </label>
-                    <input
-                      type="text"
-                      id="model"
-                      value={formData.model}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="e.g. Camry"
-                      aria-invalid={!!errors.model}
-                      aria-describedby={errors.model ? "model-error" : undefined}
-                      className={`mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.model ? "outline-primary ring-1 ring-primary" : ""}`}
+                    <label htmlFor="model" className={labelBase}>Model *</label>
+                    <input type="text" id="model" value={formData.model} onChange={handleInputChange} required aria-invalid={!!errors.model} aria-describedby={errors.model ? "model-error" : undefined} placeholder="e.g. Civic"
+                      className={`${inputBase} ${errors.model ? inputError : ""}`}
                     />
-                    {errors.model && (
-                      <p id="model-error" className="mt-1 text-xs text-primary font-bold">
-                        {errors.model}
-                      </p>
-                    )}
+                    {errors.model && <p id="model-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.model}</p>}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5">
+                  <div>
+                    <label htmlFor="mileage" className={labelBase}>Approximate Mileage (Optional)</label>
+                    <input type="text" id="mileage" inputMode="numeric" value={formData.mileage} onChange={handleInputChange} placeholder="e.g. 85000"
+                      className={inputBase}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="vin" className={labelBase}>VIN (Optional)</label>
+                    <input type="text" id="vin" maxLength={17} value={formData.vin} onChange={handleInputChange} placeholder="17 characters"
+                      className={inputBase}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="drivable" className={labelBase}>Is the Vehicle Drivable?</label>
+                    <select id="drivable" value={formData.drivable} onChange={handleInputChange}
+                      className={inputBase}
+                    >
+                      <option value="">Not sure</option>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label htmlFor="mileage" className="block text-xs font-bold text-zinc-700">
-                      Approximate Mileage (Optional)
-                    </label>
-                    <input
-                      type="number"
-                      id="mileage"
-                      value={formData.mileage}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 105000"
-                      className="mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="vin" className="block text-xs font-bold text-zinc-700">
-                      VIN (Optional)
-                    </label>
-                    <input
-                      type="text"
-                      id="vin"
-                      value={formData.vin}
-                      onChange={handleInputChange}
-                      placeholder="17-character VIN"
-                      maxLength={17}
-                      className="mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <span className="block text-xs font-bold text-zinc-700 mb-2">
-                    Is the vehicle currently drivable?
-                  </span>
-                  <div className="flex gap-4">
-                    <label className="inline-flex items-center text-sm font-semibold text-zinc-700">
-                      <input
-                        type="radio"
-                        id="drivable-yes"
-                        name="drivable"
-                        value="true"
-                        checked={formData.drivable === "true"}
-                        onChange={handleInputChange}
-                        className="size-4 text-primary focus:ring-primary"
-                      />
-                      <span className="ml-2">Yes, it drives</span>
-                    </label>
-                    <label className="inline-flex items-center text-sm font-semibold text-zinc-700">
-                      <input
-                        type="radio"
-                        id="drivable-no"
-                        name="drivable"
-                        value="false"
-                        checked={formData.drivable === "false"}
-                        onChange={handleInputChange}
-                        className="size-4 text-primary focus:ring-primary"
-                      />
-                      <span className="ml-2">No (needs tow/safety issues)</span>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <span className="block text-xs font-bold text-zinc-700 mb-2">
-                    Active Warning Lights (Select all that apply)
-                  </span>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      "Check Engine",
-                      "ABS / Braking",
-                      "Battery / Charging",
-                      "Traction / Stability",
-                      "Airbag / SRS",
-                    ].map((light) => (
-                      <label
-                        key={light}
-                        className="inline-flex items-center text-xs font-semibold text-zinc-700"
-                      >
+                {/* Warning Lights */}
+                <div className="mt-5">
+                  <span className={`${labelBase} mb-2 block`}>Active Warning Lights</span>
+                  <div className="flex flex-wrap gap-3">
+                    {["Check Engine", "ABS / Braking", "Battery / Charging", "Traction / Stability", "Airbag / SRS"].map((light) => (
+                      <label key={light} className="flex items-center gap-2 text-sm cursor-pointer text-[#606770]">
                         <input
                           type="checkbox"
                           value={light}
                           checked={formData.warning_lights.includes(light)}
                           onChange={handleWarningLightChange}
-                          className="rounded text-primary focus:ring-primary size-4"
+                          className="rounded text-[#C8202F] focus:ring-[#C8202F] size-4"
                         />
-                        <span className="ml-2">{light}</span>
+                        {light}
                       </label>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Section 3: Service Requested */}
-              <div className="border-b border-zinc-150 pb-6">
-                <h3 className="text-base font-bold text-zinc-900 mb-4">3. Service Requested</h3>
-
-                <div>
-                  <label htmlFor="service" className="block text-sm font-bold text-zinc-800">
-                    Primary Service Category *
-                  </label>
-                  <select
-                    id="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    required
-                    aria-invalid={!!errors.service}
-                    aria-describedby={errors.service ? "service-error" : undefined}
-                    className={`mt-1.5 block w-full rounded-md bg-white px-3 py-2 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary ${errors.service ? "outline-primary ring-1 ring-primary" : ""}`}
-                  >
-                    <option value="" disabled>
-                      Select a category...
-                    </option>
-                    <option value="muffler-exhaust">Muffler & Exhaust Repair</option>
-                    <option value="catalytic-converters">Catalytic Converter Replacement</option>
-                    <option value="brakes-suspension">Brakes & Suspension Service</option>
-                    <option value="engine-diagnostics">Engine Diagnostics & Repair</option>
-                    <option value="transmission-service">Transmission Service & Repair</option>
-                    <option value="routine-maintenance">Routine Maintenance & Oil Changes</option>
-                    <option value="other">Other Auto Repair Service</option>
-                  </select>
-                  {errors.service && (
-                    <p id="service-error" className="mt-1 text-xs text-primary font-bold">
-                      {errors.service}
-                    </p>
-                  )}
+              {/* ── 03 Service ─────────────────────── */}
+              <div className="pb-8 mb-8 border-b border-[#DDE0E3]">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-xs font-mono font-bold text-[#C8202F]">03</span>
+                  <h3 className="text-base font-bold text-[#16191D]" style={{ fontFamily: "var(--font-display)" }}>
+                    Service Details
+                  </h3>
                 </div>
-
-                <div className="mt-4">
-                  <label htmlFor="message" className="block text-sm font-bold text-zinc-800">
-                    Describe the Issue or Symptoms *
-                  </label>
-                  <textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={4}
-                    required
-                    placeholder="Describe noises, dashboard lights, scheduling details, or the specific service you need..."
-                    aria-invalid={!!errors.message}
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                    className={`mt-1.5 block w-full rounded-md bg-white px-3.5 py-2 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-zinc-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary resize-none ${errors.message ? "outline-primary ring-1 ring-primary" : ""}`}
-                  />
-                  {errors.message && (
-                    <p id="message-error" className="mt-1 text-xs text-primary font-bold">
-                      {errors.message}
-                    </p>
-                  )}
+                <div className="space-y-5">
+                  <div>
+                    <label htmlFor="service" className={labelBase}>Primary Service Category *</label>
+                    <select id="service" value={formData.service} onChange={handleInputChange} required aria-invalid={!!errors.service} aria-describedby={errors.service ? "service-error" : undefined}
+                      className={`${inputBase} ${errors.service ? inputError : ""}`}
+                    >
+                      <option value="">Select a category</option>
+                      <option value="muffler-exhaust">Muffler & Exhaust Repair</option>
+                      <option value="catalytic-converters">Catalytic Converters</option>
+                      <option value="brakes-suspension">Brakes & Suspension</option>
+                      <option value="engine-diagnostics">Engine Diagnostics & Repair</option>
+                      <option value="transmission-service">Transmission Service & Repair</option>
+                      <option value="routine-maintenance">Routine Maintenance & Oil Changes</option>
+                      <option value="other">Other / Not Sure</option>
+                    </select>
+                    {errors.service && <p id="service-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.service}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="message" className={labelBase}>Describe the Issue or Symptoms *</label>
+                    <textarea id="message" rows={4} value={formData.message} onChange={handleInputChange} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}
+                      placeholder="What symptoms are you experiencing? Noises, warning lights, performance issues?"
+                      className={`${inputBase} resize-y ${errors.message ? inputError : ""}`}
+                    />
+                    {errors.message && <p id="message-error" className="mt-1 text-xs text-[#C8202F] font-semibold">{errors.message}</p>}
+                  </div>
                 </div>
               </div>
 
-              {/* Section 4: Preferences & Consent */}
-              <div>
-                <h3 className="text-base font-bold text-zinc-900 mb-4">4. Preferences & Consent</h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* ── 04 Preferences ─────────────────── */}
+              <div className="pb-8 mb-8 border-b border-[#DDE0E3]">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-xs font-mono font-bold text-[#C8202F]">04</span>
+                  <h3 className="text-base font-bold text-[#16191D]" style={{ fontFamily: "var(--font-display)" }}>
+                    Preferences
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                   <div>
-                    <label
-                      htmlFor="preferred_contact"
-                      className="block text-xs font-bold text-zinc-700"
-                    >
-                      Preferred Contact Method
-                    </label>
-                    <select
-                      id="preferred_contact"
-                      value={formData.preferred_contact}
-                      onChange={handleInputChange}
-                      className="mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                    <label htmlFor="preferred_contact" className={labelBase}>Preferred Contact</label>
+                    <select id="preferred_contact" value={formData.preferred_contact} onChange={handleInputChange}
+                      className={inputBase}
                     >
                       <option value="phone">Phone Call</option>
-                      <option value="sms">Text Message (SMS)</option>
+                      <option value="sms">Text / SMS</option>
                       <option value="email">Email</option>
                     </select>
                   </div>
-
                   <div>
-                    <label
-                      htmlFor="preferred_date"
-                      className="block text-xs font-bold text-zinc-700"
-                    >
-                      Preferred Appointment Day
-                    </label>
-                    <select
-                      id="preferred_date"
-                      value={formData.preferred_date}
-                      onChange={handleInputChange}
-                      className="mt-1.5 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-zinc-900 outline outline-1 -outline-offset-1 outline-zinc-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                    <label htmlFor="preferred_time" className={labelBase}>Best Time</label>
+                    <input type="text" id="preferred_time" value={formData.preferred_time} onChange={handleInputChange} placeholder="e.g. Morning"
+                      className={inputBase}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="preferred_date" className={labelBase}>Preferred Day</label>
+                    <select id="preferred_date" value={formData.preferred_date} onChange={handleInputChange}
+                      className={inputBase}
                     >
                       <option value="">No preference</option>
                       <option value="monday">Monday</option>
@@ -810,22 +646,22 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                <div className="mt-6 space-y-4">
-                  <label className="relative flex items-start">
+                <div className="mt-6">
+                  <label className="relative flex items-start cursor-pointer">
                     <div className="flex h-6 items-center">
                       <input
                         type="checkbox"
                         id="sms_consent"
                         checked={formData.sms_consent}
                         onChange={handleInputChange}
-                        className="rounded text-primary focus:ring-primary size-4"
+                        className="rounded text-[#C8202F] focus:ring-[#C8202F] size-4"
                       />
                     </div>
                     <div className="ml-3 text-xs leading-5">
-                      <span className="font-bold text-zinc-800">
+                      <span className="font-bold text-[#16191D]">
                         Consent to Automated Text Updates (Optional)
                       </span>
-                      <p className="text-zinc-500 mt-1">
+                      <p className="mt-1 text-[#818891]">
                         Check this box to receive SMS updates about your estimate and appointments
                         from our team. We do not sell your data. Message frequency varies. Reply
                         STOP to cancel at any time.
@@ -835,10 +671,10 @@ export function ContactSection() {
                 </div>
               </div>
 
-              {/* Bot Verification (Turnstile) */}
+              {/* Turnstile Verification */}
               {getSiteKey() && (
-                <div className="mt-6 border-b border-zinc-150 pb-6">
-                  <span className="block text-sm font-bold text-zinc-850 mb-2">
+                <div className="pb-8 mb-8 border-b border-[#DDE0E3]">
+                  <span className={`${labelBase} mb-3 block`}>
                     Security Verification
                   </span>
                   <div
@@ -847,27 +683,27 @@ export function ContactSection() {
                     aria-live="polite"
                   ></div>
                   {errors.turnstile && (
-                    <p id="turnstile-error" className="mt-2 text-xs text-primary font-bold">
+                    <p id="turnstile-error" className="mt-2 text-xs text-[#C8202F] font-semibold">
                       {errors.turnstile}
                     </p>
                   )}
                 </div>
               )}
 
-              {/* Submit Action */}
-              <div className="mt-8">
+              {/* Submit */}
+              <div>
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="block w-full rounded-md bg-primary hover:bg-red-700 px-3.5 py-3 text-center text-sm font-bold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
+                  className="block w-full rounded-lg bg-[#C8202F] hover:bg-[#AE1D2A] px-4 py-4 text-center text-base font-semibold text-white transition-colors shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8202F] disabled:opacity-50"
                 >
                   {status === "loading"
                     ? "Processing Estimate Request..."
                     : "Submit Estimate Request"}
                 </button>
-                <p className="text-[10px] text-zinc-500 mt-3 text-center leading-normal">
+                <p className="text-[11px] mt-3 text-center text-[#818891]">
                   By submitting, you agree to our{" "}
-                  <a href="/privacy" className="underline hover:text-zinc-800">
+                  <a href="/privacy" className="underline hover:text-[#16191D]">
                     Privacy Policy
                   </a>
                   .

@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { TrustBar } from "./components/TrustBar";
-import { WhyChooseUs } from "./components/WhyChooseUs";
+import { ServicePanels } from "./components/ServicePanels";
+import { ProcessSection } from "./components/ProcessSection";
 import { AboutSection } from "./components/AboutSection";
 import { GallerySection } from "./components/GallerySection";
-import { ServiceAreaMap } from "./components/ServiceAreaMap";
 import { TestimonialsSection } from "./components/TestimonialsSection";
+import { ServiceAreaMap } from "./components/ServiceAreaMap";
 import { FAQSection } from "./components/FAQSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { MobileCallBar } from "./components/MobileCallBar";
-import { ServicePanels } from "./components/ServicePanels";
 import { ServicePage } from "./components/ServicePage";
 import { PrivacyPage } from "./components/PrivacyPage";
 import { ContactPage } from "./components/ContactPage";
@@ -76,12 +76,12 @@ export default function App() {
           <>
             <HeroSection />
             <TrustBar />
-            <WhyChooseUs />
             <ServicePanels />
+            <ProcessSection />
             <AboutSection />
             <GallerySection />
-            <ServiceAreaMap />
             <TestimonialsSection />
+            <ServiceAreaMap />
             <FAQSection />
             <ContactSection />
           </>

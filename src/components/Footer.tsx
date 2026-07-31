@@ -1,3 +1,4 @@
+import React from "react";
 import { Wrench } from "lucide-react";
 import { businessConfig } from "../config/business";
 import { trackEvent } from "../utils/analytics";
@@ -29,55 +30,64 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-zinc-900 text-zinc-400 border-t border-zinc-800">
+    <footer className="bg-[#101214] border-t-2 border-[#C8202F] text-slate-300 relative">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-          {/* Column 1: NAP & Branding */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-4">
+          {/* Column 1: Branding & Contact */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="size-9 bg-primary rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="size-9 bg-[#C8202F] rounded-lg flex items-center justify-center text-white flex-shrink-0">
                 <Wrench className="size-5" />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="text-sm font-extrabold tracking-tight leading-none text-white uppercase">
+                <span
+                  className="text-base font-bold tracking-tight leading-none text-white uppercase"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
                   {businessConfig.name.short}
                 </span>
-                <span className="text-[9px] font-bold tracking-widest leading-none mt-1 text-[#CC0000] uppercase">
+                <span
+                  className="text-[10px] font-medium tracking-[0.15em] leading-none mt-1 text-slate-400 uppercase"
+                  style={{ fontFamily: "var(--font-mono)" }}
+                >
                   {businessConfig.name.tagline}
                 </span>
               </div>
             </div>
-            <p className="text-xs text-zinc-400 mb-6 leading-relaxed font-semibold">
+            <p className="text-xs text-slate-400 leading-relaxed mb-6">
               Family-owned auto repair and muffler specialty shop serving Anaheim and Orange County
               since {businessConfig.established}.
             </p>
-            <div className="space-y-2 text-xs text-zinc-300 font-semibold">
+            <div className="space-y-2 text-xs text-slate-300">
               <p>
-                📞{" "}
+                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase mr-2">PH</span>
                 <a
                   href={businessConfig.phone.link}
                   onClick={() =>
                     trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
                   }
-                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded font-mono font-semibold text-white"
                 >
                   {businessConfig.phone.display}
                 </a>
               </p>
-              <p>📍 {businessConfig.address.full}</p>
-              <p className="pt-2 text-zinc-450 text-[10px] font-bold uppercase tracking-wider">
-                Hours
+              <p className="flex items-start">
+                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase mr-2 flex-shrink-0">LOC</span>
+                <span>{businessConfig.address.full}</span>
               </p>
-              <p>Mon–Fri: {businessConfig.hours.weekdays}</p>
-              <p>Sat: {businessConfig.hours.saturday}</p>
-              <p>Sun: {businessConfig.hours.sunday}</p>
+              <div className="pt-3">
+                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-1">HOURS</span>
+                <p className="text-[11px] text-slate-400 font-mono">Mon–Fri: {businessConfig.hours.weekdays}</p>
+                <p className="text-[11px] text-slate-400 font-mono">Sat: {businessConfig.hours.saturday}</p>
+                <p className="text-[11px] text-slate-400 font-mono">Sun: {businessConfig.hours.sunday}</p>
+              </div>
             </div>
           </div>
 
           {/* Column 2: Services */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-4">Services</h3>
-            <ul className="space-y-2 text-xs font-semibold">
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">SERVICES</span>
+            <ul className="space-y-2.5 text-xs">
               {footerServicesList.map((s) => {
                 const path = pathMap[s] || "/";
                 return (
@@ -85,7 +95,7 @@ export function Footer() {
                     <a
                       href={path}
                       onClick={(e) => handleNavigation(e, path)}
-                      className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                      className="text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                     >
                       {s}
                     </a>
@@ -95,52 +105,52 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Trust & Reviews */}
+          {/* Column 3: Reviews & Directions */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-4">Reviews & Directions</h3>
-            <ul className="space-y-2 text-xs font-semibold">
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">PROOF & LOCATION</span>
+            <ul className="space-y-2.5 text-xs font-semibold mb-6">
               <li>
                 <a
                   href={businessConfig.urls.yelp}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent({ type: "reviews_click", source: "yelp" })}
-                  className="hover:text-white transition-colors text-primary flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-primary rounded"
+                  className="text-[#D99A24] hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                 >
                   Read Yelp Reviews ↗
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Anaheim+Auto+Repair+Muffler+Care,+2583+W+Ball+Rd,+Anaheim,+CA+92804"
+                  href={businessConfig.urls.directions}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent({ type: "directions_click" })}
-                  className="hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-primary rounded"
+                  className="text-slate-300 hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                 >
                   Get Directions on Google Maps ↗
                 </a>
               </li>
             </ul>
-            <div className="mt-6 rounded-lg bg-zinc-850 border border-zinc-800 p-4 max-w-[200px]">
-              <p className="text-xs font-bold text-white">
+            <div className="rounded-xl border border-[#2A2E33] bg-[#17191C] p-4 max-w-[220px]">
+              <p className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 {businessConfig.rating.value} ★ on Yelp
               </p>
-              <p className="text-[10px] text-zinc-400 mt-1">
-                {businessConfig.rating.reviewsCount} verified reviews
+              <p className="text-[10px] font-mono text-slate-400 mt-1">
+                {businessConfig.rating.reviewsCount}+ Yelp Reviews
               </p>
             </div>
           </div>
 
-          {/* Column 4: Nearby Areas */}
+          {/* Column 4: Service Area */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-xs font-semibold mb-4">
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">SERVICE AREA</span>
+            <ul className="space-y-2 text-xs mb-4">
               <li>
                 <a
                   href="/contact"
                   onClick={(e) => handleNavigation(e, "/contact")}
-                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                  className="text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                 >
                   Contact Us
                 </a>
@@ -149,13 +159,13 @@ export function Footer() {
                 <a
                   href="/privacy"
                   onClick={(e) => handleNavigation(e, "/privacy")}
-                  className="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-primary rounded"
+                  className="text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                 >
                   Privacy Policy
                 </a>
               </li>
             </ul>
-            <p className="text-xs text-zinc-450 leading-relaxed font-semibold">
+            <p className="text-xs text-slate-400 leading-relaxed">
               Serving drivers in Anaheim, Garden Grove, Stanton, Orange, Cypress, Buena Park, and
               surrounding Orange County communities.
             </p>
@@ -163,7 +173,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 border-t border-zinc-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-semibold text-zinc-500">
+        <div className="mt-12 border-t border-[#2A2E33] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-400">
           <p>
             © {new Date().getFullYear()} {businessConfig.name.full}. All rights reserved.
           </p>
@@ -171,7 +181,7 @@ export function Footer() {
             Built by{" "}
             <a
               href="https://kratosintelligence.com"
-              className="text-primary hover:underline focus-visible:outline-2 focus-visible:outline-primary rounded"
+              className="text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
             >
               Kratos Intelligence
             </a>

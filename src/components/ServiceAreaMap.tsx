@@ -1,79 +1,138 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { businessConfig } from "../config/business";
+import { trackEvent } from "../utils/analytics";
 
 export function ServiceAreaMap() {
+  const isOpen = () => {
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const time = hour * 60 + minute;
+
+    if (day === 0) return false; // Sunday closed
+    if (day === 6) return time >= 510 && time < 990; // Sat 8:30-16:30
+    return time >= 510 && time < 1050; // Mon-Fri 8:30-17:30
+  };
+
+  const open = isOpen();
+
   return (
-    <section id="location" className="bg-zinc-50 py-24 border-b border-zinc-200">
+    <section id="location" className="bg-[#F1F2F2] py-20 sm:py-24">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Details */}
-            <div className="lg:col-span-5 flex flex-col justify-center">
-              <span className="text-sm font-bold tracking-widest uppercase text-primary block mb-3">
-                Our Location
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-6">
-                Anaheim Shop & Service Hours
-              </h2>
+          {/* Section Header */}
+          <div className="max-w-2xl mb-12 sm:mb-14">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">Location</span>
+            <h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#16191D] tracking-tight"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Visit the Anaheim Shop
+            </h2>
+          </div>
 
-              <div className="space-y-6 text-base text-zinc-600 font-semibold">
-                <div>
-                  <h3 className="text-zinc-900 font-bold text-lg mb-1">📍 Address</h3>
-                  <p>{businessConfig.address.full}</p>
-                  <p className="text-xs text-zinc-500 font-medium mt-1">
-                    On-site customer parking is available.
-                  </p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
+            {/* Business Info Panel */}
+            <div className="lg:col-span-2 bg-white rounded-2xl border border-[#DDE0E3] p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+              <div>
+                {/* Open/Closed Status */}
+                <div className="flex items-center gap-2.5 mb-6">
+                  <div
+                    className={`w-2.5 h-2.5 rounded-full ${open ? 'status-dot' : ''}`}
+                    style={{ backgroundColor: open ? '#3E9B68' : '#C8202F' }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="text-sm font-semibold"
+                    style={{ color: open ? '#3E9B68' : '#C8202F' }}
+                  >
+                    {open ? "Open Now" : "Currently Closed"}
+                  </span>
                 </div>
 
-                <div>
-                  <h3 className="text-zinc-900 font-bold text-lg mb-1">🕒 Operating Hours</h3>
-                  <p>Monday – Friday: {businessConfig.hours.weekdays}</p>
-                  <p>Saturday: {businessConfig.hours.saturday}</p>
-                  <p>Sunday: {businessConfig.hours.sunday}</p>
+                {/* Address */}
+                <address className="not-italic mb-6">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#818891] block mb-1">Address</span>
+                  <p
+                    className="text-xl font-bold text-[#16191D] leading-snug"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {businessConfig.address.street}
+                  </p>
+                  <p className="text-sm text-[#606770] mt-1">
+                    {businessConfig.address.city}, {businessConfig.address.state} {businessConfig.address.zip}
+                  </p>
+                </address>
+
+                {/* Phone */}
+                <div className="mb-6">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#818891] block mb-1">Phone</span>
+                  <a
+                    href={businessConfig.phone.link}
+                    onClick={() =>
+                      trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+                    }
+                    className="text-xl font-bold text-[#C8202F] hover:text-[#AE1D2A] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
+                    style={{ fontFamily: "var(--font-mono)" }}
+                  >
+                    {businessConfig.phone.display}
+                  </a>
                 </div>
 
-                <div>
-                  <h3 className="text-zinc-900 font-bold text-lg mb-1">
-                    🚗 Serving Nearby Communities
-                  </h3>
-                  <p className="text-sm leading-relaxed text-zinc-500 font-medium">
-                    Our shop on W Ball Rd provides convenient, drive-in auto repair access for
-                    vehicle owners in Anaheim, Garden Grove, Stanton, Orange, Cypress, and Buena
-                    Park.
-                  </p>
+                {/* Hours */}
+                <div className="mb-8">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#818891] block mb-2.5">Hours</span>
+                  <div className="space-y-1.5">
+                    {businessConfig.hours.list.map((h, i) => (
+                      <div key={i} className="flex justify-between items-baseline max-w-xs">
+                        <span className="text-xs text-[#606770]" style={{ fontFamily: "var(--font-mono)" }}>
+                          {h.days}
+                        </span>
+                        <span className={`text-xs font-semibold ${h.hours === 'Closed' ? 'text-[#818891]' : 'text-[#16191D]'}`} style={{ fontFamily: "var(--font-mono)" }}>
+                          {h.hours}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-[#DDE0E3]">
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Anaheim+Auto+Repair+Muffler+Care,+2583+W+Ball+Rd,+Anaheim,+CA+92804"
+                  href={businessConfig.urls.directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-md bg-primary hover:bg-red-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors text-center focus-visible:outline-2 focus-visible:outline-primary"
+                  onClick={() => trackEvent({ type: "directions_click" })}
+                  className="rounded-lg bg-[#C8202F] hover:bg-[#AE1D2A] px-6 py-3 text-sm font-semibold text-white transition-colors text-center shadow-sm focus-visible:outline-2 focus-visible:outline-[#C8202F]"
                 >
-                  Get Directions ↗
+                  Get Directions
                 </a>
                 <a
                   href={businessConfig.phone.link}
-                  className="rounded-md bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-700 px-5 py-3 text-sm font-bold shadow-sm transition-colors text-center focus-visible:outline-2 focus-visible:outline-primary"
+                  onClick={() =>
+                    trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
+                  }
+                  className="rounded-lg border border-[#DDE0E3] bg-[#F6F6F3] hover:bg-[#E8EBED] text-[#16191D] px-6 py-3 text-sm font-semibold transition-all text-center focus-visible:outline-2 focus-visible:outline-[#C8202F]"
                 >
-                  Call Shop: {businessConfig.phone.display}
+                  Call Shop
                 </a>
               </div>
             </div>
 
-            {/* Right Column: Shorter Map */}
-            <div className="lg:col-span-7 w-full">
-              <div className="overflow-hidden rounded-xl border border-zinc-200 h-[350px] shadow-sm">
+            {/* Map */}
+            <div className="lg:col-span-3">
+              <div className="rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm h-[400px] sm:h-[460px] lg:h-full lg:min-h-[480px]">
                 <iframe
-                  title="Anaheim Auto Repair Shop Location"
-                  src="https://maps.google.com/maps?q=Anaheim+Auto+Repair+Muffler+Care,+2583+W+Ball+Rd,+Anaheim,+CA+92804&z=15&output=embed"
+                  title="Anaheim Auto Repair & Muffler Care Location"
+                  src="https://maps.google.com/maps?q=2583+W+Ball+Rd,+Anaheim,+CA+92804&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
+                  className="w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
                 />
               </div>
             </div>

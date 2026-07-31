@@ -1,36 +1,76 @@
+/* ═══════════════════════════════════════════════════
+   Neo-Industrial Precision Garage — Design Tokens
+   ═══════════════════════════════════════════════════ */
+
 :root {
-  --font-size: 14px;
-  --font-family:
-    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --background: #fdfdfd;
-  --foreground: #18181b;
-  --card: #ffffff;
-  --card-foreground: #18181b;
-  --popover: #ffffff;
-  --popover-foreground: #18181b;
-  --primary: #c8202f;
+  /* ── Typography ─────────────────────────────── */
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", "Geist Mono", ui-monospace, "Cascadia Code", monospace;
+  --font-size: 16px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ── Clean Professional Palette ─────────────── */
+  --page-background: #F6F6F3;
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F1F2F2;
+  --surface-soft: #F7F7F7;
+
+  --text-primary: #16191D;
+  --text-secondary: #606770;
+  --text-muted: #818891;
+
+  --border-light: #DDE0E3;
+  --border-strong: #C9CDD2;
+
+  --brand-red: #C8202F;
+  --brand-red-hover: #AE1D2A;
+  --signal-red: #C8202F;
+  --signal-red-hover: #AE1D2A;
+
+  --nav-dark: #17191C;
+  --footer-dark: #101214;
+
+  --status-green: #3E9B68;
+  --status-amber: #D99A24;
+  --success-green: #3E9B68;
+
+  /* Legacy aliases mapped to clean theme */
+  --garage-950: #17191C;
+  --garage-900: #101214;
+  --garage-850: #F1F2F2;
+  --garage-800: #FFFFFF;
+  --paper: #F6F6F3;
+  --paper-bright: #FFFFFF;
+  --steel-600: #606770;
+  --steel-500: #818891;
+  --steel-400: #606770;
+  --steel-300: #16191D;
+  --steel-200: #DDE0E3;
+  --steel-100: #F1F2F2;
+
+  /* ── Mapped Semantic Tokens ─────────────────── */
+  --background: var(--page-background);
+  --foreground: var(--text-primary);
+  --card: var(--surface-primary);
+  --card-foreground: var(--text-primary);
+  --primary: var(--brand-red);
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #c8202f;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: rgba(200, 32, 47, 0.05);
-  --accent-foreground: #c8202f;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e4e4e7;
+  --secondary: var(--surface-secondary);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--surface-secondary);
+  --muted-foreground: var(--text-secondary);
+  --border: var(--border-light);
   --input: #ffffff;
   --input-background: #ffffff;
-  --switch-background: #d4d4d8;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
   --ring: rgba(200, 32, 47, 0.3);
-  --chart-1: #c8202f;
-  --chart-2: #dc2626;
-  --chart-3: #f87171;
-  --chart-4: #fca5a5;
-  --chart-5: #fee2e2;
   --radius: 0.75rem;
+
+  --shadow-card: 0 8px 24px rgba(22, 25, 29, 0.07);
+  --shadow-elevated: 0 16px 40px rgba(22, 25, 29, 0.10);
 }
 
 @theme inline {
@@ -38,28 +78,35 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-input-background: var(--input-background);
-  --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+
+  /* Garage surfaces */
+  --color-garage-950: var(--garage-950);
+  --color-garage-900: var(--garage-900);
+  --color-garage-850: var(--garage-850);
+  --color-garage-800: var(--garage-800);
+  --color-paper: var(--paper);
+  --color-paper-bright: var(--paper-bright);
+  --color-steel-600: var(--steel-600);
+  --color-steel-500: var(--steel-500);
+  --color-steel-400: var(--steel-400);
+  --color-steel-300: var(--steel-300);
+  --color-steel-200: var(--steel-200);
+  --color-steel-100: var(--steel-100);
+  --color-signal-red: var(--signal-red);
+  --color-signal-red-hover: var(--signal-red-hover);
+  --color-status-amber: var(--status-amber);
+  --color-success-green: var(--success-green);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -73,79 +120,73 @@
 
   html {
     font-size: var(--font-size);
-    font-family: var(--font-family);
+    font-family: var(--font-body);
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-family);
-    background-image:
-      radial-gradient(ellipse at top, rgba(200, 32, 47, 0.02), transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(24, 24, 27, 0.01), transparent 50%);
-    background-size: 100% 100%;
-    background-attachment: fixed;
+    font-family: var(--font-body);
+    background-color: var(--paper-bright);
   }
 
   h1 {
-    font-size: var(--text-2xl);
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-semibold);
     line-height: 1.25;
     letter-spacing: -0.02em;
   }
 
-  h2 {
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
+  h4 {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-semibold);
     line-height: 1.3;
     letter-spacing: -0.01em;
   }
 
-  h3 {
-    font-size: var(--text-lg);
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
-    line-height: 1.4;
-  }
-
-  h4 {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
-    line-height: 1.4;
-  }
-
   p {
-    font-size: var(--text-base);
+    font-family: var(--font-body);
     font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 1rem;
   }
 
   label {
-    font-size: var(--text-base);
+    font-family: var(--font-body);
     font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
     line-height: 1.5;
   }
 
   button {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-family);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-semibold);
     line-height: 1.5;
   }
 
-  input {
-    font-size: var(--text-base);
+  input, textarea, select {
+    font-family: var(--font-body);
     font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
     line-height: 1.5;
   }
 }
 
+/* ── Reduced Motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-delay: -1ms !important;
