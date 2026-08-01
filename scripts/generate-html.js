@@ -195,7 +195,7 @@ ${renderFAQ(page.faq)}
 
         <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-8 text-center mt-12">
           <h3 class="text-xl font-bold text-zinc-900 mb-4">Need an Estimate?</h3>
-          <p class="text-zinc-600 mb-6 font-medium">Speak directly with Carson for a straightforward estimate.</p>
+          <p class="text-zinc-600 mb-6 font-medium">Contact our shop for a straightforward estimate.</p>
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="tel:+17148264444" class="rounded-md bg-primary hover:bg-red-700 px-6 py-3 font-bold text-white shadow-sm">
               📞 Call (714) 826-4444
@@ -207,11 +207,14 @@ ${renderFAQ(page.faq)}
         </div>`;
   }
 
+  const isOwnerPreview = process.env.VITE_OWNER_PREVIEW === "true";
+  const robotsTag = isOwnerPreview ? '\n    <meta name="robots" content="noindex, nofollow" />' : '';
+
   const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />${robotsTag}
     <title>${page.title}</title>
     <meta name="description" content="${page.description}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

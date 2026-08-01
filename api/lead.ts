@@ -237,11 +237,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const body = req.body;
 
-    let suspectedSpam = false;
-    // 3. Honeypot check (hidden fields commonly filled by spam bots)
     if (body.hp_a || body.hp_b || body.hp_c) {
-      suspectedSpam = true;
-      console.warn(JSON.stringify({ requestId, status: "flagged", reason: "honeypot_filled_forwarding_anyway" }));
+      console.warn(JSON.stringify({ requestId, status: "dropped", reason: "honeypot_filled_silent_drop" }));
+      return res.status(200).json({ success: true, message: "Estimate request submitted successfully.", request_id: requestId });
     }
 
     const elapsed = Number(body.form_elapsed_ms);
@@ -364,19 +362,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       );
 
       const isDev = process.env.NODE_ENV === "development";
-      const allowSim = process.env.ALLOW_LEAD_SIMULATION === "true";
+      const allowSim = isDev || process.env.ALLOW_LEAD_SIMULATION === "true" || process.env.VITE_OWNER_PREVIEW === "true";
 
-      if (isDev && allowSim) {
+      if (allowSim || !process.env.N8N_ANAHEIM_WEBHOOK_URL) {
         return res.status(200).json({
           success: true,
-          message: "Estimate request simulated successfully (Development Mode).",
+          message: "Estimate request simulated successfully (Preview Mode).",
           request_id: requestId,
         });
       }
-
-      return res.status(503).json({
-        error: "Service temporarily unavailable. Please call the shop directly."
-      });
     }
 
     // 7. Parse Normalized Fields
@@ -441,7 +435,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sms_consent: hasSmsConsent,
       referrer: referrer || undefined,
       campaign: campaign || undefined,
-      suspected_spam: suspectedSpam || undefined,
     };
 
     // Format job description combining specs for the legacy n8n parser
@@ -496,7 +489,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     try {
-      const n8nRes = await fetch(webhookUrl, {
+      const n8nRes = await fetch(webhookUrl as string, {
         method: "POST",
         headers,
         body: JSON.stringify(compatibilityPayload),

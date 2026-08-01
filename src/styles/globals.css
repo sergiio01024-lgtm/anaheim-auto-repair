@@ -179,7 +179,9 @@
     line-height: 1.5;
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     font-family: var(--font-body);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;

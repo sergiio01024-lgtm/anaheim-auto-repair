@@ -1,6 +1,8 @@
 export type AnalyticsEvent =
   | { type: "phone_click"; displayPhone: string }
   | { type: "estimate_cta_click"; label: string }
+  | { type: "navigation_click"; target: string }
+  | { type: "gallery_open"; title: string }
   | { type: "estimate_form_start" }
   | { type: "estimate_submit_success"; requestId: string }
   | { type: "estimate_submit_error"; error: string }
@@ -25,6 +27,12 @@ export function trackEvent(event: AnalyticsEvent) {
           break;
         case "estimate_cta_click":
           gtag("event", "cta_click", { label: event.label });
+          break;
+        case "navigation_click":
+          gtag("event", "navigation_click", { target: event.target });
+          break;
+        case "gallery_open":
+          gtag("event", "gallery_open", { title: event.title });
           break;
         case "estimate_form_start":
           gtag("event", "form_start");

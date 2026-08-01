@@ -3,7 +3,7 @@
     "title": "Muffler & Exhaust Repair Anaheim | Anaheim Auto Repair & Muffler Care",
     "description": "Muffler replacements, exhaust manifold leaks, and tailpipe repair in Anaheim, CA. Serving Orange County since 1978. Call (714) 826-4444.",
     "heading": "Muffler & Exhaust Repair",
-    "longDescription": "For over 45 years, we have provided dedicated muffler and exhaust services in Anaheim. A well-maintained exhaust system is crucial for safety, engine efficiency, and sound control. We carry quality replacement parts and perform professional exhaust pipe fitting and replacement.",
+    "longDescription": "Since 1978, we have provided dedicated muffler and exhaust services in Anaheim. A well-maintained exhaust system is crucial for safety, engine efficiency, and sound control. We carry quality replacement parts and perform professional exhaust pipe fitting and replacement.",
     "symptoms": [
       "Loud rumbling engine noises",
       "Rattling under the floorboards",
@@ -12,8 +12,8 @@
     ],
     "process": [
       "Visual check of the entire exhaust line for holes, rust, and breaks",
-      "Upfront estimate provided directly by Carson",
-      "Replacement of damaged hangers, mufflers, or pipe segments using CARB-compliant components",
+      "Upfront estimate provided prior to repair work",
+      "Replacement of damaged hangers, mufflers, or pipe segments using quality replacement components",
       "Post-repair check for leaks and sound test"
     ],
     "related": [
@@ -25,7 +25,7 @@
     "faq": [
       {
         "q": "How long does a muffler replacement take?",
-        "a": "Most standard muffler replacements can be completed in 1 to 2 hours."
+        "a": "Most standard muffler replacements can be completed efficiently depending on vehicle design and component fitment."
       },
       {
         "q": "Do you offer exhaust pipe fitting?",
@@ -35,35 +35,35 @@
   },
   "catalytic-converter-anaheim": {
     "title": "Catalytic Converter Replacement Anaheim | Anaheim Auto Repair & Muffler Care",
-    "description": "CARB-compliant catalytic converter replacements, anti-theft security shields, and smog diagnostics in Anaheim, CA. Call (714) 826-4444.",
+    "description": "Catalytic converter replacements, emissions diagnostics, and exhaust service in Anaheim, CA. Call (714) 826-4444.",
     "heading": "Catalytic Converter Replacement",
-    "longDescription": "We specialize in emissions diagnostic assessments and catalytic converter replacements that comply with California's strict CARB standards. We ensure every catalytic converter installed meets California's strict CARB emissions standards and can successfully pass smog inspections.",
+    "longDescription": "We specialize in emissions diagnostic assessments and catalytic converter replacements focused on restoring vehicle performance and proper exhaust system function.",
     "symptoms": [
-      "Failing a California smog check",
       "Check engine light codes P0420 or P0430",
       "Sulphur or 'rotten egg' smell from exhaust",
-      "Loss of engine power or acceleration hesitations"
+      "Loss of engine power or acceleration hesitations",
+      "Exhaust rattles under the vehicle"
     ],
     "process": [
       "Emissions trouble code analysis and visual catalyst inspection",
-      "Engine group identification to match certified CARB part numbers",
-      "Clean weld-in installation of the certified catalytic converter",
-      "Resetting engine monitors and verification drive cycle"
+      "Engine group identification to match proper replacement part specifications",
+      "Clean weld-in installation of the replacement catalytic converter",
+      "Resetting engine monitors and verification cycle"
     ],
     "related": [
-      "Anti-Theft Shield Installation",
+      "Exhaust System Diagnostics",
       "O2 Sensor Replacement",
       "Exhaust Pipe Rebuilding",
-      "Smog Failure Diagnostics"
+      "Check Engine Diagnostics"
     ],
     "faq": [
       {
-        "q": "Can I use an aftermarket catalytic converter in California?",
-        "a": "Only CARB-approved aftermarket catalytic converters are legal. We only install compliant CARB-certified units."
+        "q": "What causes catalytic converters to fail?",
+        "a": "Common causes include unburnt fuel entering the exhaust due to misfires, oil or coolant contamination, or physical impact damage."
       },
       {
-        "q": "How do you protect catalytic converters from theft?",
-        "a": "We fit heavy-duty steel or aluminum security plates (shields) over the converter to block access for thieves."
+        "q": "How do I know if my converter is clogged?",
+        "a": "Symptoms include severe loss of engine power at higher speeds, sluggish acceleration, and intense heat building under the floorboard."
       }
     ]
   },
@@ -71,7 +71,7 @@
     "title": "Brake Repair & Suspension Anaheim | Anaheim Auto Repair & Muffler Care",
     "description": "Brake pad replacement, rotor resurfacing, and suspension repairs in Anaheim, CA. Serving Orange County since 1978. Call (714) 826-4444.",
     "heading": "Brakes & Suspension Service",
-    "longDescription": "Our brake and suspension services keep your vehicle stopping quickly and riding smoothly. We inspect brake linings, calipers, master cylinders, and replace worn suspension components to restore responsive handling.",
+    "longDescription": "Our brake and suspension services keep your vehicle stopping predictably and riding smoothly. We inspect brake linings, calipers, master cylinders, and replace worn suspension components to restore responsive handling.",
     "symptoms": [
       "Squealing or grinding noises when braking",
       "Brake pedal feels soft, spongy, or goes to the floor",
@@ -80,9 +80,9 @@
     ],
     "process": [
       "Multi-point inspection of brake pads, rotors, hoses, and fluid levels",
-      "Visual and push check of shock absorbers and steering linkage",
-      "Precise component replacement with premium ceramic pads or heavy-duty struts",
-      "Final road test to ensure stopping power and handling alignment"
+      "Visual check of shock absorbers and steering linkage",
+      "Precise component replacement using quality ceramic pads or heavy-duty struts",
+      "Final check to ensure stopping power and handling alignment"
     ],
     "related": [
       "Rotor Resurfacing & Replacement",
@@ -105,18 +105,18 @@
     "title": "Engine Diagnostics & Repair Anaheim | Anaheim Auto Repair & Muffler Care",
     "description": "Computer diagnostics, spark plugs, timing belts, and mechanical engine repairs in Anaheim, CA. Honest rates since 1978. Call (714) 826-4444.",
     "heading": "Engine Diagnostics & Repair",
-    "longDescription": "Our mechanics use advanced diagnostics to decode engine warning lights and troubleshoot mechanical engine faults. We pinpoint issues accurately so we only replace what is necessary.",
+    "longDescription": "Our mechanics use diagnostics to decode engine warning lights and troubleshoot mechanical engine faults. We pinpoint issues accurately so we recommend appropriate repairs.",
     "symptoms": [
       "Check Engine or Service Soon light is on",
       "Engine running rough, misfiring, or shaking",
       "Overheating or steam coming from the hood",
-      "Leaks of oil or green/orange coolant under the engine"
+      "Leaks of oil or coolant under the engine"
     ],
     "process": [
       "Electronic diagnostic scan to retrieve error codes",
       "Manual verification of sensors, wiring, and vacuum lines",
       "Clear explanation of immediate vs. deferrable repairs",
-      "Component repair and resetting of the onboard system monitors"
+      "Component repair and resetting of system monitors"
     ],
     "related": [
       "Spark Plug & Ignition Coil Kits",
@@ -139,7 +139,7 @@
     "title": "Transmission Repair & Fluid Service Anaheim | Anaheim Auto Repair & Muffler Care",
     "description": "Manual and automatic transmission fluid changes, clutch replacement, and shifting diagnostics in Anaheim, CA. Call (714) 826-4444.",
     "heading": "Transmission Service & Repair",
-    "longDescription": "Avoid costly transmission rebuilds with routine fluid maintenance and expert diagnostics. We flush fluid, replace filters, check solenoids, and repair manual clutches.",
+    "longDescription": "Avoid transmission failures with routine fluid maintenance and expert diagnostics. We flush fluid, replace filters, check solenoids, and perform clutch services.",
     "symptoms": [
       "Delayed or slipping gear shifting",
       "Grinding or shuddering when shifting",
@@ -173,7 +173,7 @@
     "title": "Routine Maintenance & Oil Changes Anaheim | Anaheim Auto Repair & Muffler Care",
     "description": "Conventional and synthetic oil changes, fluid flushes, tune-ups, and scheduled mileage checkups in Anaheim, CA. Call (714) 826-4444.",
     "heading": "Routine Maintenance & Oil Changes",
-    "longDescription": "Preventative maintenance keeps your vehicle reliable and prolongs engine life. We perform conventional and synthetic oil changes, fluid flushes, filter changes, and complete log-book inspections.",
+    "longDescription": "Preventative maintenance keeps your vehicle reliable and prolongs engine life. We perform conventional and synthetic oil changes, fluid flushes, filter changes, and complete vehicle inspections.",
     "symptoms": [
       "'Oil Change Due' or service light is on",
       "Dark, dirty oil on the engine dipstick",
@@ -195,7 +195,7 @@
     "faq": [
       {
         "q": "Do I need synthetic oil for my car?",
-        "a": "Many modern cars require synthetic oil. Check your owner's manual, or Carson can check it for you."
+        "a": "Many modern cars require synthetic oil. Check your owner's manual, or our shop technicians can check it for you."
       },
       {
         "q": "How often should I change my air filters?",
@@ -204,10 +204,10 @@
     ]
   },
   "contact": {
-    "title": "Contact Us & Free Estimate | Anaheim Auto Repair & Muffler Care",
-    "description": "Contact our auto shop in Anaheim, CA. Request a repair or maintenance estimate online or call manager Carson directly at (714) 826-4444.",
+    "title": "Contact Us & Estimate Request | Anaheim Auto Repair & Muffler Care",
+    "description": "Contact our auto shop in Anaheim, CA. Request a repair or maintenance estimate online or call our shop directly at (714) 826-4444.",
     "heading": "Contact Our Shop",
-    "longDescription": "Need a price estimate or check our availability? Fill out our service intake form on this page, visit our shop, or speak directly with our manager Carson. On-site customer parking is available.",
+    "longDescription": "Need an estimate or check our availability? Fill out our service intake form on this page, visit our shop, or call our shop directly at (714) 826-4444. Customer parking is available.",
     "symptoms": [],
     "process": [],
     "related": [],

@@ -13,7 +13,7 @@ export const primaryServices: ServiceItem[] = [
     id: "muffler-exhaust",
     title: "Muffler & Exhaust Repair",
     description:
-      "Muffler replacement, exhaust pipe fitting, and exhaust leak repairs. Our core specialty for over 45 years.",
+      "Muffler replacement, exhaust pipe fitting, and exhaust leak repairs. Our core specialty since 1978.",
     icon: Wind,
     ctaText: "Exhaust Quote",
   },

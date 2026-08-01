@@ -57,7 +57,7 @@ describe("/api/lead Serverless Function", () => {
     expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ error: expect.any(String) }));
   });
 
-  it("should forward bot honeypot lead with suspected_spam flag to n8n instead of dropping it", async () => {
+  it("should return 200 silent success and not call fetch when bot honeypot field is filled", async () => {
     process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
     process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
 
@@ -73,22 +73,11 @@ describe("/api/lead Serverless Function", () => {
       form_elapsed_ms: 8000,
     };
 
-    (global.fetch as any).mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({ success: true }),
-    });
-
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);
 
     expect(statusMock).toHaveBeenCalledWith(200);
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith(
-      "https://n8n.test/webhook",
-      expect.objectContaining({
-        body: expect.stringContaining('"suspected_spam":true'),
-      })
-    );
+    expect(global.fetch).toHaveBeenCalledTimes(0);
+    expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ success: true }));
   });
 
   it("should return 200 silent success and not call fetch if timing trap is triggered", async () => {

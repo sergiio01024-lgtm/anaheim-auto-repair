@@ -7,6 +7,33 @@ export function ReputationHub() {
     trackEvent({ type: "reviews_click", source: "reputation_hub" });
   };
 
+  const pillars = [
+    {
+      value: `${reputationConfig.primaryPlatform.rating.toFixed(1)} ★`,
+      label: "Customer Rating",
+      detail: `Overall rating from ${reputationConfig.primaryPlatform.reviewsCountDisplay} reviews on Yelp`,
+      source: "Yelp",
+    },
+    {
+      value: `${reputationConfig.yearsInBusiness}+ Years`,
+      label: "Years in Business",
+      detail: `Serving Anaheim since ${reputationConfig.established}`,
+      source: "Business History",
+    },
+    {
+      value: "Anaheim & OC",
+      label: "Service Area",
+      detail: "Serving Orange County drivers for over 4 decades",
+      source: "Business Records",
+    },
+    {
+      value: "Mufflers & Exhaust",
+      label: "Specialist Care",
+      detail: "Custom pipes, catalytic converters, & diagnostics",
+      source: "Core Services",
+    },
+  ];
+
   return (
     <section 
       aria-label="Reputation and Trust"
@@ -21,7 +48,7 @@ export function ReputationHub() {
               CUSTOMER FEEDBACK ON YELP
             </span>
             <h2 className="text-[#16191D] text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
-              Trusted by Anaheim Drivers Since {reputationConfig.established}
+              Trusted by Anaheim Drivers Since {businessConfig.established}
             </h2>
             <p className="text-[#606770] text-base mb-6 leading-relaxed">
               Decades of dedicated repair work, transparent pricing, and local auto care at {businessConfig.address.street}.
@@ -67,7 +94,7 @@ export function ReputationHub() {
 
           {/* Right Column: 4 Trust Pillars */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {reputationConfig.metrics.map((metric, idx) => (
+            {pillars.map((metric, idx) => (
               <div
                 key={idx}
                 className="bg-white border border-[#DDE0E3] p-6 rounded-2xl shadow-sm hover:border-[#C9CDD2] transition-all"

@@ -51,11 +51,10 @@ export function ProcessSection() {
               <div key={idx} className="relative flex flex-col items-center text-center px-6">
                 {/* Step Number Circle */}
                 <div
-                  className={`relative z-10 w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 shadow-sm ${
-                    idx === 0
+                  className={`relative z-10 w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 shadow-sm ${idx === 0
                       ? 'border-[#C8202F] bg-[#C8202F] text-white'
                       : 'border-[#DDE0E3] bg-white text-[#16191D]'
-                  }`}
+                    }`}
                 >
                   <span
                     className="text-base font-semibold font-mono"
@@ -89,11 +88,10 @@ export function ProcessSection() {
                 {/* Vertical line + circle */}
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-12 h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 shadow-sm ${
-                      idx === 0
+                    className={`w-12 h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 shadow-sm ${idx === 0
                         ? 'border-[#C8202F] bg-[#C8202F] text-white'
                         : 'border-[#DDE0E3] bg-white text-[#16191D]'
-                    }`}
+                      }`}
                   >
                     <span className="text-xs font-semibold font-mono">
                       {step.number}

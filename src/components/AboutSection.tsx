@@ -18,7 +18,7 @@ export function AboutSection() {
               </h2>
               <div className="space-y-4 text-base text-[#606770] leading-relaxed">
                 <p>
-                  Anaheim Auto Repair & Muffler Care started on West Ball Road in {businessConfig.established} as a specialty muffler and exhaust shop. Over {businessConfig.yearsInBusiness} years, we&apos;ve grown into a full-service repair center trusted by generations of Orange County drivers.
+                  Anaheim Auto Repair & Muffler Care has served Anaheim drivers since {businessConfig.established}. Over {businessConfig.yearsInBusiness} years, we&apos;ve provided dedicated auto care trusted by generations of Orange County drivers.
                 </p>
                 <p>
                   Built on a simple principle: diagnose accurately, communicate clearly, and complete repair work with integrity. We service domestic and import vehicles — Honda, Toyota, Ford, Chevrolet, BMW, Mercedes, Nissan, Lexus, and more.

@@ -32,7 +32,7 @@ describe("Reputation Architecture & Config Audit", () => {
     expect(reputationConfig.transparencyCommitments).toHaveLength(4);
     expect(reputationConfig.transparencyCommitments[0].title).toBe("Clear Explanation");
     expect(reputationConfig.transparencyCommitments[1].title).toBe("Estimate & Authorization");
-    
+
     // Confirm no prohibited absolute promises exist in transparency copy
     const fullText = JSON.stringify(reputationConfig.transparencyCommitments).toLowerCase();
     expect(fullText).not.toContain("every repair is road-tested");
@@ -49,7 +49,7 @@ describe("ReputationHub Component Provenance Audit", () => {
     expect(screen.getByText(/Trusted by Anaheim Drivers Since 1978/i)).toBeInTheDocument();
     expect(screen.getByText("4.7")).toBeInTheDocument();
     expect(screen.getByText(/590\+ Yelp Reviews/i)).toBeInTheDocument();
-    
+
     const yelpLink = screen.getByRole("link", { name: /Read Reviews on Yelp/i });
     expect(yelpLink).toHaveAttribute("href", reputationConfig.externalLinks.yelpProfile);
     expect(yelpLink).toHaveAttribute("target", "_blank");
@@ -101,7 +101,7 @@ describe("AboutSection Team & Location Audit", () => {
     render(<AboutSection />);
 
     expect(screen.getByText(/Serving Anaheim Drivers Since 1978/i)).toBeInTheDocument();
-    
+
     // Confirm unconfirmed team representative cards do not render until owner confirmed
     expect(screen.queryByText(/Key Shop Representatives/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Same Corner\. Same Family\./i)).not.toBeInTheDocument();

@@ -1,21 +1,10 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { businessConfig } from "../config/business";
 import { trackEvent } from "../utils/analytics";
+import { getAnaheimBusinessStatus } from "../utils/businessHours";
 
 export function ServiceAreaMap() {
-  const isOpen = () => {
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const time = hour * 60 + minute;
-
-    if (day === 0) return false; // Sunday closed
-    if (day === 6) return time >= 510 && time < 990; // Sat 8:30-16:30
-    return time >= 510 && time < 1050; // Mon-Fri 8:30-17:30
-  };
-
-  const open = isOpen();
+  const status = getAnaheimBusinessStatus();
 
   return (
     <section id="location" className="bg-[#F1F2F2] py-20 sm:py-24">
@@ -39,15 +28,15 @@ export function ServiceAreaMap() {
                 {/* Open/Closed Status */}
                 <div className="flex items-center gap-2.5 mb-6">
                   <div
-                    className={`w-2.5 h-2.5 rounded-full ${open ? 'status-dot' : ''}`}
-                    style={{ backgroundColor: open ? '#3E9B68' : '#C8202F' }}
+                    className={`w-2.5 h-2.5 rounded-full ${status.isOpen ? 'status-dot' : ''}`}
+                    style={{ backgroundColor: status.isOpen ? '#3E9B68' : '#C8202F' }}
                     aria-hidden="true"
                   />
                   <span
                     className="text-sm font-semibold"
-                    style={{ color: open ? '#3E9B68' : '#C8202F' }}
+                    style={{ color: status.isOpen ? '#3E9B68' : '#C8202F' }}
                   >
-                    {open ? "Open Now" : "Currently Closed"}
+                    {status.isOpen ? "Open Now" : status.message}
                   </span>
                 </div>
 
@@ -59,8 +48,7 @@ export function ServiceAreaMap() {
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {businessConfig.address.street}
-                  </p>
-                  <p className="text-sm text-[#606770] mt-1">
+                    <br />
                     {businessConfig.address.city}, {businessConfig.address.state} {businessConfig.address.zip}
                   </p>
                 </address>
@@ -98,43 +86,28 @@ export function ServiceAreaMap() {
                 </div>
               </div>
 
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-[#DDE0E3]">
-                <a
-                  href={businessConfig.urls.directions}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent({ type: "directions_click" })}
-                  className="rounded-lg bg-[#C8202F] hover:bg-[#AE1D2A] px-6 py-3 text-sm font-semibold text-white transition-colors text-center shadow-sm focus-visible:outline-2 focus-visible:outline-[#C8202F]"
-                >
-                  Get Directions
-                </a>
-                <a
-                  href={businessConfig.phone.link}
-                  onClick={() =>
-                    trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
-                  }
-                  className="rounded-lg border border-[#DDE0E3] bg-[#F6F6F3] hover:bg-[#E8EBED] text-[#16191D] px-6 py-3 text-sm font-semibold transition-all text-center focus-visible:outline-2 focus-visible:outline-[#C8202F]"
-                >
-                  Call Shop
-                </a>
-              </div>
+              {/* Get Directions Link */}
+              <a
+                href={businessConfig.urls.directions}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent({ type: "directions_click" })}
+                className="w-full inline-flex justify-center items-center gap-2 rounded-xl bg-[#16191D] hover:bg-[#2C3036] px-5 py-3.5 text-sm font-semibold text-white transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-[#16191D]"
+              >
+                Get Directions ↗
+              </a>
             </div>
 
-            {/* Map */}
-            <div className="lg:col-span-3">
-              <div className="rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm h-[400px] sm:h-[460px] lg:h-full lg:min-h-[480px]">
-                <iframe
-                  title="Anaheim Auto Repair & Muffler Care Location"
-                  src="https://maps.google.com/maps?q=2583+W+Ball+Rd,+Anaheim,+CA+92804&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="100%"
-                  className="w-full h-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
-              </div>
+            {/* Embedded Google Map */}
+            <div className="lg:col-span-3 min-h-[360px] lg:min-h-[440px] rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm relative bg-[#E5E3DF]">
+              <iframe
+                title="Anaheim Auto Repair location map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.0234123456!2d-117.9625!3d33.8175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd67890abcdef%3A0x1234567890abcdef!2s2583%20W%20Ball%20Rd%2C%20Anaheim%2C%20CA%2092804!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                className="w-full h-full border-0 absolute inset-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>

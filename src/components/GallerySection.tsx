@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { trackEvent } from "../utils/analytics";
 
@@ -52,40 +52,78 @@ const galleryItems: GalleryItem[] = [
     title: "Muffler & Exhaust Specialist",
     label: "SIGNAGE",
   },
-  {
-    src: "/images/storefront-angle.webp",
-    alt: "Anaheim Auto Repair bays and entrance angle view",
-    title: "Shop Entrance & Bays",
-    label: "EXTERIOR",
-  },
 ];
 
 export function GallerySection() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        const prevIdx = lightboxIndex;
         setLightboxIndex(null);
+        if (prevIdx !== null && triggerRefs.current[prevIdx]) {
+          setTimeout(() => triggerRefs.current[prevIdx]?.focus(), 50);
+        }
       } else if (e.key === "ArrowRight") {
-        setLightboxIndex((lightboxIndex + 1) % galleryItems.length);
+        setLightboxIndex((prev) => (prev !== null ? (prev + 1) % galleryItems.length : null));
       } else if (e.key === "ArrowLeft") {
-        setLightboxIndex((lightboxIndex - 1 + galleryItems.length) % galleryItems.length);
+        setLightboxIndex((prev) => (prev !== null ? (prev - 1 + galleryItems.length) % galleryItems.length : null));
       }
     };
 
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
+
+    // Focus close button on open
+    setTimeout(() => {
+      closeBtnRef.current?.focus();
+    }, 50);
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [lightboxIndex]);
 
+  const closeModal = () => {
+    const prevIdx = lightboxIndex;
+    setLightboxIndex(null);
+    if (prevIdx !== null && triggerRefs.current[prevIdx]) {
+      setTimeout(() => triggerRefs.current[prevIdx]?.focus(), 50);
+    }
+  };
+
+  const handleTabKey = (e: React.KeyboardEvent) => {
+    if (e.key !== "Tab" || !modalRef.current) return;
+    const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusables.length === 0) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        last.focus();
+        e.preventDefault();
+      }
+    } else {
+      if (document.activeElement === last) {
+        first.focus();
+        e.preventDefault();
+      }
+    }
+  };
+
   const handleOpenLightbox = (index: number) => {
-    trackEvent({ type: "estimate_cta_click", label: `Open Gallery: ${galleryItems[index].title}` });
+    trackEvent({ type: "gallery_open", title: galleryItems[index].title });
     setLightboxIndex(index);
   };
 
@@ -108,20 +146,21 @@ export function GallerySection() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
             {/* Left Column: Dominant Feature (spans 7 cols on desktop) */}
             <button
+              ref={(el) => { triggerRefs.current[0] = el; }}
               onClick={() => handleOpenLightbox(0)}
-              className="lg:col-span-7 group relative overflow-hidden rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red min-h-[44px]"
+              className="lg:col-span-7 group relative overflow-hidden rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] min-h-[44px]"
               aria-label={`View ${galleryItems[0].title}`}
             >
               <div className="aspect-[4/3] lg:aspect-auto lg:h-full">
                 <img
                   src={galleryItems[0].src}
                   alt={galleryItems[0].alt}
-                  className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 sm:p-6 text-left">
-                <span className="label-mono text-steel-300 text-xs mb-1.5">{galleryItems[0].label}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 sm:p-6 text-left">
+                <span className="text-xs font-mono font-bold text-[#D5D9DE] uppercase tracking-wider mb-1.5">{galleryItems[0].label}</span>
                 <h3
                   className="text-lg sm:text-xl font-bold text-white"
                   style={{ fontFamily: "var(--font-display)" }}
@@ -130,8 +169,8 @@ export function GallerySection() {
                 </h3>
               </div>
               {/* Number badge */}
-              <div className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm">
-                <span className="label-mono text-xs text-steel-300">01</span>
+              <div className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded bg-black/70 backdrop-blur-sm border border-white/10">
+                <span className="text-xs font-mono font-bold text-white">01</span>
               </div>
             </button>
 
@@ -140,20 +179,21 @@ export function GallerySection() {
               {galleryItems.slice(1, 5).map((item, idx) => (
                 <button
                   key={idx + 1}
+                  ref={(el) => { triggerRefs.current[idx + 1] = el; }}
                   onClick={() => handleOpenLightbox(idx + 1)}
-                  className="group relative overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red min-h-[44px]"
+                  className="group relative overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] min-h-[44px]"
                   aria-label={`View ${item.title}`}
                 >
                   <div className="aspect-[4/3] h-full">
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3.5 sm:p-4 text-left">
-                    <span className="label-mono text-steel-300 text-[11px] mb-1">{item.label}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3.5 sm:p-4 text-left">
+                    <span className="text-[11px] font-mono font-bold text-[#D5D9DE] uppercase tracking-wider mb-1">{item.label}</span>
                     <h3
                       className="text-xs sm:text-sm font-bold text-white truncate"
                       style={{ fontFamily: "var(--font-display)" }}
@@ -161,8 +201,8 @@ export function GallerySection() {
                       {item.title}
                     </h3>
                   </div>
-                  <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm">
-                    <span className="label-mono text-[11px] text-steel-300">
+                  <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-sm border border-white/10">
+                    <span className="text-[11px] font-mono font-bold text-white">
                       {String(idx + 2).padStart(2, "0")}
                     </span>
                   </div>
@@ -175,20 +215,21 @@ export function GallerySection() {
               {galleryItems.slice(5, 7).map((item, idx) => (
                 <button
                   key={idx + 5}
+                  ref={(el) => { triggerRefs.current[idx + 5] = el; }}
                   onClick={() => handleOpenLightbox(idx + 5)}
-                  className="group relative overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red min-h-[44px]"
+                  className="group relative overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] min-h-[44px]"
                   aria-label={`View ${item.title}`}
                 >
                   <div className="aspect-[16/9]">
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-left">
-                    <span className="label-mono text-steel-300 text-xs mb-1">{item.label}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-left">
+                    <span className="text-xs font-mono font-bold text-[#D5D9DE] uppercase tracking-wider mb-1">{item.label}</span>
                     <h3
                       className="text-sm sm:text-base font-bold text-white"
                       style={{ fontFamily: "var(--font-display)" }}
@@ -196,8 +237,8 @@ export function GallerySection() {
                       {item.title}
                     </h3>
                   </div>
-                  <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm">
-                    <span className="label-mono text-xs text-steel-300">
+                  <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/70 backdrop-blur-sm border border-white/10">
+                    <span className="text-xs font-mono font-bold text-white">
                       {String(idx + 6).padStart(2, "0")}
                     </span>
                   </div>
@@ -211,21 +252,22 @@ export function GallerySection() {
       {/* Lightbox Modal */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          ref={modalRef}
+          onKeyDown={handleTabKey}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md"
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          style={{ backgroundColor: "rgba(11, 13, 16, 0.97)" }}
         >
           <button
             className="absolute inset-0 w-full h-full cursor-default focus:outline-none"
-            onClick={() => setLightboxIndex(null)}
+            onClick={closeModal}
             tabIndex={-1}
             aria-hidden="true"
           />
 
-          <div className="relative max-w-5xl w-full flex flex-col items-center justify-center">
-            <div className="relative overflow-hidden rounded-xl" style={{ backgroundColor: "var(--garage-950)" }}>
+          <div className="relative max-w-5xl w-full flex flex-col items-center justify-center pointer-events-auto">
+            <div className="relative overflow-hidden rounded-xl bg-[#101214] border border-white/14">
               <img
                 src={galleryItems[lightboxIndex].src}
                 alt={galleryItems[lightboxIndex].alt}
@@ -234,11 +276,11 @@ export function GallerySection() {
             </div>
 
             <div className="text-center text-white mt-5 space-y-1.5 z-10">
-              <span className="label-mono text-steel-400 block">
+              <span className="text-xs font-mono text-[#D5D9DE] block">
                 {String(lightboxIndex + 1).padStart(2, "0")} / {String(galleryItems.length).padStart(2, "0")}
               </span>
               <h3
-                className="text-lg font-bold"
+                className="text-lg font-bold text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {galleryItems[lightboxIndex].title}
@@ -246,8 +288,9 @@ export function GallerySection() {
             </div>
 
             <button
-              onClick={() => setLightboxIndex(null)}
-              className="absolute -top-12 right-0 sm:right-[-2rem] text-steel-400 hover:text-white text-2xl p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red rounded transition-colors"
+              ref={closeBtnRef}
+              onClick={closeModal}
+              className="absolute -top-12 right-0 sm:right-[-2rem] text-white hover:text-[#C8202F] text-2xl p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] rounded transition-colors"
               aria-label="Close image viewer"
             >
               ✕
@@ -259,7 +302,7 @@ export function GallerySection() {
                   (lightboxIndex - 1 + galleryItems.length) % galleryItems.length
                 )
               }
-              className="absolute left-0 sm:left-[-3rem] top-1/2 -translate-y-1/2 text-steel-400 hover:text-white text-3xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red rounded transition-colors"
+              className="absolute left-0 sm:left-[-3rem] top-1/2 -translate-y-1/2 text-white hover:text-[#C8202F] text-3xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] rounded transition-colors"
               aria-label="Previous image"
             >
               ‹
@@ -269,7 +312,7 @@ export function GallerySection() {
               onClick={() =>
                 setLightboxIndex((lightboxIndex + 1) % galleryItems.length)
               }
-              className="absolute right-0 sm:right-[-3rem] top-1/2 -translate-y-1/2 text-steel-400 hover:text-white text-3xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-red rounded transition-colors"
+              className="absolute right-0 sm:right-[-3rem] top-1/2 -translate-y-1/2 text-white hover:text-[#C8202F] text-3xl p-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8202F] rounded transition-colors"
               aria-label="Next image"
             >
               ›

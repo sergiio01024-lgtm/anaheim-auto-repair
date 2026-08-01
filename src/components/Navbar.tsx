@@ -111,14 +111,22 @@ export function Navbar() {
     { label: "Location", href: "#location" },
   ];
 
+  const isOwnerPreview =
+    (import.meta as any).env?.VITE_OWNER_PREVIEW === "true" ||
+    (typeof window !== "undefined" && window.location.hostname.includes("preview"));
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
+      {isOwnerPreview && (
+        <div className="bg-[#C8202F] text-white text-xs font-semibold py-2 px-4 text-center border-b border-white/20">
+          🔒 Private website preview — business details pending owner confirmation.
+        </div>
+      )}
       <nav
-        className={`transition-all duration-300 px-6 py-3.5 lg:px-8 ${
-          scrolled
+        className={`transition-all duration-300 px-6 py-3.5 lg:px-8 ${scrolled
             ? "bg-[#13171C]/95 backdrop-blur-md shadow-lg shadow-black/10"
             : "bg-[#13171C]/80 backdrop-blur-sm"
-        }`}
+          }`}
         aria-label="Global"
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between">

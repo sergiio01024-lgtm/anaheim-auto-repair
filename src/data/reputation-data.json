@@ -1,0 +1,64 @@
+{
+  "primaryPlatform": {
+    "name": "Yelp",
+    "rating": 4.7,
+    "reviewsCount": 590,
+    "reviewsCountDisplay": "590+",
+    "displayString": "4.7 ★ · 590+ Yelp Reviews",
+    "profileUrl": "https://www.yelp.com/biz/anaheim-auto-repair-and-muffler-care-anaheim"
+  },
+  "established": 1978,
+  "yearsInBusiness": 48,
+  "externalLinks": {
+    "yelpProfile": "https://www.yelp.com/biz/anaheim-auto-repair-and-muffler-care-anaheim",
+    "googleProfileUrl": null
+  },
+  "metrics": [
+    {
+      "value": "4.7 ★",
+      "label": "Yelp Rating",
+      "detail": "Based on 590+ customer reviews on Yelp",
+      "source": "Yelp Business Profile"
+    },
+    {
+      "value": "48+ Years",
+      "label": "In Business",
+      "detail": "Serving Anaheim and Orange County drivers since 1978",
+      "source": "Business History"
+    },
+    {
+      "value": "Anaheim & OC",
+      "label": "Service Area",
+      "detail": "Serving Anaheim, Garden Grove, Buena Park, & surrounding cities",
+      "source": "Shop Location"
+    },
+    {
+      "value": "Mufflers & Exhaust",
+      "label": "Specialty Focus",
+      "detail": "Mufflers, catalytic converters, diagnostics, and full auto repair",
+      "source": "Core Services"
+    }
+  ],
+  "transparencyCommitments": [
+    {
+      "id": "01",
+      "title": "Clear Explanation",
+      "description": "We walk you through diagnostic findings so you understand what needs immediate repair versus optional maintenance."
+    },
+    {
+      "id": "02",
+      "title": "Estimate & Authorization",
+      "description": "We discuss recommended work and costs with you before starting any repairs."
+    },
+    {
+      "id": "03",
+      "title": "Need-Based Recommendations",
+      "description": "We focus on genuine repair needs and vehicle safety, advising you honestly on priority items."
+    },
+    {
+      "id": "04",
+      "title": "Repair-Appropriate Verification",
+      "description": "Completed work is inspected and checked to verify proper operation before returning your vehicle."
+    }
+  ]
+}

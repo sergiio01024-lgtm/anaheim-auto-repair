@@ -5,8 +5,8 @@ export interface FAQ {
 
 export const faqsData: FAQ[] = [
   {
-    q: "Do you do free estimates?",
-    a: "Yes. We give free, upfront quotes — including over the phone for many jobs. Call us at (714) 826-4444 and we'll walk you through it.",
+    q: "How do I request an estimate?",
+    a: "You can submit your vehicle details through our online intake form or call the shop at (714) 826-4444 to discuss your requested service.",
   },
   {
     q: "What kind of cars do you work on?",
@@ -14,15 +14,15 @@ export const faqsData: FAQ[] = [
   },
   {
     q: "Do you do mufflers and catalytic converters?",
-    a: "Yes — muffler and exhaust work is our specialty. Muffler replacement, catalytic converters, and full exhaust systems are what we've done best for over 45 years.",
+    a: "Yes — muffler and exhaust work is our specialty. Muffler replacement, catalytic converters, and custom exhaust systems have been a core focus since 1978.",
   },
   {
-    q: "Can I get a quote over the phone?",
-    a: "Often, yes. Call (714) 826-4444 and describe the issue. For exhaust work you can even email photos and we'll quote it.",
+    q: "Can I discuss my repair over the phone?",
+    a: "Yes. Call (714) 826-4444 and describe the vehicle symptoms or service needed with our shop.",
   },
   {
     q: "Do you do oil changes and routine maintenance?",
-    a: "Absolutely. Oil and filter changes, 30k/60k/90k service, AC recharge, batteries, tune-ups, and more.",
+    a: "Absolutely. Oil and filter changes, scheduled maintenance, AC service, batteries, tune-ups, and complete auto care.",
   },
   {
     q: "What are your hours?",
@@ -30,10 +30,10 @@ export const faqsData: FAQ[] = [
   },
   {
     q: "Where are you located?",
-    a: "2583 W Ball Rd, Anaheim, CA 92804 — easy to reach from anywhere in Orange County.",
+    a: "2583 W Ball Rd, Anaheim, CA 92804 — convenient access from anywhere in Orange County.",
   },
   {
     q: "Do you check engine lights?",
-    a: "Yes. We run check-engine diagnostics and will tell you honestly what's going on before doing any work.",
+    a: "Yes. We run check-engine diagnostics and explain the findings before proceeding with approved work.",
   },
 ];

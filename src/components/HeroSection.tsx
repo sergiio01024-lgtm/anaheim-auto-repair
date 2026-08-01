@@ -53,7 +53,7 @@ export function HeroSection() {
               }}
               className="rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/30 px-7 py-3.5 text-base font-semibold transition-colors text-center backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Request Free Estimate
+              Request Estimate
             </a>
           </div>
         </div>

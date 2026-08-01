@@ -334,12 +334,12 @@ export function ContactSection() {
           <span className="label-mono text-steel-500 block mb-4">Service Intake</span>
           <h2
             id="contact-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#16191D] tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Request a Free Estimate
+            Request an Estimate
           </h2>
-          <p className="mt-5 text-lg text-steel-400 leading-relaxed">
+          <p className="mt-5 text-lg text-[#606770] leading-relaxed">
             Describe your vehicle's issue. We'll respond with a ballpark estimate — or call{" "}
             <a
               href={businessConfig.phone.link}
@@ -375,7 +375,7 @@ export function ContactSection() {
                 Estimate Requested Successfully!
               </h3>
               <p className="text-base text-steel-600 leading-relaxed max-w-md mx-auto">
-                {businessConfig.staff.manager} or a shop technician will contact you shortly during business hours.
+                A shop representative will contact you during business hours regarding your requested service.
               </p>
               <button
                 onClick={() => setStatus("idle")}

@@ -29,7 +29,7 @@ const serviceModules: ServiceModule[] = [
     id: "muffler-exhaust",
     title: "Muffler & Exhaust",
     description:
-      "Muffler replacement, exhaust pipe fitting, catalytic converter installation, custom exhaust systems, and leak repair. Our core specialty for over 45 years.",
+      "Muffler replacement, exhaust pipe fitting, catalytic converter installation, custom exhaust systems, and leak repair. Our core specialty since 1978.",
     tags: ["Mufflers", "Exhaust Pipes", "Catalytic Converters", "Custom Exhaust", "Leak Repair"],
     image: "/images/exhaust-pipes.webp",
     imageAlt: "Custom exhaust piping work under vehicle",
@@ -238,7 +238,7 @@ export function ServicePanels() {
                 }}
                 className="rounded-lg bg-[#C8202F] hover:bg-[#AE1D2A] px-6 py-3 text-sm font-semibold text-white transition-colors text-center shadow-sm focus-visible:outline-2 focus-visible:outline-[#C8202F]"
               >
-                Get a Free Quote
+                Request an Estimate
               </a>
               <a
                 href={businessConfig.phone.link}

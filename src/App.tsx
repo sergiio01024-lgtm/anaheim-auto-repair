@@ -33,6 +33,26 @@ export default function App() {
       setCurrentPath(window.location.pathname);
     };
     window.addEventListener("popstate", handlePopState);
+
+    // Dynamic indexing protection for Owner Preview Mode
+    const isOwnerPreview =
+      (import.meta as any).env?.VITE_OWNER_PREVIEW === "true" ||
+      (typeof window !== "undefined" && window.location.hostname.includes("preview"));
+
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (isOwnerPreview) {
+      if (!robotsMeta) {
+        robotsMeta = document.createElement("meta");
+        robotsMeta.setAttribute("name", "robots");
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute("content", "noindex, nofollow");
+    } else {
+      if (robotsMeta) {
+        robotsMeta.remove();
+      }
+    }
+
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
@@ -101,6 +121,7 @@ export default function App() {
       >
         Skip to main content
       </a>
+
       <div className="min-h-screen pb-20 md:pb-0">
         <Navbar />
         <main id="main-content">

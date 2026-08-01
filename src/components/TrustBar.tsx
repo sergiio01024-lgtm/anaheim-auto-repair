@@ -42,7 +42,7 @@ export function TrustBar() {
           <div className="flex items-center gap-2.5">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#818891]">{businessConfig.yearsInBusiness}+ Yrs</span>
             <span className="text-sm font-semibold text-[#16191D]" style={{ fontFamily: 'var(--font-body)' }}>
-              Same Anaheim Location
+              Serving Anaheim Drivers
             </span>
           </div>
         </div>

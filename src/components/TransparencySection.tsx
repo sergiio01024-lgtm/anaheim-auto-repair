@@ -2,7 +2,7 @@ import { reputationConfig } from "../config/reputation";
 
 export function TransparencySection() {
   return (
-    <section 
+    <section
       aria-label="Shop Transparency and Expectations"
       className="bg-[#F1F2F2] border-y border-[#DDE0E3] py-16 px-4 sm:px-6 lg:px-8"
       id="transparency"
@@ -44,7 +44,7 @@ export function TransparencySection() {
               </div>
 
               <div className="mt-6 pt-3 border-t border-[#F1F2F2] text-[11px] font-semibold text-[#818891] uppercase tracking-wider">
-                Standard Policy
+                Shop Commitment
               </div>
             </div>
           ))}

@@ -130,9 +130,9 @@ export function ServicePage({
           {/* Sidebar / CTAs */}
           <div className="lg:col-span-4 space-y-6">
             <div className="border border-zinc-200 rounded-xl p-6 bg-zinc-50 shadow-sm text-center">
-              <h3 className="text-base font-bold text-zinc-900 mb-3">Speak With Carson</h3>
+              <h3 className="text-base font-bold text-zinc-900 mb-3">Call the Shop</h3>
               <p className="text-xs text-zinc-500 font-semibold mb-6">
-                Get an instant estimate over the phone or check our availability.
+                Discuss your vehicle and requested service with our shop.
               </p>
               <a
                 href={businessConfig.phone.link}
@@ -142,16 +142,16 @@ export function ServicePage({
               </a>
             </div>
 
-            {/* Verified Reputation Sidebar Card */}
+            {/* Yelp Reputation Sidebar Card */}
             <div className="border border-[#DDE0E3] rounded-xl p-6 bg-white shadow-sm text-center">
               <span className="text-[11px] font-bold text-[#C8202F] uppercase tracking-wider block mb-1">
-                VERIFIED REPUTATION
+                YELP REPUTATION
               </span>
               <div className="text-2xl font-black text-[#16191D] mb-1">
                 4.7 ★ Yelp Rating
               </div>
               <p className="text-xs text-[#606770] font-medium mb-4">
-                590+ reviews · Est. {reputationConfig.established} in Anaheim
+                590+ reviews · Est. {businessConfig.established} in Anaheim
               </p>
               <a
                 href={reputationConfig.externalLinks.yelpProfile}

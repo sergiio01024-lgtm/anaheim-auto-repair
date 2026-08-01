@@ -55,7 +55,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed mb-6">
-              Family-owned auto repair and muffler specialty shop serving Anaheim and Orange County
+              Auto repair and muffler specialty shop serving Anaheim and Orange County
               since {businessConfig.established}.
             </p>
             <div className="space-y-2 text-xs text-slate-300">
