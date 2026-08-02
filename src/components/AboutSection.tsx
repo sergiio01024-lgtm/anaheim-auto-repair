@@ -24,7 +24,7 @@ export function AboutSection() {
                   Built on a simple principle: diagnose accurately, communicate clearly, and complete repair work with integrity. We service domestic and import vehicles — Honda, Toyota, Ford, Chevrolet, BMW, Mercedes, Nissan, Lexus, and more.
                 </p>
                 <p>
-                  All repair recommendations are explained prior to work, focusing on vehicle safety, performance, and transparent customer service.
+                  Our goal is clear communication about vehicle condition, recommended service, safety, and performance.
                 </p>
               </div>
 

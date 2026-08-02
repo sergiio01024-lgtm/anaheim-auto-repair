@@ -23,7 +23,7 @@ export function HeroSection() {
           {/* Eyebrow */}
           <div className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-5 flex items-center gap-2.5">
             <span className="inline-block w-6 h-0.5 bg-[#C8202F]" aria-hidden="true" />
-            Anaheim · Family-Owned Since {businessConfig.established}
+            Anaheim · Serving Drivers Since {businessConfig.established}
           </div>
 
           {/* Headline */}

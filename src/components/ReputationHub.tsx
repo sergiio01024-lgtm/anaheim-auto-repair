@@ -51,7 +51,7 @@ export function ReputationHub() {
               Trusted by Anaheim Drivers Since {businessConfig.established}
             </h2>
             <p className="text-[#606770] text-base mb-6 leading-relaxed">
-              Decades of dedicated repair work, transparent pricing, and local auto care at {businessConfig.address.street}.
+              Decades of automotive repair work and local service at {businessConfig.address.street}.
             </p>
 
             {/* Rating Highlight Block */}

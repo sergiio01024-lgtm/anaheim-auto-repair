@@ -47,8 +47,8 @@
     },
     {
       "id": "02",
-      "title": "Estimate & Authorization",
-      "description": "We discuss recommended work and costs with you before starting any repairs."
+      "title": "Recommended Next Steps",
+      "description": "We explain the findings and discuss the recommended service with you."
     },
     {
       "id": "03",
@@ -57,8 +57,8 @@
     },
     {
       "id": "04",
-      "title": "Repair-Appropriate Verification",
-      "description": "Completed work is inspected and checked to verify proper operation before returning your vehicle."
+      "title": "Repair-Appropriate Follow-Up",
+      "description": "We focus on completing the repair carefully and addressing the vehicle concern."
     }
   ]
 }

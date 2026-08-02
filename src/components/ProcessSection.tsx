@@ -11,13 +11,13 @@ const steps = [
     number: "02",
     title: "EXPLAIN",
     description:
-      "You receive a clear diagnosis and price before work begins.",
+      "We explain the findings and recommended next steps.",
   },
   {
     number: "03",
     title: "REPAIR",
     description:
-      "We complete the approved work and verify the result.",
+      "We complete the repair work and check the result.",
   },
 ];
 

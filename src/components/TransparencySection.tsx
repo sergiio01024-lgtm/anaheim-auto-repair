@@ -16,7 +16,7 @@ export function TransparencySection() {
             What You Can Expect
           </h2>
           <p className="text-[#606770] text-base leading-relaxed">
-            Straightforward diagnostic communication, clear pricing before repair work starts, and no high-pressure sales.
+            Straightforward communication about findings, recommendations, and next steps for your vehicle.
           </p>
         </div>
 

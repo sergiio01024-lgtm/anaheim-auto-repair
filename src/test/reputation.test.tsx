@@ -31,7 +31,7 @@ describe("Reputation Architecture & Config Audit", () => {
   it("should contain conservative transparency commitments without absolute promises", () => {
     expect(reputationConfig.transparencyCommitments).toHaveLength(4);
     expect(reputationConfig.transparencyCommitments[0].title).toBe("Clear Explanation");
-    expect(reputationConfig.transparencyCommitments[1].title).toBe("Estimate & Authorization");
+    expect(reputationConfig.transparencyCommitments[1].title).toBe("Recommended Next Steps");
 
     // Confirm no prohibited absolute promises exist in transparency copy
     const fullText = JSON.stringify(reputationConfig.transparencyCommitments).toLowerCase();
@@ -90,9 +90,9 @@ describe("TransparencySection Component Audit", () => {
 
     expect(screen.getByText(/What You Can Expect/i)).toBeInTheDocument();
     expect(screen.getByText(/Clear Explanation/i)).toBeInTheDocument();
-    expect(screen.getByText(/Estimate & Authorization/i)).toBeInTheDocument();
+    expect(screen.getByText(/Recommended Next Steps/i)).toBeInTheDocument();
     expect(screen.getByText(/Need-Based Recommendations/i)).toBeInTheDocument();
-    expect(screen.getByText(/Repair-Appropriate Verification/i)).toBeInTheDocument();
+    expect(screen.getByText(/Repair-Appropriate Follow-Up/i)).toBeInTheDocument();
   });
 });
 

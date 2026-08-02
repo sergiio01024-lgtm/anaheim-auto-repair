@@ -121,7 +121,7 @@ for (const [key, page] of Object.entries(pagesContent)) {
         </h1>
         
         <p class="text-lg text-zinc-650 mb-8 leading-relaxed">
-          Need an estimate or check our availability? Fill out our service intake form on this page, visit our shop, or speak directly with our manager Carson.
+          Need an estimate or check our availability? Fill out our service intake form on this page, visit our shop, or speak directly with our team.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -149,8 +149,8 @@ for (const [key, page] of Object.entries(pagesContent)) {
         </div>
 
         <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-8 text-center">
-          <h2 class="text-2xl font-bold text-zinc-900 mb-4">Request a Free Estimate</h2>
-          <p class="text-zinc-600 mb-6 font-medium">Use the online form to submit your vehicle year, make, model, and symptoms.</p>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-4">Request an Estimate</h2>
+          <p class="text-zinc-600 mb-6 font-medium">Describe your vehicle's issue and we'll follow up about your service request — or call (714) 826-4444 to speak with the shop.</p>
           <a href="tel:+17148264444" class="inline-block rounded-md bg-primary hover:bg-red-700 px-8 py-4 font-bold text-white shadow-sm mb-4">
             📞 Call Now: (714) 826-4444
           </a>

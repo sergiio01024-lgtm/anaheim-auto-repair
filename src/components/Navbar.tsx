@@ -140,7 +140,7 @@ export function Navbar() {
                 <span className="text-sm md:text-[15px] font-bold tracking-tight leading-none text-white uppercase" style={{ fontFamily: 'var(--font-display)' }}>
                   {businessConfig.name.short}
                 </span>
-                <span className="hidden sm:inline-block text-[10px] font-medium tracking-[0.15em] leading-none mt-1 text-steel-400 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
+                <span className="hidden sm:inline-block text-[10px] font-medium tracking-[0.15em] leading-none mt-1 text-slate-400 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
                   {businessConfig.name.tagline}
                 </span>
               </div>
@@ -153,7 +153,7 @@ export function Navbar() {
               ref={triggerRef}
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-steel-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red transition-colors"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-slate-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red transition-colors"
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
@@ -171,7 +171,7 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-[13px] font-medium text-steel-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1 tracking-wide uppercase"
+                className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1 tracking-wide uppercase"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {link.label}
@@ -186,7 +186,7 @@ export function Navbar() {
               onClick={() =>
                 trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
               }
-              className="text-[13px] font-semibold text-steel-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1"
+              className="text-[13px] font-semibold text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               {businessConfig.phone.display}
@@ -223,7 +223,7 @@ export function Navbar() {
                   <span className="text-sm font-bold tracking-tight leading-none text-white uppercase" style={{ fontFamily: 'var(--font-display)' }}>
                     {businessConfig.name.short}
                   </span>
-                  <span className="text-[10px] font-medium tracking-[0.15em] leading-none mt-1 text-steel-400 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
+                  <span className="text-[10px] font-medium tracking-[0.15em] leading-none mt-1 text-slate-400 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
                     {businessConfig.name.tagline}
                   </span>
                 </div>
@@ -233,7 +233,7 @@ export function Navbar() {
                   setMobileOpen(false);
                   triggerRef.current?.focus();
                 }}
-                className="-m-2.5 rounded-md p-2.5 text-steel-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red transition-colors"
+                className="-m-2.5 rounded-md p-2.5 text-slate-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red transition-colors"
                 aria-label="Close menu"
               >
                 <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -248,7 +248,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="block rounded-lg px-4 py-3.5 text-base font-medium text-steel-300 hover:text-white hover:bg-white/5 transition-all focus-visible:outline-2 focus-visible:outline-signal-red tracking-wide"
+                    className="block rounded-lg px-4 py-3.5 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all focus-visible:outline-2 focus-visible:outline-signal-red tracking-wide"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {link.label}

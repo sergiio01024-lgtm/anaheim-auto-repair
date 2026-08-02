@@ -138,7 +138,7 @@ export function GallerySection() {
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#16191D] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Built, Repaired, and Tested Here
+              Inside the Anaheim Shop
             </h2>
           </div>
 

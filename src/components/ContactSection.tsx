@@ -340,14 +340,14 @@ export function ContactSection() {
             Request an Estimate
           </h2>
           <p className="mt-5 text-lg text-[#606770] leading-relaxed">
-            Describe your vehicle's issue. We'll respond with a ballpark estimate — or call{" "}
+            Describe your vehicle&apos;s issue and we&apos;ll follow up about your service request — or call{" "}
             <a
               href={businessConfig.phone.link}
               className="text-signal-red hover:text-white transition-colors font-semibold"
             >
               {businessConfig.phone.display}
             </a>{" "}
-            for an immediate quote.
+            to speak with the shop.
           </p>
         </div>
 
@@ -662,9 +662,7 @@ export function ContactSection() {
                         Consent to Automated Text Updates (Optional)
                       </span>
                       <p className="mt-1 text-[#818891]">
-                        Check this box to receive SMS updates about your estimate and appointments
-                        from our team. We do not sell your data. Message frequency varies. Reply
-                        STOP to cancel at any time.
+                        Check this box if you agree to receive automated SMS messages related to your service request. Message frequency varies. Reply STOP to opt out.
                       </p>
                     </div>
                   </label>
