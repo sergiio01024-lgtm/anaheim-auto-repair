@@ -123,9 +123,9 @@ export function Navbar() {
         </div>
       )}
       <nav
-        className={`transition-all duration-300 px-6 py-3.5 lg:px-8 ${scrolled
-            ? "bg-[#13171C]/95 backdrop-blur-md shadow-lg shadow-black/10"
-            : "bg-[#13171C]/80 backdrop-blur-sm"
+        className={`transition-all duration-300 px-6 py-3.5 lg:px-8 border-b ${scrolled
+            ? "bg-[#101214] shadow-lg shadow-black/20 border-white/10"
+            : "bg-[#101214]/98 backdrop-blur-md shadow-md border-white/5"
           }`}
         aria-label="Global"
       >
@@ -171,7 +171,7 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1 tracking-wide uppercase"
+                className="text-[13px] font-medium text-slate-200 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1 tracking-wide uppercase"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {link.label}
@@ -186,7 +186,7 @@ export function Navbar() {
               onClick={() =>
                 trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
               }
-              className="text-[13px] font-semibold text-slate-300 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1"
+              className="text-[13px] font-semibold text-slate-200 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-red rounded px-1"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               {businessConfig.phone.display}
@@ -248,7 +248,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="block rounded-lg px-4 py-3.5 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all focus-visible:outline-2 focus-visible:outline-signal-red tracking-wide"
+                    className="block rounded-lg px-4 py-3.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/5 transition-all focus-visible:outline-2 focus-visible:outline-signal-red tracking-wide"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {link.label}

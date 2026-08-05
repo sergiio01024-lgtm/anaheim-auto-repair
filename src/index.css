@@ -6,6 +6,10 @@
   scroll-margin-top: 150px;
 }
 
+section[id] {
+  scroll-margin-top: 100px;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }
