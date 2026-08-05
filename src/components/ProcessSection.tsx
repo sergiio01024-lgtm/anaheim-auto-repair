@@ -23,27 +23,30 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="bg-white py-16 sm:py-20 border-y border-[#DDE0E3]">
+    <section className="bg-[#101214] py-20 sm:py-24 border-y border-white/5">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-10 sm:mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">
-              How It Works
+          <div className="text-center mb-16">
+            <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#C8202F] block mb-3 uppercase">
+              WORKFLOW TIMELINE
             </span>
             <h2
-              className="text-3xl sm:text-4xl font-bold text-[#16191D] tracking-tight"
+              className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Transparent From Start to Finish
+              Our Service Process
             </h2>
+            <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
+              Clear, straightforward diagnostic and repair steps for every vehicle.
+            </p>
           </div>
 
           {/* Desktop: Horizontal Timeline */}
           <div className="hidden md:grid md:grid-cols-3 gap-0 relative">
             {/* Connecting Line */}
             <div
-              className="absolute top-8 left-[16.67%] right-[16.67%] h-0.5 bg-[#DDE0E3]"
+              className="absolute top-8 left-[16.67%] right-[16.67%] h-px bg-white/10"
               aria-hidden="true"
             />
 
@@ -51,13 +54,10 @@ export function ProcessSection() {
               <div key={idx} className="relative flex flex-col items-center text-center px-6">
                 {/* Step Number Circle */}
                 <div
-                  className={`relative z-10 w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 shadow-sm ${idx === 0
-                      ? 'border-[#C8202F] bg-[#C8202F] text-white'
-                      : 'border-[#DDE0E3] bg-white text-[#16191D]'
-                    }`}
+                  className="relative z-10 w-16 h-16 rounded-full border-2 border-[#C8202F] bg-[#17191C] flex items-center justify-center mb-5 shadow-lg shadow-black/40"
                 >
                   <span
-                    className="text-base font-semibold font-mono"
+                    className="text-base font-bold font-mono text-[#C8202F]"
                   >
                     {step.number}
                   </span>
@@ -65,15 +65,14 @@ export function ProcessSection() {
 
                 {/* Step Title */}
                 <h3
-                  className="text-base sm:text-lg font-bold text-[#16191D] mb-2 tracking-wide uppercase"
-                  style={{ fontFamily: "var(--font-display)" }}
+                  className="text-base sm:text-lg font-bold text-white mb-2 tracking-widest uppercase font-mono"
                 >
                   {step.title}
                 </h3>
 
                 {/* Step Description */}
                 <p
-                  className="text-sm sm:text-base text-[#606770] leading-relaxed max-w-[280px]"
+                  className="text-sm text-slate-400 leading-relaxed max-w-[280px]"
                 >
                   {step.description}
                 </p>
@@ -82,35 +81,31 @@ export function ProcessSection() {
           </div>
 
           {/* Mobile: Vertical Timeline */}
-          <div className="md:hidden space-y-0">
+          <div className="md:hidden space-y-0 max-w-md mx-auto">
             {steps.map((step, idx) => (
               <div key={idx} className="relative flex gap-5">
                 {/* Vertical line + circle */}
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-12 h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 shadow-sm ${idx === 0
-                        ? 'border-[#C8202F] bg-[#C8202F] text-white'
-                        : 'border-[#DDE0E3] bg-white text-[#16191D]'
-                      }`}
+                    className="w-12 h-12 rounded-full border-2 border-[#C8202F] bg-[#17191C] flex items-center justify-center flex-shrink-0 shadow-md shadow-black/40"
                   >
-                    <span className="text-xs font-semibold font-mono">
+                    <span className="text-sm font-bold font-mono text-[#C8202F]">
                       {step.number}
                     </span>
                   </div>
                   {idx < steps.length - 1 && (
-                    <div className="w-0.5 h-8 bg-[#DDE0E3] mt-1.5" aria-hidden="true" />
+                    <div className="w-px h-12 bg-white/10 mt-1.5" aria-hidden="true" />
                   )}
                 </div>
 
                 {/* Content */}
                 <div className="pb-6 pt-1">
                   <h3
-                    className="text-base font-bold text-[#16191D] mb-1.5 tracking-wide uppercase"
-                    style={{ fontFamily: "var(--font-display)" }}
+                    className="text-base font-bold text-white mb-1.5 tracking-widest uppercase font-mono"
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-[#606770] leading-relaxed">
+                  <p className="text-sm text-slate-400 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

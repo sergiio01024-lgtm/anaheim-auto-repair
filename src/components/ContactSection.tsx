@@ -331,10 +331,12 @@ export function ContactSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-2xl mb-14 sm:mb-16">
-          <span className="label-mono text-steel-500 block mb-4">Service Intake</span>
+          <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#C8202F] block mb-3 uppercase">
+            SERVICE INTAKE
+          </span>
           <h2
             id="contact-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#16191D] tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#16191D] tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Request an Estimate
@@ -343,7 +345,7 @@ export function ContactSection() {
             Describe your vehicle&apos;s issue and we&apos;ll follow up about your service request — or call{" "}
             <a
               href={businessConfig.phone.link}
-              className="text-signal-red hover:text-white transition-colors font-semibold"
+              className="text-[#C8202F] hover:text-[#AE1D2A] transition-colors font-semibold"
             >
               {businessConfig.phone.display}
             </a>{" "}

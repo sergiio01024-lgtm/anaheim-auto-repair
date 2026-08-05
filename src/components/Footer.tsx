@@ -86,7 +86,7 @@ export function Footer() {
 
           {/* Column 2: Services */}
           <div>
-            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">SERVICES</span>
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block mb-4">SERVICES</span>
             <ul className="space-y-2.5 text-xs">
               {footerServicesList.map((s) => {
                 const path = pathMap[s] || "/";
@@ -107,7 +107,7 @@ export function Footer() {
 
           {/* Column 3: Reviews & Directions */}
           <div>
-            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">PROOF & LOCATION</span>
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block mb-4">PROOF & LOCATION</span>
             <ul className="space-y-2.5 text-xs font-semibold mb-6">
               <li>
                 <a
@@ -144,7 +144,7 @@ export function Footer() {
 
           {/* Column 4: Service Area */}
           <div>
-            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-4">SERVICE AREA</span>
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block mb-4">SERVICE AREA</span>
             <ul className="space-y-2 text-xs mb-4">
               <li>
                 <a

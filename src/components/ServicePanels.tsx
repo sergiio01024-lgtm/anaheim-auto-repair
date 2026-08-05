@@ -108,50 +108,59 @@ export function ServicePanels() {
 
         {/* Service Modules */}
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {serviceModules.map((service) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {serviceModules.map((service, index) => {
               const path = pathMap[service.id] || "/";
+              const isFeatured = index === 0;
+
               return (
                 <div
                   key={service.id}
-                  className="group relative rounded-2xl overflow-hidden bg-white border border-[#DDE0E3] hover:border-[#C9CDD2] shadow-[0_8px_24px_rgba(22,25,29,0.07)] transition-all"
+                  className={`group relative rounded-2xl overflow-hidden bg-white border border-[#DDE0E3] hover:border-[#C9CDD2] transition-all duration-300 ${
+                    isFeatured
+                      ? "md:col-span-2 lg:col-span-3 shadow-md hover:shadow-lg"
+                      : "col-span-1 shadow-sm hover:shadow-md"
+                  }`}
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-5">
+                  <div className={`flex flex-col ${isFeatured ? "lg:flex-row h-full" : "h-full justify-between"}`}>
                     {/* Image */}
-                    <div className="sm:col-span-2 relative overflow-hidden">
-                      <div className="aspect-[4/3] sm:aspect-auto sm:h-full">
-                        <img
-                          src={service.image}
-                          alt={service.imageAlt}
-                          className="img-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                          loading="lazy"
-                        />
-                      </div>
+                    <div className={`relative overflow-hidden ${isFeatured ? "lg:w-2/5 min-h-[250px] lg:min-h-full" : "w-full aspect-[16/10]"}`}>
+                      <img
+                        src={service.image}
+                        alt={service.imageAlt}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        loading="lazy"
+                      />
                       {/* Number Badge */}
-                      <div className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm">
-                        <span className="text-xs font-mono font-semibold text-white">{service.number}</span>
+                      <div className="absolute top-4 left-4 px-2.5 py-1 rounded bg-[#16191D]/80 backdrop-blur-sm border border-white/10">
+                        <span className="text-[10px] font-mono font-semibold text-white">{service.number}</span>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="sm:col-span-3 p-6 sm:p-7 flex flex-col justify-between">
+                    <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-3/5" : ""}`}>
                       <div>
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#C8202F] uppercase">
+                            {isFeatured ? "Featured Specialty" : "Automotive Care"}
+                          </span>
+                        </div>
                         <h3
-                          className="text-xl sm:text-2xl font-bold text-[#16191D] mb-2.5"
+                          className="text-xl sm:text-2xl font-bold text-[#16191D] mb-3"
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           {service.title}
                         </h3>
-                        <p className="text-base text-[#606770] leading-relaxed mb-4.5">
+                        <p className="text-sm sm:text-base text-[#606770] leading-relaxed mb-6">
                           {service.description}
                         </p>
 
                         {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mb-5">
+                        <div className="flex flex-wrap gap-1.5 mb-6">
                           {service.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="inline-block px-3 py-1 rounded-md text-xs font-medium text-[#606770] bg-[#F6F6F3] border border-[#DDE0E3]"
+                              className="inline-block px-2.5 py-1 rounded text-[11px] font-medium text-[#606770] bg-[#F6F6F3] border border-[#DDE0E3]"
                               style={{ fontFamily: "var(--font-mono)" }}
                             >
                               {tag}
@@ -161,11 +170,11 @@ export function ServicePanels() {
                       </div>
 
                       {/* Actions */}
-                      <div className="flex items-center justify-between border-t border-[#DDE0E3] pt-4 min-h-[44px]">
+                      <div className="flex items-center justify-between border-t border-[#DDE0E3] pt-4 mt-auto">
                         <a
                           href={path}
                           onClick={(e) => handleServiceClick(e, service.id)}
-                          className="text-base font-semibold text-[#C8202F] hover:text-[#AE1D2A] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1"
+                          className="text-sm font-bold text-[#C8202F] hover:text-[#AE1D2A] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1"
                         >
                           View Details →
                         </a>
@@ -177,8 +186,7 @@ export function ServicePanels() {
                               displayPhone: businessConfig.phone.display,
                             })
                           }
-                          className="text-xs font-semibold text-[#606770] hover:text-[#16191D] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1 uppercase tracking-wider"
-                          style={{ fontFamily: "var(--font-mono)" }}
+                          className="text-[11px] font-mono font-bold text-[#606770] hover:text-[#16191D] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1 uppercase tracking-wider"
                         >
                           Call Shop
                         </a>
@@ -213,11 +221,12 @@ export function ServicePanels() {
             {showSecondary && (
               <div
                 id="secondary-services-list"
-                className="mt-6 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 rounded-xl border border-[#DDE0E3] bg-white p-6 sm:p-8 text-left shadow-sm"
+                className="mt-6 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3 border-t border-[#DDE0E3] pt-8 text-left"
               >
                 {secondaryServices.map((s, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 text-sm text-[#606770] font-medium">
-                    <span className="text-[#C8202F] text-xs font-bold">✓</span> {s}
+                  <div key={idx} className="flex items-center gap-2.5 text-sm text-[#606770]">
+                    <span className="text-[#C8202F] font-mono text-xs font-bold" aria-hidden="true">✓</span>
+                    <span className="font-medium">{s}</span>
                   </div>
                 ))}
               </div>

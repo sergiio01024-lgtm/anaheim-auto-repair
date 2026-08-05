@@ -2,47 +2,51 @@ import { businessConfig } from "../config/business";
 
 export function TrustBar() {
   return (
-    <div className="bg-white border-b border-[#DDE0E3] shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4.5">
-        <div className="flex flex-wrap justify-center sm:justify-between items-center gap-x-8 gap-y-3.5">
-          <div className="flex items-center gap-2.5">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#818891]">Est.</span>
-            <span className="text-sm font-bold text-[#16191D]" style={{ fontFamily: 'var(--font-display)' }}>
+    <div className="bg-white border-b border-[#DDE0E3]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          {/* Est 1978 */}
+          <div className="flex flex-col">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#16191D] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
               {businessConfig.established}
+            </span>
+            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
+              ESTABLISHED
             </span>
           </div>
 
-          <div className="h-4 w-px bg-[#DDE0E3] hidden sm:block" aria-hidden="true" />
+          {/* Yelp Rating */}
+          <div className="flex flex-col">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#D99A24] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              {businessConfig.rating.value} ★
+            </span>
+            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
+              YELP RATING
+            </span>
+          </div>
 
+          {/* Reviews */}
           <a
             href={businessConfig.urls.yelp}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded px-1"
+            className="flex flex-col group focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
           >
-            <span className="text-sm font-bold text-[#D99A24]" style={{ fontFamily: 'var(--font-display)' }}>
-              {businessConfig.rating.value} ★
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#16191D] group-hover:text-[#C8202F] transition-colors tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              {businessConfig.rating.reviewsCount}+
             </span>
-            <span className="text-xs font-medium text-[#606770] group-hover:text-[#16191D] transition-colors">
-              {businessConfig.rating.reviewsCount}+ Yelp Reviews ↗
+            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] group-hover:text-[#606770] uppercase mt-2">
+              YELP REVIEWS ↗
             </span>
           </a>
 
-          <div className="h-4 w-px bg-[#DDE0E3] hidden sm:block" aria-hidden="true" />
-
-          <div className="flex items-center gap-2.5">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#818891]">Specialist</span>
-            <span className="text-sm font-semibold text-[#16191D]" style={{ fontFamily: 'var(--font-body)' }}>
-              Mufflers & Catalytic Converters
+          {/* Specialist Care */}
+          <div className="flex flex-col">
+            <span className="text-lg sm:text-xl font-bold text-[#16191D] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Mufflers & Exhaust
             </span>
-          </div>
-
-          <div className="h-4 w-px bg-[#DDE0E3] hidden md:block" aria-hidden="true" />
-
-          <div className="flex items-center gap-2.5">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#818891]">{businessConfig.yearsInBusiness}+ Yrs</span>
-            <span className="text-sm font-semibold text-[#16191D]" style={{ fontFamily: 'var(--font-body)' }}>
-              Serving Anaheim Drivers
+            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
+              SPECIALIST CARE
             </span>
           </div>
         </div>

@@ -133,9 +133,11 @@ export function GallerySection() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Header */}
           <div className="max-w-2xl mb-12 sm:mb-14">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">Our Work</span>
+            <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#C8202F] block mb-3 uppercase">
+              OUR GALLERY
+            </span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#16191D] tracking-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#16191D] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Inside the Anaheim Shop

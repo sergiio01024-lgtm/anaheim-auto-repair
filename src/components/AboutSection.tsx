@@ -3,20 +3,22 @@ import { businessConfig } from "../config/business";
 
 export function AboutSection() {
   return (
-    <section id="about" aria-label="About Our Shop" className="bg-[#F6F6F3] py-20 sm:py-24 border-b border-[#DDE0E3]">
+    <section id="about" aria-label="About Our Shop" className="bg-[#F6F6F3] py-24 sm:py-28 border-b border-[#DDE0E3]">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Text Content */}
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">OUR SHOP & HISTORY</span>
+            <div className="lg:col-span-5">
+              <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#C8202F] block mb-3 uppercase">
+                OUR SHOP & HISTORY
+              </span>
               <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#16191D] leading-tight mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#16191D] leading-[1.1] mb-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Serving Anaheim Drivers Since {businessConfig.established}.
               </h2>
-              <div className="space-y-4 text-base text-[#606770] leading-relaxed">
+              <div className="space-y-5 text-sm sm:text-base text-[#606770] leading-relaxed">
                 <p>
                   Anaheim Auto Repair & Muffler Care has served Anaheim drivers since {businessConfig.established}. Over {businessConfig.yearsInBusiness} years, we&apos;ve provided dedicated auto care trusted by generations of Orange County drivers.
                 </p>
@@ -29,56 +31,56 @@ export function AboutSection() {
               </div>
 
               {/* Key Facts */}
-              <div className="mt-8 grid grid-cols-2 gap-6 border-t border-[#DDE0E3] pt-6">
+              <div className="mt-10 grid grid-cols-2 gap-6 border-t border-[#DDE0E3] pt-8">
                 <div>
                   <span
-                    className="text-3xl sm:text-4xl font-bold text-[#C8202F] block"
+                    className="text-3xl sm:text-4xl font-black text-[#C8202F] block tracking-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {businessConfig.yearsInBusiness}+
                   </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#818891] mt-1 block" style={{ fontFamily: "var(--font-mono)" }}>Years in Business</span>
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#818891] mt-1.5 block uppercase">Years in Business</span>
                 </div>
                 <div>
                   <span
-                    className="text-3xl sm:text-4xl font-bold text-[#16191D] block"
+                    className="text-3xl sm:text-4xl font-black text-[#16191D] block tracking-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {businessConfig.rating.reviewsCount}+
                   </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#818891] mt-1 block" style={{ fontFamily: "var(--font-mono)" }}>Yelp Reviews</span>
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#818891] mt-1.5 block uppercase">Yelp Reviews</span>
                 </div>
               </div>
             </div>
 
             {/* Image Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 img-frame rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm">
-                <div className="aspect-[16/9]">
+            <div className="lg:col-span-7 grid grid-cols-2 gap-4">
+              <div className="col-span-2 rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm group">
+                <div className="aspect-[16/9] overflow-hidden">
                   <img
                     src="/images/service-bays.webp"
                     alt="Anaheim Auto Repair service bays with vehicles on lifts"
-                    className="img-cover"
+                    className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                 </div>
               </div>
-              <div className="img-frame rounded-xl overflow-hidden border border-[#DDE0E3] shadow-sm">
-                <div className="aspect-[4/3]">
+              <div className="rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm group">
+                <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src="/images/front-desk.webp"
                     alt="Customer service front desk area at Anaheim Auto Repair"
-                    className="img-cover"
+                    className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                 </div>
               </div>
-              <div className="img-frame rounded-xl overflow-hidden border border-[#DDE0E3] shadow-sm">
-                <div className="aspect-[4/3]">
+              <div className="rounded-2xl overflow-hidden border border-[#DDE0E3] shadow-sm group">
+                <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src="/images/storefront-daytime.webp"
                     alt="Exterior view of Anaheim Auto Repair shop on West Ball Road"
-                    className="img-cover"
+                    className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                 </div>

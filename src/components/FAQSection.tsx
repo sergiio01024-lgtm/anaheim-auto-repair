@@ -12,15 +12,15 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faq" className="bg-white py-20 sm:py-24">
+    <section id="faq" className="bg-white py-24 sm:py-28 border-b border-[#DDE0E3]">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Left Column — Sticky Header */}
             <div className="lg:col-span-2 lg:sticky lg:top-28 lg:self-start">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#C8202F] block mb-3">FAQ</span>
+              <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#C8202F] block mb-3 uppercase">FAQ</span>
               <h2
-                className="text-3xl sm:text-4xl font-bold text-[#16191D] tracking-tight mb-5"
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#16191D] tracking-tight mb-5"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Common Questions
@@ -33,7 +33,7 @@ export function FAQSection() {
                 onClick={() =>
                   trackEvent({ type: "phone_click", displayPhone: businessConfig.phone.display })
                 }
-                className="inline-flex items-center gap-2 rounded-lg bg-[#C8202F] hover:bg-[#AE1D2A] px-6 py-3.5 text-sm font-semibold text-white transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-[#C8202F]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#C8202F] hover:bg-[#AE1D2A] px-6 py-3.5 text-sm font-semibold text-white transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-[#C8202F]"
               >
                 Call {businessConfig.phone.display}
               </a>
@@ -52,15 +52,15 @@ export function FAQSection() {
                         aria-expanded={isOpen}
                         aria-controls={`faq-answer-${idx}`}
                       >
-                        <div className="flex items-start gap-3.5">
+                        <div className="flex items-start gap-4">
                           <span
-                            className="text-xs font-mono font-semibold text-[#818891] pt-1 flex-shrink-0"
+                            className="text-xs font-mono font-bold text-[#C8202F]/70 pt-1 flex-shrink-0"
                             aria-hidden="true"
                           >
                             Q{String(idx + 1).padStart(2, "0")}
                           </span>
                           <span
-                            className="text-base sm:text-lg font-bold text-[#16191D] group-hover:text-[#C8202F] transition-colors"
+                            className="text-base sm:text-lg font-bold text-[#16191D] group-hover:text-[#C8202F] transition-colors leading-snug"
                             style={{ fontFamily: "var(--font-display)" }}
                           >
                             {faq.q}
@@ -83,7 +83,7 @@ export function FAQSection() {
                           isOpen ? "max-h-96 opacity-100 pb-5" : "max-h-0 opacity-0"
                         }`}
                       >
-                        <p className="text-base text-[#606770] leading-relaxed pl-[calc(2.25rem+0.875rem)]">
+                        <p className="text-sm sm:text-base text-[#606770] leading-relaxed pl-12">
                           {faq.a}
                         </p>
                       </div>
