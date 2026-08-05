@@ -66,30 +66,30 @@ export function HeroSection() {
             <h3 className="text-xs font-mono font-bold tracking-[0.2em] text-[#C8202F] uppercase mb-6 pl-2">
               SHOP SPECIFICATIONS
             </h3>
-            <div className="space-y-4 font-mono text-[11px] pl-2 text-slate-350">
+            <div className="space-y-3.5 font-mono text-xs pl-2">
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">SHOP</span>
-                <span className="text-white font-semibold text-right">{businessConfig.name.full}</span>
+                <span className="text-slate-400 font-medium">SHOP</span>
+                <span className="text-white font-bold text-right">{businessConfig.name.full}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">SPECIALTY</span>
-                <span className="text-white font-semibold text-right">Mufflers & Catalytic Converters</span>
+                <span className="text-slate-400 font-medium">SPECIALTY</span>
+                <span className="text-white font-bold text-right">Mufflers & Catalytic Converters</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">LOCATION</span>
-                <span className="text-white font-semibold text-right">{businessConfig.address.city}, {businessConfig.address.state}</span>
+                <span className="text-slate-400 font-medium">LOCATION</span>
+                <span className="text-white font-bold text-right">{businessConfig.address.city}, {businessConfig.address.state}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">ESTABLISHED</span>
-                <span className="text-white font-semibold text-right">{businessConfig.established}</span>
+                <span className="text-slate-400 font-medium">ESTABLISHED</span>
+                <span className="text-white font-bold text-right">{businessConfig.established}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400">RATING</span>
-                <span className="text-white font-semibold text-right">4.7 ★ on Yelp</span>
+                <span className="text-slate-400 font-medium">RATING</span>
+                <span className="text-white font-bold text-right">4.7 ★ on Yelp</span>
               </div>
               <div className="flex justify-between pb-1">
-                <span className="text-slate-400">REVIEWS</span>
-                <span className="text-white font-semibold text-right">590+ Yelp Reviews</span>
+                <span className="text-slate-400 font-medium">REVIEWS</span>
+                <span className="text-white font-bold text-right">590+ Yelp Reviews</span>
               </div>
             </div>
           </div>

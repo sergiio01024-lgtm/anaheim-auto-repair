@@ -124,11 +124,11 @@ export function ServicePanels() {
                 >
                   <div className={`flex flex-col ${isFeatured ? "lg:flex-row h-full" : "h-full justify-between"}`}>
                     {/* Image */}
-                    <div className={`relative overflow-hidden ${isFeatured ? "lg:w-2/5 min-h-[250px] lg:min-h-full" : "w-full aspect-[16/10]"}`}>
+                    <div className={`relative overflow-hidden ${isFeatured ? "lg:w-[42%] min-h-[280px] lg:min-h-full" : "w-full aspect-[16/10]"}`}>
                       <img
                         src={service.image}
                         alt={service.imageAlt}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02]"
                         loading="lazy"
                       />
                       {/* Number Badge */}
@@ -138,7 +138,7 @@ export function ServicePanels() {
                     </div>
 
                     {/* Content */}
-                    <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-3/5" : ""}`}>
+                    <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-[58%] lg:p-10" : ""}`}>
                       <div>
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-[10px] font-mono font-bold tracking-widest text-[#C8202F] uppercase">
@@ -146,7 +146,7 @@ export function ServicePanels() {
                           </span>
                         </div>
                         <h3
-                          className="text-xl sm:text-2xl font-bold text-[#16191D] mb-3"
+                          className={`font-bold text-[#16191D] mb-3 ${isFeatured ? "text-2xl lg:text-3xl" : "text-xl sm:text-2xl"}`}
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           {service.title}
