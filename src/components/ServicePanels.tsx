@@ -122,17 +122,17 @@ export function ServicePanels() {
                       : "col-span-1 shadow-sm hover:shadow-md"
                   }`}
                 >
-                  <div className={`flex flex-col ${isFeatured ? "lg:flex-row h-full" : "h-full justify-between"}`}>
+                  <div className={`flex flex-col ${isFeatured ? "lg:flex-row" : "h-full justify-between"}`}>
                     {/* Image */}
-                    <div className={`relative overflow-hidden ${isFeatured ? "lg:w-[42%] min-h-[280px] lg:min-h-full" : "w-full aspect-[16/10]"}`}>
+                    <div className={`relative overflow-hidden flex-shrink-0 ${isFeatured ? "lg:w-[42%] min-h-[250px] lg:min-h-0" : "w-full aspect-[16/10]"}`}>
                       <img
                         src={service.image}
                         alt={service.imageAlt}
-                        className="w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02]"
+                        className={`w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02] ${isFeatured ? "lg:absolute lg:inset-0" : ""}`}
                         loading="lazy"
                       />
                       {/* Number Badge */}
-                      <div className="absolute top-4 left-4 px-2.5 py-1 rounded bg-[#16191D]/80 backdrop-blur-sm border border-white/10">
+                      <div className="absolute top-4 left-4 px-2.5 py-1 rounded bg-[#16191D]/80 backdrop-blur-sm border border-white/10 z-10">
                         <span className="text-[10px] font-mono font-semibold text-white">{service.number}</span>
                       </div>
                     </div>
