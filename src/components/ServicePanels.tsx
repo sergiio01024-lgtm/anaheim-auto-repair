@@ -124,7 +124,7 @@ export function ServicePanels() {
                 >
                   <div className={`flex flex-col ${isFeatured ? "lg:flex-row" : "h-full justify-between"}`}>
                     {/* Image */}
-                    <div className={`relative overflow-hidden flex-shrink-0 ${isFeatured ? "lg:w-[42%] min-h-[250px] lg:min-h-0" : "w-full aspect-[16/10]"}`}>
+                    <div className={`relative overflow-hidden flex-shrink-0 ${isFeatured ? "lg:w-[38%] min-h-[250px] lg:min-h-0" : "w-full aspect-[16/10]"}`}>
                       <img
                         src={service.image}
                         alt={service.imageAlt}
@@ -138,7 +138,7 @@ export function ServicePanels() {
                     </div>
 
                     {/* Content */}
-                    <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-[58%] lg:p-10" : ""}`}>
+                    <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-[62%] lg:p-10" : ""}`}>
                       <div>
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-[10px] font-mono font-bold tracking-widest text-[#C8202F] uppercase">

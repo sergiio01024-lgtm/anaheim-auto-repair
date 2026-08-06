@@ -11,10 +11,10 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   {
-    src: "/images/exhaust-pipes.webp",
-    alt: "Custom exhaust piping and bending work",
-    title: "Custom Exhaust Piping",
-    label: "EXHAUST SYSTEM",
+    src: "/images/service-bays.webp",
+    alt: "Multiple auto repair service bays with vehicles on lifts",
+    title: "Service Bays & Facilities",
+    label: "SHOP FLOOR",
   },
   {
     src: "/images/brake-work.webp",
@@ -41,10 +41,10 @@ const galleryItems: GalleryItem[] = [
     label: "SUSPENSION",
   },
   {
-    src: "/images/service-bays.webp",
-    alt: "Multiple auto repair service bays with vehicles on lifts",
-    title: "Service Bays & Facilities",
-    label: "SHOP FLOOR",
+    src: "/images/exhaust-pipes.webp",
+    alt: "Custom exhaust piping and bending work",
+    title: "Custom Exhaust Piping",
+    label: "EXHAUST SYSTEM",
   },
   {
     src: "/images/sign-mufflers.webp",

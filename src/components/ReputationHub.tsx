@@ -10,21 +10,18 @@ export function ReputationHub() {
   const pillars = [
     {
       value: `${reputationConfig.yearsInBusiness}+ Years`,
-      label: "Years in Business",
+      label: "Business History",
       detail: `Serving Anaheim drivers since ${reputationConfig.established}`,
-      source: "Business History",
     },
     {
       value: "Anaheim & OC",
       label: "Service Area",
       detail: "Dedicated automotive care for local Orange County drivers",
-      source: "Business Records",
     },
     {
       value: "Mufflers & Exhaust",
-      label: "Specialist Care",
+      label: "Specialty Care",
       detail: "Exhaust piping, catalytic converters, and diagnostics",
-      source: "Core Services",
     },
   ];
 
@@ -45,7 +42,7 @@ export function ReputationHub() {
               Trusted by Anaheim Drivers Since {businessConfig.established}
             </h2>
             <p className="text-[#606770] text-sm leading-relaxed mb-6">
-              Decades of automotive repair work and local service at {businessConfig.address.street}.
+              Decades of automotive repair work serving Anaheim drivers since {businessConfig.established}.
             </p>
 
             {/* Rating Highlight Block */}
@@ -93,32 +90,20 @@ export function ReputationHub() {
             {pillars.map((metric, idx) => (
               <div
                 key={idx}
-                className="bg-[#F6F6F3] border border-[#DDE0E3] p-6 rounded-xl shadow-sm relative overflow-hidden flex flex-col justify-between"
+                className="bg-[#F6F6F3] border border-[#DDE0E3] p-6 rounded-xl shadow-sm relative overflow-hidden"
               >
                 {/* Thin technical red edge */}
                 <div className="absolute top-0 left-0 w-1 h-full bg-[#C8202F]/70" />
                 
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#818891] uppercase">
-                      {metric.label}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-[#C8202F]/60">
-                      SYS-0{idx + 1}
-                    </span>
-                  </div>
-                  <div className="text-xl sm:text-2xl font-black text-[#16191D] mb-1.5" style={{ fontFamily: 'var(--font-display)' }}>
-                    {metric.value}
-                  </div>
-                  <p className="text-xs text-[#606770] leading-relaxed">
-                    {metric.detail}
-                  </p>
+                <span className="text-[10px] font-mono font-bold tracking-widest text-[#818891] uppercase block mb-1.5">
+                  {metric.label}
+                </span>
+                <div className="text-xl sm:text-2xl font-black text-[#16191D] mb-1.5" style={{ fontFamily: 'var(--font-display)' }}>
+                  {metric.value}
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-[#DDE0E3]/60 flex items-center justify-between text-[9px] font-mono font-bold text-[#818891] uppercase tracking-wider">
-                  <span>METRIC VERIFICATION</span>
-                  <span className="text-[#818891]/80">SRC: {metric.source}</span>
-                </div>
+                <p className="text-xs text-[#606770] leading-relaxed">
+                  {metric.detail}
+                </p>
               </div>
             ))}
           </div>
