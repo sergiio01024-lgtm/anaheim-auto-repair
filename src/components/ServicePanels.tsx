@@ -30,7 +30,7 @@ const serviceModules: ServiceModule[] = [
     title: "Muffler & Exhaust",
     description:
       "Muffler replacement, exhaust pipe fitting, catalytic converter installation, custom exhaust systems, and leak repair. Our core specialty since 1978.",
-    tags: ["Mufflers", "Exhaust Pipes", "Catalytic Converters", "Custom Exhaust", "Leak Repair"],
+    tags: ["Mufflers", "Exhaust Pipes", "Catalytic Converters", "Exhaust Leaks"],
     image: "/images/exhaust-pipes.webp",
     imageAlt: "Custom exhaust piping work under vehicle",
   },
@@ -40,7 +40,7 @@ const serviceModules: ServiceModule[] = [
     title: "Brakes, Suspension & Alignment",
     description:
       "Brake pads, rotors, calipers, shock absorbers, struts, steering linkages, and computerized wheel alignment for a smooth, safe ride.",
-    tags: ["Brake Pads & Rotors", "Calipers", "Shocks & Struts", "Wheel Alignment", "Steering"],
+    tags: ["Brakes", "Suspension", "Wheel Alignment"],
     image: "/images/brake-work.webp",
     imageAlt: "Mechanic replacing brake rotor and caliper",
   },
@@ -50,7 +50,7 @@ const serviceModules: ServiceModule[] = [
     title: "Engine & Transmission",
     description:
       "Check-engine diagnostics, spark plugs, timing belts, transmission fluid flushes, clutch repairs, and major mechanical work.",
-    tags: ["Engine Diagnostics", "Spark Plugs", "Timing Belts", "Transmission", "Clutch Repair"],
+    tags: ["Diagnostics", "Engine Repair", "Transmission Fluid", "Clutch Repair"],
     image: "/images/engine-work.webp",
     imageAlt: "Mechanic performing engine diagnostics and tune-up",
   },
@@ -60,7 +60,7 @@ const serviceModules: ServiceModule[] = [
     title: "Maintenance & Diagnostics",
     description:
       "Oil and filter changes, fluid checks, 30k/60k/90k mileage service, AC recharge, battery testing, and general preventative care.",
-    tags: ["Oil Changes", "Fluid Service", "AC Recharge", "Batteries", "Tune-Ups"],
+    tags: ["Oil Changes", "AC Recharge", "Batteries", "Tune-Ups"],
     image: "/images/tire-alignment.webp",
     imageAlt: "Computerized wheel alignment system in use",
   },
@@ -131,20 +131,11 @@ export function ServicePanels() {
                         className={`w-full h-full object-cover transition-transform duration-550 group-hover:scale-[1.02] ${isFeatured ? "lg:absolute lg:inset-0" : ""}`}
                         loading="lazy"
                       />
-                      {/* Number Badge */}
-                      <div className="absolute top-4 left-4 px-2.5 py-1 rounded bg-[#16191D]/80 backdrop-blur-sm border border-white/10 z-10">
-                        <span className="text-[10px] font-mono font-semibold text-white">{service.number}</span>
-                      </div>
                     </div>
 
                     {/* Content */}
                     <div className={`flex-1 p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? "lg:w-[62%] lg:p-10" : ""}`}>
                       <div>
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#C8202F] uppercase">
-                            {isFeatured ? "Featured Specialty" : "Automotive Care"}
-                          </span>
-                        </div>
                         <h3
                           className={`font-bold text-[#16191D] mb-3 ${isFeatured ? "text-2xl lg:text-3xl" : "text-xl sm:text-2xl"}`}
                           style={{ fontFamily: "var(--font-display)" }}
@@ -161,7 +152,6 @@ export function ServicePanels() {
                             <span
                               key={tag}
                               className="inline-block px-2.5 py-1 rounded text-[11px] font-medium text-[#606770] bg-[#F6F6F3] border border-[#DDE0E3]"
-                              style={{ fontFamily: "var(--font-mono)" }}
                             >
                               {tag}
                             </span>
@@ -186,7 +176,7 @@ export function ServicePanels() {
                               displayPhone: businessConfig.phone.display,
                             })
                           }
-                          className="text-[11px] font-mono font-bold text-[#606770] hover:text-[#16191D] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1 uppercase tracking-wider"
+                          className="text-xs font-bold text-[#606770] hover:text-[#16191D] transition-colors focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded py-1 uppercase tracking-wider"
                         >
                           Call Shop
                         </a>

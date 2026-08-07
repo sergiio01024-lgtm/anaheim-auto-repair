@@ -7,28 +7,10 @@ export function ReputationHub() {
     trackEvent({ type: "reviews_click", source: "reputation_hub" });
   };
 
-  const pillars = [
-    {
-      value: `${reputationConfig.yearsInBusiness}+ Years`,
-      label: "Business History",
-      detail: `Serving Anaheim drivers since ${reputationConfig.established}`,
-    },
-    {
-      value: "Anaheim & OC",
-      label: "Service Area",
-      detail: "Dedicated automotive care for local Orange County drivers",
-    },
-    {
-      value: "Mufflers & Exhaust",
-      label: "Specialty Care",
-      detail: "Exhaust piping, catalytic converters, and diagnostics",
-    },
-  ];
-
   return (
     <section 
       aria-label="Reputation and Trust"
-      className="bg-white border-y border-[#DDE0E3] py-20 px-4 sm:px-6 lg:px-8"
+      className="bg-white border-y border-[#DDE0E3] py-16 sm:py-20 px-6 sm:px-8"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -36,7 +18,7 @@ export function ReputationHub() {
           {/* Left Column: Primary Reputation Metric */}
           <div className="lg:col-span-5 bg-[#F6F6F3] border border-[#DDE0E3] rounded-2xl p-8 shadow-sm">
             <span className="text-[#C8202F] font-bold text-xs uppercase tracking-widest block mb-3">
-              YELP FEEDBACK
+              Yelp Feedback
             </span>
             <h2 className="text-[#16191D] text-3xl sm:text-4xl font-extrabold tracking-tight mb-4" style={{ fontFamily: "var(--font-display)" }}>
               Trusted by Anaheim Drivers Since {businessConfig.established}
@@ -85,27 +67,14 @@ export function ReputationHub() {
             </a>
           </div>
 
-          {/* Right Column: 3 Trust Pillars */}
-          <div className="lg:col-span-7 flex flex-col gap-5">
-            {pillars.map((metric, idx) => (
-              <div
-                key={idx}
-                className="bg-[#F6F6F3] border border-[#DDE0E3] p-6 rounded-xl shadow-sm relative overflow-hidden"
-              >
-                {/* Thin technical red edge */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-[#C8202F]/70" />
-                
-                <span className="text-[10px] font-mono font-bold tracking-widest text-[#818891] uppercase block mb-1.5">
-                  {metric.label}
-                </span>
-                <div className="text-xl sm:text-2xl font-black text-[#16191D] mb-1.5" style={{ fontFamily: 'var(--font-display)' }}>
-                  {metric.value}
-                </div>
-                <p className="text-xs text-[#606770] leading-relaxed">
-                  {metric.detail}
-                </p>
-              </div>
-            ))}
+          {/* Right Column: Clean human introduction */}
+          <div className="lg:col-span-7">
+            <h3 className="text-[#16191D] text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5" style={{ fontFamily: "var(--font-display)" }}>
+              Straightforward Care for Your Vehicle
+            </h3>
+            <p className="text-[#606770] text-base sm:text-lg leading-relaxed">
+              Since {businessConfig.established}, our shop has provided reliable muffler, exhaust, and general auto repair to the Anaheim community. We focus on direct explanations and quality mechanical work so you can get back on the road safely.
+            </p>
           </div>
 
         </div>

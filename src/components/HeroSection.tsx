@@ -59,37 +59,36 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Technical specification panel on large screens */}
-          <div className="hidden lg:block w-full max-w-sm bg-[#13171C]/90 border border-white/10 p-6 rounded-xl shadow-2xl relative overflow-hidden backdrop-blur-md">
+          {/* Simple human-facing proof panel on large screens */}
+          <div className="hidden lg:block w-full max-w-sm bg-[#13171C]/95 border border-white/10 p-8 rounded-xl shadow-2xl relative overflow-hidden backdrop-blur-md">
             {/* Red accent edge */}
             <div className="absolute top-0 left-0 w-1 h-full bg-[#C8202F]" />
-            <h3 className="text-xs font-mono font-bold tracking-[0.2em] text-[#C8202F] uppercase mb-6 pl-2">
-              SHOP SPECIFICATIONS
-            </h3>
-            <div className="space-y-3.5 font-mono text-xs pl-2">
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400 font-medium">SHOP</span>
-                <span className="text-white font-bold text-right">{businessConfig.name.full}</span>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-white tracking-tight leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+                  Serving Anaheim Since {businessConfig.established}
+                </h3>
+                <p className="mt-2 text-sm text-slate-300">
+                  Muffler, Exhaust & Auto Repair
+                </p>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400 font-medium">SPECIALTY</span>
-                <span className="text-white font-bold text-right">Mufflers & Catalytic Converters</span>
+              
+              <div className="border-t border-white/10 pt-5">
+                <div className="text-xl font-extrabold text-[#D99A24]">
+                  {businessConfig.rating.value} ★ on Yelp
+                </div>
+                <p className="text-sm text-slate-300 mt-1">
+                  590+ Reviews
+                </p>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400 font-medium">LOCATION</span>
-                <span className="text-white font-bold text-right">{businessConfig.address.city}, {businessConfig.address.state}</span>
-              </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400 font-medium">ESTABLISHED</span>
-                <span className="text-white font-bold text-right">{businessConfig.established}</span>
-              </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-slate-400 font-medium">RATING</span>
-                <span className="text-white font-bold text-right">4.7 ★ on Yelp</span>
-              </div>
-              <div className="flex justify-between pb-1">
-                <span className="text-slate-400 font-medium">REVIEWS</span>
-                <span className="text-white font-bold text-right">590+ Yelp Reviews</span>
+
+              <div className="border-t border-white/10 pt-5">
+                <p className="text-base font-semibold text-white">
+                  Anaheim, CA
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  {businessConfig.address.street}
+                </p>
               </div>
             </div>
           </div>

@@ -3,50 +3,50 @@ import { businessConfig } from "../config/business";
 export function TrustBar() {
   return (
     <div className="bg-white border-b border-[#DDE0E3]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10 sm:py-12">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-8 sm:py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {/* Est 1978 */}
+          {/* Since 1978 */}
           <div className="flex flex-col">
-            <span className="text-3xl sm:text-4xl font-extrabold text-[#16191D] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              {businessConfig.established}
+            <span className="text-2xl sm:text-3xl font-black text-[#16191D] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Since {businessConfig.established}
             </span>
-            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
-              ESTABLISHED
+            <span className="text-xs font-medium text-[#606770] mt-1.5 uppercase tracking-wider">
+              Serving Anaheim
             </span>
           </div>
 
-          {/* Yelp Rating */}
-          <div className="flex flex-col">
-            <span className="text-3xl sm:text-4xl font-extrabold text-[#D99A24] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              {businessConfig.rating.value} ★
-            </span>
-            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
-              YELP RATING
-            </span>
-          </div>
-
-          {/* Reviews */}
+          {/* Yelp Reviews */}
           <a
             href={businessConfig.urls.yelp}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col group focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
           >
-            <span className="text-3xl sm:text-4xl font-extrabold text-[#16191D] group-hover:text-[#C8202F] transition-colors tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-2xl sm:text-3xl font-black text-[#16191D] group-hover:text-[#C8202F] transition-colors tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
               {businessConfig.rating.reviewsCount}+
             </span>
-            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] group-hover:text-[#606770] uppercase mt-2">
-              YELP REVIEWS ↗
+            <span className="text-xs font-medium text-[#606770] group-hover:text-[#C8202F] mt-1.5 uppercase tracking-wider">
+              Yelp Reviews ↗
             </span>
           </a>
 
-          {/* Specialist Care */}
+          {/* Muffler & Exhaust Specialists */}
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl font-bold text-[#16191D] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              Mufflers & Exhaust
+              Muffler & Exhaust
             </span>
-            <span className="text-xs font-mono font-bold tracking-widest text-[#818891] uppercase mt-2">
-              SPECIALIST CARE
+            <span className="text-xs font-medium text-[#606770] mt-1.5 uppercase tracking-wider">
+              Specialists
+            </span>
+          </div>
+
+          {/* Address Location */}
+          <div className="flex flex-col">
+            <span className="text-base sm:text-lg font-bold text-[#16191D] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              {businessConfig.address.street}
+            </span>
+            <span className="text-xs font-medium text-[#606770] mt-1.5 uppercase tracking-wider">
+              {businessConfig.address.city}, CA
             </span>
           </div>
         </div>

@@ -5,19 +5,19 @@ const steps = [
     number: "01",
     title: "INSPECT",
     description:
-      "We reproduce the issue and inspect the relevant system.",
+      "We check the relevant system and identify the cause. Our focus is on genuine repair needs and vehicle safety.",
   },
   {
     number: "02",
     title: "EXPLAIN",
     description:
-      "We explain the findings and recommended next steps.",
+      "We explain what we found and the recommended next steps. We walk you through the findings so you understand what needs priority attention.",
   },
   {
     number: "03",
     title: "REPAIR",
     description:
-      "We complete the repair work and check the result.",
+      "Approved work is completed and the result is checked. We focus on completing the repair carefully and addressing the vehicle concern.",
   },
 ];
 
