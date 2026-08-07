@@ -115,7 +115,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent({ type: "reviews_click", source: "yelp" })}
-                  className="text-[#D99A24] hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
+                  className="text-[#D99A16] hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-[#C8202F] rounded"
                 >
                   Read Yelp Reviews ↗
                 </a>

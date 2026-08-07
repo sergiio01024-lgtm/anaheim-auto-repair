@@ -71,7 +71,7 @@ export function HeroSection() {
               </div>
               
               <div className="border-t border-white/10 pt-5">
-                <div className="text-xl font-extrabold text-[#D99A24]">
+                <div className="text-xl font-extrabold text-[#D99A16]">
                   {businessConfig.rating.value} ★ on Yelp
                 </div>
                 <p className="text-sm text-slate-300 mt-1">
@@ -93,9 +93,9 @@ export function HeroSection() {
 
         {/* Concise Proof Line */}
         <div className="mt-10 flex items-center gap-2.5">
-          <span className="inline-block size-2.5 rounded-full bg-[#D99A24]" aria-hidden="true" />
+          <span className="inline-block size-2.5 rounded-full bg-[#D99A16]" aria-hidden="true" />
           <p className="text-sm font-medium text-slate-200">
-            <span className="text-[#D99A24] font-semibold">{businessConfig.rating.value} ★ on Yelp</span>
+            <span className="text-[#D99A16] font-semibold">{businessConfig.rating.value} ★ on Yelp</span>
           </p>
         </div>
       </div>
