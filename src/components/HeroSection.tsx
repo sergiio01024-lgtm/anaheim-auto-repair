@@ -66,11 +66,8 @@ export function HeroSection() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white tracking-tight leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-                  Serving Anaheim Since {businessConfig.established}
-                </h3>
-                <p className="mt-2 text-sm text-slate-300">
                   Muffler, Exhaust & Auto Repair
-                </p>
+                </h3>
               </div>
               
               <div className="border-t border-white/10 pt-5">
@@ -99,8 +96,6 @@ export function HeroSection() {
           <span className="inline-block size-2.5 rounded-full bg-[#D99A24]" aria-hidden="true" />
           <p className="text-sm font-medium text-slate-200">
             <span className="text-[#D99A24] font-semibold">{businessConfig.rating.value} ★ on Yelp</span>
-            <span className="mx-2 text-slate-400">·</span>
-            <span>Serving Anaheim since {businessConfig.established}</span>
           </p>
         </div>
       </div>
