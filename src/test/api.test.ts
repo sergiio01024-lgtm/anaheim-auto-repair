@@ -34,6 +34,8 @@ describe("/api/lead Serverless Function", () => {
     delete process.env.N8N_ANAHEIM_WEBHOOK_URL;
     delete process.env.N8N_ANAHEIM_WEBHOOK_SECRET;
     delete process.env.ALLOW_LEAD_SIMULATION;
+    delete process.env.TURNSTILE_SECRET_KEY;
+    delete process.env.RECAPTCHA_SECRET_KEY;
   });
 
   afterEach(() => {
@@ -57,27 +59,70 @@ describe("/api/lead Serverless Function", () => {
     expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ error: expect.any(String) }));
   });
 
-  it("should return 200 silent success and not call fetch when bot honeypot field is filled", async () => {
+  it("should forward lead to n8n even if hp_a, hp_b, or hp_c honeypot field is filled, without including honeypots in payload", async () => {
     process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
     process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
 
+    // Test hp_a filled
     mockReq.body = {
-      name: "Spam Bot",
-      phone: "1234567890",
+      name: "John Smith",
+      phone: "(714) 826-4444",
       year: "2020",
       make: "Toyota",
-      model: "Corolla",
+      model: "Camry",
       service: "muffler-exhaust",
-      message: "Spam",
-      hp_b: "555-555-5555", // Honeypot filled
+      message: "Exhaust pipe rattle",
+      hp_a: "bot_autofill_value",
       form_elapsed_ms: 8000,
     };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
 
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);
 
     expect(statusMock).toHaveBeenCalledWith(200);
-    expect(global.fetch).toHaveBeenCalledTimes(0);
-    expect(jsonMock).toHaveBeenCalledWith(expect.objectContaining({ success: true }));
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    const callArgs = (global.fetch as any).mock.calls[0];
+    const forwardedBody = JSON.parse(callArgs[1].body);
+
+    expect(forwardedBody.name).toBe("John Smith");
+    expect(forwardedBody.hp_a).toBeUndefined();
+    expect(forwardedBody.hp_b).toBeUndefined();
+    expect(forwardedBody.hp_c).toBeUndefined();
+    expect(forwardedBody.canonical.hp_a).toBeUndefined();
+
+    // Test hp_b filled
+    (global.fetch as any).mockClear();
+    mockReq.body.hp_a = "";
+    mockReq.body.hp_b = "some_autofill_phone";
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    // Test hp_c filled
+    (global.fetch as any).mockClear();
+    mockReq.body.hp_b = "";
+    mockReq.body.hp_c = "some_autofill_address";
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
   it("should return 200 silent success and not call fetch if timing trap is triggered", async () => {
@@ -354,5 +399,61 @@ describe("/api/lead Serverless Function", () => {
       expect.objectContaining({ error: "Bot verification token is missing." })
     );
     expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("should correctly harden the canonical payload (vin, sms->text mapping, warning light slugs, source) while keeping compatibility wrapper intact", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
+    mockReq.body = {
+      name: "Jane Doe",
+      phone: "(714) 555-0199",
+      email: "jane@example.com",
+      year: "2021",
+      make: "Toyota",
+      model: "RAV4",
+      vin: "1HGCR2F83HA000000",
+      service: "brakes-suspension",
+      message: "Squeaking brakes when stopping",
+      warning_lights: ["Check Engine", "ABS / Braking"],
+      preferred_contact: "sms",
+      sms_consent: true,
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    const callArgs = (global.fetch as any).mock.calls[0];
+    const forwardedBody = JSON.parse(callArgs[1].body);
+
+    // Verify outer compatibility wrapper fields
+    expect(forwardedBody.name).toBe("Jane Doe");
+    expect(forwardedBody.phone).toBe("(714) 555-0199");
+    expect(forwardedBody.service_type).toBe("brakes-suspension");
+    expect(forwardedBody.request_type).toBe("quote");
+    expect(forwardedBody.property_address).toBe("");
+    expect(forwardedBody.job_description).toContain("VIN: 1HGCR2F83HA000000");
+    expect(forwardedBody.job_description).toContain("Warning Lights: Check Engine, ABS / Braking");
+    expect(forwardedBody.job_description).toContain("Preferred Contact: sms");
+
+    // Verify nested canonical object hardening
+    const canonical = forwardedBody.canonical;
+    expect(canonical).toBeDefined();
+    expect(canonical.source).toBe("anaheim-auto-website");
+    expect(canonical.vin).toBe("1HGCR2F83HA000000");
+    expect(canonical.preferred_contact).toBe("text");
+    expect(canonical.warning_lights).toEqual(["check-engine", "abs-braking"]);
+    expect(canonical.sms_consent).toBe(true);
+    expect(canonical.vehicle_year).toBe(2021);
+    expect(canonical.vehicle_make).toBe("Toyota");
+    expect(canonical.vehicle_model).toBe("RAV4");
   });
 });

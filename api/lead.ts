@@ -11,6 +11,7 @@ interface CanonicalPayload {
   vehicle_year: number;
   vehicle_make: string;
   vehicle_model: string;
+  vin?: string;
   mileage?: number | null;
   drivable?: boolean | null;
   warning_lights?: string[];
@@ -237,10 +238,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const body = req.body;
 
-    if (body.hp_a || body.hp_b || body.hp_c) {
-      console.warn(JSON.stringify({ requestId, status: "dropped", reason: "honeypot_filled_silent_drop" }));
-      return res.status(200).json({ success: true, message: "Estimate request submitted successfully.", request_id: requestId });
-    }
+    const honeypotTriggered =
+      Boolean(typeof body.hp_a === "string" && body.hp_a.trim()) ||
+      Boolean(typeof body.hp_b === "string" && body.hp_b.trim()) ||
+      Boolean(typeof body.hp_c === "string" && body.hp_c.trim());
 
     const elapsed = Number(body.form_elapsed_ms);
     if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500) {
@@ -373,6 +374,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
+    if (honeypotTriggered) {
+      console.warn(
+        JSON.stringify({
+          requestId,
+          signal: "honeypot_filled",
+          action: "allowed_after_other_checks",
+        })
+      );
+    }
+
     // 7. Parse Normalized Fields
     const {
       name,
@@ -412,11 +423,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
     const hasSmsConsent = sms_consent === true || sms_consent === "true";
 
+    const normalizedVin = vin ? vin.trim().toUpperCase() : "";
+    let mappedPreferredContact = preferred_contact || "phone";
+    if (mappedPreferredContact === "sms") {
+      mappedPreferredContact = "text";
+    }
+
+    const warningLightSlugMap: Record<string, string> = {
+      "Check Engine": "check-engine",
+      "ABS / Braking": "abs-braking",
+      "Battery / Charging": "battery-charging",
+      "Traction / Stability": "traction-stability",
+      "Airbag / SRS": "airbag-srs",
+    };
+
+    const canonicalWarningLights = Array.isArray(warning_lights)
+      ? warning_lights.map((light: string) => warningLightSlugMap[light] || light)
+      : [];
+
     // 8. Build Canonical Payload
     const canonicalPayload: CanonicalPayload = {
       request_id: requestId,
       submitted_at: new Date().toISOString(),
-      source: "white-label-form",
+      source: "anaheim-auto-website",
       page_url: page_url || "",
       name: normalizedName,
       phone: normalizedPhone,
@@ -424,12 +453,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       vehicle_year: parsedYear,
       vehicle_make: normalizedMake,
       vehicle_model: normalizedModel,
+      vin: normalizedVin || undefined,
       mileage: parsedMileage,
       drivable: isDrivable,
-      warning_lights: Array.isArray(warning_lights) ? warning_lights : [],
+      warning_lights: canonicalWarningLights,
       service_type: service,
       symptoms: normalizedSymptoms,
-      preferred_contact: preferred_contact || "phone",
+      preferred_contact: mappedPreferredContact,
       preferred_date: preferred_date || undefined,
       preferred_time: preferred_time || undefined,
       sms_consent: hasSmsConsent,
@@ -439,9 +469,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Format job description combining specs for the legacy n8n parser
     const vehicleLabel = `${canonicalPayload.vehicle_year} ${canonicalPayload.vehicle_make} ${canonicalPayload.vehicle_model}`;
+    const rawWarningLights = Array.isArray(warning_lights) ? warning_lights : [];
     const warningLabel =
-      canonicalPayload.warning_lights && canonicalPayload.warning_lights.length > 0
-        ? `Warning Lights: ${canonicalPayload.warning_lights.join(", ")}`
+      rawWarningLights.length > 0
+        ? `Warning Lights: ${rawWarningLights.join(", ")}`
         : "No Warning Lights";
     const mileageLabel = canonicalPayload.mileage ? `Mileage: ${canonicalPayload.mileage}` : "";
     const drivableLabel =
@@ -451,12 +482,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const combinedJobDesc = [
       `Vehicle: ${vehicleLabel}`,
-      vin ? `VIN: ${vin}` : "",
+      normalizedVin ? `VIN: ${normalizedVin}` : "",
       mileageLabel,
       drivableLabel,
       warningLabel,
       `Symptoms: ${canonicalPayload.symptoms}`,
-      `Preferred Contact: ${canonicalPayload.preferred_contact}`,
+      `Preferred Contact: ${preferred_contact || "phone"}`,
       `SMS Marketing Consent: ${canonicalPayload.sms_consent ? "Granted" : "Not Granted"}`,
     ]
       .filter(Boolean)
