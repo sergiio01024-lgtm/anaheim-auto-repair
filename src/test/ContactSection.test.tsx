@@ -121,6 +121,41 @@ describe("ContactSection Auto-Repair Intake Form", () => {
     });
   });
 
+  it("reuses the request ID when the customer retries after a network failure", async () => {
+    (global.fetch as any)
+      .mockRejectedValueOnce(new Error("Network failure"))
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({ success: true, request_id: "stable-request-id" }),
+      });
+
+    render(<ContactSection />);
+
+    fireEvent.change(screen.getByLabelText(/Name \*/), { target: { value: "Dylan" } });
+    fireEvent.change(screen.getByLabelText(/Phone Number \*/), { target: { value: "7148264444" } });
+    fireEvent.change(screen.getByLabelText(/Year \*/), { target: { value: "2018" } });
+    fireEvent.change(screen.getByLabelText(/Make \*/), { target: { value: "Subaru" } });
+    fireEvent.change(screen.getByLabelText(/Model \*/), { target: { value: "Outback" } });
+    fireEvent.change(screen.getByLabelText(/Primary Service Category \*/), {
+      target: { value: "muffler-exhaust" },
+    });
+    fireEvent.change(screen.getByLabelText(/Describe the Issue or Symptoms \*/), {
+      target: { value: "Broken muffler hanger" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Submit Estimate Request/ }));
+    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
+
+    fireEvent.click(screen.getByRole("button", { name: /Submit Estimate Request/ }));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+
+    const firstBody = JSON.parse((global.fetch as any).mock.calls[0][1].body);
+    const secondBody = JSON.parse((global.fetch as any).mock.calls[1][1].body);
+    expect(firstBody.request_id).toBeTruthy();
+    expect(secondBody.request_id).toBe(firstBody.request_id);
+  });
+
   it("shows Turnstile widget and requires Turnstile token if VITE_TURNSTILE_SITE_KEY is set", async () => {
     // Mock the site key env variable
     vi.stubEnv("VITE_TURNSTILE_SITE_KEY", "test-site-key");
