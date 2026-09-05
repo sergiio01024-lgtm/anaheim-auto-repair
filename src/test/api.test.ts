@@ -125,7 +125,10 @@ describe("/api/lead Serverless Function", () => {
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
-  it("should return 200 silent success and not call fetch if timing trap is triggered", async () => {
+  it("should forward fast valid submissions with a spam diagnostic instead of silently dropping them", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
     mockReq.body = {
       name: "Spam Bot",
       phone: "1234567890",
@@ -137,14 +140,18 @@ describe("/api/lead Serverless Function", () => {
       form_elapsed_ms: 300, // too fast
     };
 
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
     await handler(mockReq as VercelRequest, mockRes as VercelResponse);
 
     expect(statusMock).toHaveBeenCalledWith(200);
-    expect(jsonMock).toHaveBeenCalledWith({
-      success: true,
-      message: "Request received successfully.",
-    });
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    const forwardedBody = JSON.parse((global.fetch as any).mock.calls[0][1].body);
+    expect(forwardedBody.canonical.suspected_spam).toBe(true);
   });
 
   it("should reject payload with missing required fields with 400", async () => {
@@ -206,6 +213,29 @@ describe("/api/lead Serverless Function", () => {
         message: expect.stringContaining("simulated"),
       })
     );
+  });
+
+  it("should return 503 when the webhook URL is missing outside preview mode", async () => {
+    const originalNodeEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "production";
+    delete process.env.ALLOW_LEAD_SIMULATION;
+
+    mockReq.body = {
+      name: "Dylan",
+      phone: "(714) 826-4444",
+      year: "2015",
+      make: "Honda",
+      model: "Civic",
+      service: "muffler-exhaust",
+      message: "Replacing the rear exhaust pipe segment.",
+    };
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    process.env.NODE_ENV = originalNodeEnv;
+
+    expect(statusMock).toHaveBeenCalledWith(503);
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
   it("should forward payload to n8n and sign headers when webhook envs are present", async () => {
@@ -406,6 +436,7 @@ describe("/api/lead Serverless Function", () => {
     process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
 
     mockReq.body = {
+      request_id: "anaheim-client-stable-123",
       name: "Jane Doe",
       phone: "(714) 555-0199",
       email: "jane@example.com",
@@ -447,6 +478,8 @@ describe("/api/lead Serverless Function", () => {
     // Verify nested canonical object hardening
     const canonical = forwardedBody.canonical;
     expect(canonical).toBeDefined();
+    expect(canonical.request_id).toBe("anaheim-client-stable-123");
+    expect(forwardedBody.request_id).toBe("anaheim-client-stable-123");
     expect(canonical.source).toBe("anaheim-auto-website");
     expect(canonical.vin).toBe("1HGCR2F83HA000000");
     expect(canonical.preferred_contact).toBe("text");
