@@ -31,6 +31,11 @@ const inputBase =
 const inputError = "outline-[#C8202F] ring-1 ring-[#C8202F]";
 const labelBase = "block text-sm font-semibold mb-1 text-[#16191D]";
 
+const createRequestId = () =>
+  typeof crypto !== "undefined" && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `anaheim_${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}`;
+
 export function ContactSection() {
   const getSiteKey = (): string | undefined => {
     try {
@@ -68,6 +73,7 @@ export function ContactSection() {
   const formStarted = useRef(false);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const formLoadedAt = useRef<number>(Date.now());
+  const requestIdRef = useRef<string>(createRequestId());
 
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileWidgetId = useRef<string | null>(null);
@@ -249,6 +255,7 @@ export function ContactSection() {
         },
         body: JSON.stringify({
           ...formData,
+          request_id: requestIdRef.current,
           "cf-turnstile-response": turnstileToken,
           form_elapsed_ms: Date.now() - formLoadedAt.current,
           page_url: window.location.href,
@@ -283,6 +290,7 @@ export function ContactSection() {
           hp_c: "",
         });
         formLoadedAt.current = Date.now();
+        requestIdRef.current = createRequestId();
         setTurnstileToken(null);
         if (turnstileWidgetId.current && typeof window !== "undefined" && (window as any).turnstile) {
           try {
