@@ -26,9 +26,24 @@ interface CanonicalPayload {
   suspected_spam?: boolean;
 }
 
+function generateRequestId(): string {
+  return typeof crypto !== "undefined" && crypto.randomUUID
+    ? crypto.randomUUID()
+    : Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
 function validateInput(body: any): { isValid: boolean; error?: string } {
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return { isValid: false, error: "Invalid payload format." };
+  }
+
+  if (
+    body.request_id !== undefined &&
+    (typeof body.request_id !== "string" ||
+      body.request_id.trim().length === 0 ||
+      body.request_id.length > 128)
+  ) {
+    return { isValid: false, error: "Invalid request ID." };
   }
 
   // Honeypots must be strings if provided
@@ -200,10 +215,7 @@ function validateInput(body: any): { isValid: boolean; error?: string } {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const startTime = Date.now();
-  const requestId =
-    typeof crypto !== "undefined" && crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substring(2) + Date.now().toString(36);
+  let requestId = generateRequestId();
 
   // 1. Accept POST only
   if (req.method !== "POST") {
@@ -238,16 +250,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const body = req.body;
 
+    if (typeof body?.request_id === "string" && body.request_id.trim()) {
+      requestId = body.request_id.trim();
+    }
+
     const honeypotTriggered =
       Boolean(typeof body.hp_a === "string" && body.hp_a.trim()) ||
       Boolean(typeof body.hp_b === "string" && body.hp_b.trim()) ||
       Boolean(typeof body.hp_c === "string" && body.hp_c.trim());
 
     const elapsed = Number(body.form_elapsed_ms);
-    if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500) {
-      console.warn(JSON.stringify({ requestId, status: "rejected", reason: "submitted_too_fast", elapsed }));
-      return res.status(200).json({ success: true, message: "Request received successfully." });
-    }
+    const submittedTooFast = Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500;
 
     // 4. Validate Schema (Fail closed on type issues)
     const validationResult = validateInput(body);
@@ -365,13 +378,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const isDev = process.env.NODE_ENV === "development";
       const allowSim = isDev || process.env.ALLOW_LEAD_SIMULATION === "true" || process.env.VITE_OWNER_PREVIEW === "true";
 
-      if (allowSim || !process.env.N8N_ANAHEIM_WEBHOOK_URL) {
+      if (allowSim) {
         return res.status(200).json({
           success: true,
           message: "Estimate request simulated successfully (Preview Mode).",
           request_id: requestId,
         });
       }
+
+      return res.status(503).json({
+        error: "Service temporarily unavailable. Please call the shop directly."
+      });
     }
 
     if (honeypotTriggered) {
@@ -379,6 +396,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         JSON.stringify({
           requestId,
           signal: "honeypot_filled",
+          action: "allowed_after_other_checks",
+        })
+      );
+    }
+
+    if (submittedTooFast) {
+      console.warn(
+        JSON.stringify({
+          requestId,
+          signal: "submitted_too_fast",
+          elapsed,
           action: "allowed_after_other_checks",
         })
       );
@@ -465,6 +493,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sms_consent: hasSmsConsent,
       referrer: referrer || undefined,
       campaign: campaign || undefined,
+      suspected_spam: honeypotTriggered || submittedTooFast,
     };
 
     // Format job description combining specs for the legacy n8n parser
@@ -494,6 +523,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .join("\n");
 
     const compatibilityPayload = {
+      request_id: canonicalPayload.request_id,
       name: canonicalPayload.name,
       phone: canonicalPayload.phone,
       email: canonicalPayload.email || "",
