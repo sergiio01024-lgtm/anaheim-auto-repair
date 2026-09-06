@@ -198,12 +198,54 @@ function validateInput(body: any): { isValid: boolean; error?: string } {
   return { isValid: true };
 }
 
+const REQUEST_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]*$/;
+const REQUEST_ID_MAX_LENGTH = 128;
+
+function generateRequestId(): string {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return crypto.randomUUID();
+  }
+
+  return `lead_${Date.now().toString(36)}_${Math.random()
+    .toString(36)
+    .slice(2, 14)}`;
+}
+
+function getRequestId(
+  body: unknown
+): { requestId: string; error?: string } {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return { requestId: generateRequestId() };
+  }
+
+  const providedRequestId = (body as Record<string, unknown>).request_id;
+
+  if (providedRequestId === undefined) {
+    return { requestId: generateRequestId() };
+  }
+
+  if (
+    typeof providedRequestId !== "string" ||
+    providedRequestId.length === 0 ||
+    providedRequestId.length > REQUEST_ID_MAX_LENGTH ||
+    !REQUEST_ID_PATTERN.test(providedRequestId)
+  ) {
+    return {
+      requestId: generateRequestId(),
+      error:
+        "request_id must be a non-empty string of up to 128 letters, numbers, periods, underscores, colons, or hyphens.",
+    };
+  }
+
+  return { requestId: providedRequestId };
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const startTime = Date.now();
-  const requestId =
-    typeof crypto !== "undefined" && crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substring(2) + Date.now().toString(36);
+  const { requestId, error: requestIdError } = getRequestId(req.body);
 
   // 1. Accept POST only
   if (req.method !== "POST") {
@@ -233,6 +275,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res
       .status(415)
       .json({ error: "Unsupported media type. Only application/json is accepted." });
+  }
+
+  if (requestIdError) {
+    console.warn(
+      JSON.stringify({
+        requestId,
+        status: "rejected",
+        reason: "invalid_request_id",
+        error: requestIdError,
+      })
+    );
+    return res.status(400).json({ error: requestIdError });
   }
 
   try {

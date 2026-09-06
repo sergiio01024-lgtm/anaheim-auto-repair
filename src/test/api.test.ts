@@ -456,4 +456,112 @@ describe("/api/lead Serverless Function", () => {
     expect(canonical.vehicle_make).toBe("Toyota");
     expect(canonical.vehicle_model).toBe("RAV4");
   });
+
+  it("should preserve valid client-supplied request_id in canonical payload and API response", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
+    const clientRequestId = "anaheim-v1-retry-test-001";
+
+    mockReq.body = {
+      request_id: clientRequestId,
+      name: "Jane Doe",
+      phone: "(714) 555-0199",
+      year: "2021",
+      make: "Toyota",
+      model: "RAV4",
+      service: "brakes-suspension",
+      message: "Squeaking brakes when stopping",
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(jsonMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        success: true,
+        request_id: clientRequestId,
+      })
+    );
+
+    const callArgs = (global.fetch as any).mock.calls[0];
+    const forwardedBody = JSON.parse(callArgs[1].body);
+    expect(forwardedBody.canonical.request_id).toBe(clientRequestId);
+  });
+
+  it("should generate a fallback request_id when request_id is missing", async () => {
+    process.env.N8N_ANAHEIM_WEBHOOK_URL = "https://n8n.test/webhook";
+    process.env.N8N_ANAHEIM_WEBHOOK_SECRET = "super_secret_token";
+
+    mockReq.body = {
+      name: "Jane Doe",
+      phone: "(714) 555-0199",
+      year: "2021",
+      make: "Toyota",
+      model: "RAV4",
+      service: "brakes-suspension",
+      message: "Squeaking brakes when stopping",
+    };
+
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ success: true }),
+    });
+
+    await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+    expect(statusMock).toHaveBeenCalledWith(200);
+    const responseObj = jsonMock.mock.calls[0][0];
+    expect(responseObj.request_id).toBeDefined();
+    expect(typeof responseObj.request_id).toBe("string");
+    expect(responseObj.request_id.length).toBeGreaterThan(0);
+
+    const callArgs = (global.fetch as any).mock.calls[0];
+    const forwardedBody = JSON.parse(callArgs[1].body);
+    expect(forwardedBody.canonical.request_id).toBe(responseObj.request_id);
+  });
+
+  it("should reject malformed or invalid request_id with HTTP 400", async () => {
+    const invalidIds = [
+      "",
+      "bad request id with spaces",
+      "a".repeat(129),
+      "invalid/id",
+      "-starts-with-hyphen",
+    ];
+
+    for (const invalidId of invalidIds) {
+      statusMock.mockClear();
+      jsonMock.mockClear();
+
+      mockReq.body = {
+        request_id: invalidId,
+        name: "Jane Doe",
+        phone: "(714) 555-0199",
+        year: "2021",
+        make: "Toyota",
+        model: "RAV4",
+        service: "brakes-suspension",
+        message: "Squeaking brakes when stopping",
+      };
+
+      await handler(mockReq as VercelRequest, mockRes as VercelResponse);
+
+      expect(statusMock).toHaveBeenCalledWith(400);
+      expect(jsonMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          error:
+            "request_id must be a non-empty string of up to 128 letters, numbers, periods, underscores, colons, or hyphens.",
+        })
+      );
+    }
+  });
 });
+
